@@ -6,3 +6,54 @@
 body {
   margin: 0;
 }
+
+@font-face {
+  font-family: "SF-Compact-Medium";
+  src: local("SF-Compact-Medium"),
+    url("/fonts/SFCompact/SF-Compact-Text-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SF-Compact-Semibold";
+  src: local("SF-Compact-Semibold"),
+    url("/fonts/SFCompact/SF-Compact-Text-Semibold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SF-Compact-Light";
+  src: local("SF-Compact-Light"),
+    url("/fonts/SFCompact/SF-Compact-Text-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SF-Compact-Thin";
+  src: local("SF-Compact-Thin"),
+    url("/fonts/SFCompact/SF-Compact-Text-Thin.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SF-Compact-Bold";
+  src: local("SF-Compact-Bold"),
+    url("/fonts/SFCompact/SF-Compact-Text-Bold.ttf") format("truetype");
+}
+
+
+.SF-Compact-Medium {
+  font-family: "SF-Compact-Medium";
+}
+
+.SF-Compact-Semibold {
+  font-family: "SF-Compact-Semibold";
+}
+
+.SF-Compact-Light {
+  font-family: "SF-Compact-Light";
+}
+
+.SF-Compact-Thin {
+  font-family: "SF-Compact-Thin";
+}
+
+.SF-Compact-Bold {
+  font-family: "SF-Compact-Bold";
+}
