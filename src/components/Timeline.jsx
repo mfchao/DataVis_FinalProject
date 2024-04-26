@@ -1,7 +1,7 @@
 import { Float, PerspectiveCamera, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useState, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { Euler, Group, Vector3 } from "three";
 import { usePlay } from "../contexts/Play";
@@ -69,7 +69,7 @@ export const Timeline = (props) => {
         ),
         title: "1843",
         subtitle: `First racially restrictive covenant, stating that land not be sold to a "Negro or native of Ireland"`,
-        image: '../public/images/2-men-sepia.png'
+        image: '../images/2-men-sepia.png'
 
       },
       {
@@ -82,7 +82,7 @@ export const Timeline = (props) => {
         rotation: [0, -0.1, 0],
         title: "1927",
         subtitle: `The National Association of Real Estate Boards' Code of Ethics creates covenant stating "no part of the property should be used, occupied, sold or leased to black people, unless they were servants, janitors, or chauffeurs living in basements, servants' quarters, or a barn or garage in the rear."`,
-        image: '../public/images/mom-child-2.png'
+        image: '../images/mom-child-2.png'
 
       },
       {
@@ -95,7 +95,7 @@ export const Timeline = (props) => {
         rotation: [0, 1, 0],
         title: "1938",
         subtitle: `Home Owners Loan Corporation (HOLC) created Residential Security maps for assessing the risk of financing mortgages. Areas were given 4 grades, from A for "best" to D for "hazardous".`,
-        image: '../public/images/children=4.png'
+        image: '../images/children=4.png'
       },
       {
         cameraRailDist: 1.5,
@@ -107,7 +107,7 @@ export const Timeline = (props) => {
         rotation: [0, -1, 0],
         title: "1960",
         subtitle: `Median price of owner-occupied housing in Boston is $15,900 and median gross monthly rent is $82 ($984 annualy).`,
-        image: '../public/images/couple-2.png'
+        image: '../images/couple-2.png'
 
       },
       {
@@ -120,7 +120,7 @@ export const Timeline = (props) => {
         rotation: [0, 0, 0],
         title: "1968",
         subtitle: `Redlining is outlawed by the U.S. 1968 Fair Housing Act. Boston establishes the Boston Urban Renewal Groud (BBRG) to provide Black Bostonians FHA-insured loans and mortgages, but only in Dorchester, Mattapan, and Roxbury, areas which were 'red' under the just-outlawed HOLC map system.`,
-        image: '../public/images/couple.png'
+        image: '../images/couple.png'
 
       },
       {
@@ -133,7 +133,7 @@ export const Timeline = (props) => {
         rotation: [0, 0, 0],
         title: "2018",
         subtitle: `The impacts of single-family zoning continue to this day. While explicitly segregationist housing policies have gone away, the geographic and economical foundation that they laid has allowed the impacts to carry forward into modern day, largely maintained by exclusionary single-family zoning. `,
-        image: '../public/images/black-child-1.png'
+        image: '../images/black-child-1.png'
 
       },
 
@@ -147,7 +147,7 @@ export const Timeline = (props) => {
         rotation: [0, 0, 0],
         title: "2018",
         subtitle: `The historically lower incomes in these areas have also resulted in historically lower access to quality resources, making it much harder for those born into poverty to escape it. `,
-        image: '../public/images/woman-original.png'
+        image: '../images/woman-original.png'
       },
       {
         cameraRailDist: 0,
@@ -159,7 +159,7 @@ export const Timeline = (props) => {
         rotation: [0, 0, 0],
         title: "2022+",
         subtitle: `The median value of owner-occupied homes stood at $684,900, with median gross rent at $1,981, and median income at $89,212. This indicates a shift from racial to financial segregation, perpetuating exclusionary practices. What implications might this have for the future?`,
-        image: '../public/images/mom-child.png'
+        image: '../images/mom-child.png'
 
       },
     ];
@@ -325,7 +325,6 @@ export const Timeline = (props) => {
 
   useEffect(() => {
     tl.current = gsap.timeline();
-
     bgColors.forEach(({ colorA, colorB, duration }) => {
       tl.current.to(backgroundColors.current, {
         duration,
