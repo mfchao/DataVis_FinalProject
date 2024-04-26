@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Papa from 'papaparse';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -13,6 +13,9 @@ const MapComponent = () => {
   const incomeLevelTextLow = ["$0", "$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000"];
   const incomeLevelTextHigh = ["$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000", "INF"];
 
+    const [minIndex, setMinIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(15);
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -207,27 +210,17 @@ const MapComponent = () => {
       incomeLevelMin.addEventListener('input', updateIncomeDisplay);
       incomeLevelMax.addEventListener('input', updateIncomeDisplay);
     }
+    
 
     return () => {
       if (incomeLevelMin && incomeLevelMax) {
         incomeLevelMin.removeEventListener('input', updateIncomeDisplay);
         incomeLevelMax.removeEventListener('input', updateIncomeDisplay);
+        map.remove();
       }
     };
 
-    return () => map.remove();
   }, []);
-
-  function transformRequest(url, resourceType) {
-    var isMapboxRequest =
-      url.slice(8, 22) === "api.mapbox.com" ||
-      url.slice(10, 26) === "tiles.mapbox.com";
-    return {
-      url: isMapboxRequest
-        ? url.replace("?", "?pluginName=dataJoins&")
-        : url,
-    };
-  }
 
   const papaPromise = (url) => new Promise((resolve, reject) => {
     Papa.parse(url, {
@@ -239,16 +232,21 @@ const MapComponent = () => {
     });
   });
 
-  const calculateIncomeWithinRange = (data, minIndex, maxIndex) => {
-    let totalPop = incomeLevels.reduce((sum, level) => sum + (parseInt(data[level], 10) || 0), 0);
-    let totalIncomeWithinRange = 0;
-    for (let i = minIndex; i <= maxIndex; i++) {
-      totalIncomeWithinRange += parseInt(data[incomeLevels[i]], 10) || 0;
+  const handleMinChange = (event) => {
+    const newMinIndex = parseInt(event.target.value);
+    setMinIndex(newMinIndex);
+    if (newMinIndex >= maxIndex) {
+      setMaxIndex(newMinIndex + 1);
     }
-    return (totalIncomeWithinRange / totalPop) * 100; // Convert to percentage
   };
 
-
+  const handleMaxChange = (event) => {
+    const newMaxIndex = parseInt(event.target.value);
+    setMaxIndex(newMaxIndex);
+    if (newMaxIndex <= minIndex) {
+      setMinIndex(newMaxIndex - 1);
+    }
+  };
 
   return (
     <div>
@@ -256,8 +254,8 @@ const MapComponent = () => {
         <div>
           Selected Income Range: <span id="selectedIncomeRange"></span>
           <br />
-          <input type="range" id="incomeLevelMin" min="0" max="15" value="0" step="1" style={{ width: 200 }} />
-          <input type="range" id="incomeLevelMax" min="0" max="15" value="15" step="1" style={{ width: 200 }} />
+          <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
+          <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
         </div>
       </div>
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
