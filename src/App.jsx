@@ -11,6 +11,7 @@ import CoiVsSingleFamilyMapComponent from "./components/CoiVsSingleFamilyMapComp
 import IncomeVsSingleFamilyMapComponent from "./components/IncomeVsSingleFamilyMapComponent";
 import { Menu } from './components/Menu';
 import { EffectComposer, Noise } from '@react-three/postprocessing';
+import { HtmlWrapper } from './components/HtmlWrapper';
 
 
 function App() {
@@ -18,30 +19,43 @@ function App() {
   const [section, setSection] = useState(null);
   const [currentSection, setCurrentSection] = useState(0);
 
+  const [mapOpened, setMapOpened] = useState(false);
+  const [openMap, setOpenMap] = useState(null);
+
+
+
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
-        <div style={{ width: '40%' }}>
-          <Canvas shadows>
-            <color attach="background" args={["#ececec"]} />
+      {/* <div style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
+        <div style={{ width: '40%' }}> */}
+      <Canvas shadows>
+        <color attach="background" args={["#ececec"]} />
 
-            <ScrollControls pages={9} damping={0.5}>
-              <ScrollManager section={section} onSectionChange={setSection} />
+        <ScrollControls pages={9} damping={0.5} enabled={mapOpened ? false : true}>
+          <ScrollManager section={section} onSectionChange={setSection} />
 
-              {/* <SheetProvider sheet={sheet}> */}
-              <Timeline setCurrentSection={setCurrentSection} />
-              {/* </SheetProvider> */}
-            </ScrollControls>
+          <HtmlWrapper
+            currentSection={currentSection}
+            mapOpened={mapOpened}
+            setMapOpened={setMapOpened}
+            openMap={openMap}
+            setOpenMap={setOpenMap}
+          />
 
-            <EffectComposer >
-              <Noise opacity={0.1} />
-            </EffectComposer>
-          </Canvas>
-        </div>
-        <div style={{ width: '60%' }}>
+          {/* <SheetProvider sheet={sheet}> */}
+          <Timeline setCurrentSection={setCurrentSection} setMapOpened={setMapOpened} mapOpened={mapOpened} openMap={openMap} setOpenMap={setOpenMap} />
+          {/* </SheetProvider> */}
+        </ScrollControls>
+
+        <EffectComposer >
+          <Noise opacity={0.1} />
+        </EffectComposer>
+      </Canvas>
+      {/* </div>
+         <div style={{ width: '60%' }}>
           <CoiVsSingleFamilyMapComponent/>
-        </div>
-      </div>
+        </div> 
+      </div> */}
 
 
 

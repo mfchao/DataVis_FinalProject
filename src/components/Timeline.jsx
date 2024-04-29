@@ -24,7 +24,7 @@ const bgColors = [
 ];
 
 export const Timeline = (props) => {
-  const { setCurrentSection } = props;
+  const { setCurrentSection, setMapOpened, mapOpened, openMap, setOpenMap } = props;
 
   const curvePoints = useMemo(
     () => [
@@ -69,7 +69,8 @@ export const Timeline = (props) => {
         ),
         title: "1843",
         subtitle: `First racially restrictive covenant, stating that land not be sold to a "Negro or native of Ireland"`,
-        image: '../images/2-men-sepia.png'
+        image: '../images/2-men-sepia.png',
+        map: 'map1'
 
       },
       {
@@ -82,7 +83,9 @@ export const Timeline = (props) => {
         rotation: [0, -0.1, 0],
         title: "1927",
         subtitle: `The National Association of Real Estate Boards' Code of Ethics creates covenant stating "no part of the property should be used, occupied, sold or leased to black people, unless they were servants, janitors, or chauffeurs living in basements, servants' quarters, or a barn or garage in the rear."`,
-        image: '../images/mom-child-2.png'
+        image: '../images/mom-child-2.png',
+        map: 'map2'
+
 
       },
       {
@@ -95,7 +98,7 @@ export const Timeline = (props) => {
         rotation: [0, 1, 0],
         title: "1938",
         subtitle: `Home Owners Loan Corporation (HOLC) created Residential Security maps for assessing the risk of financing mortgages. Areas were given 4 grades, from A for "best" to D for "hazardous".`,
-        image: '../images/children=4.png'
+        image: '../images/children=4.png',
       },
       {
         cameraRailDist: 1.5,
@@ -184,112 +187,120 @@ export const Timeline = (props) => {
   // const { play, setHasScroll, end, setEnd } = usePlay();
 
   useFrame((_state, delta) => {
-    if (window.innerWidth > window.innerHeight) {
-      // LANDSCAPE
-      camera.current.fov = 30;
-      camera.current.position.z = 5;
+    if (mapOpened) {
+      // Set camera position to look at 0
+      // cameraGroup.current.position.lerp(new Vector3(0, 0, 0), delta * 24);
+      // Set camera target to look at 0
+      cameraGroup.current.lookAt(new Vector3(0, 0, 0));
     } else {
-      // PORTRAIT
-      camera.current.fov = 80;
-      camera.current.position.z = 2;
-    }
 
-    // if (lastScroll.current <= 0 && scroll.offset > 0) {
-    //   setHasScroll(true);
-    // }
-
-    if (sceneOpacity.current < 1) {
-      sceneOpacity.current = THREE.MathUtils.lerp(
-        sceneOpacity.current,
-        1,
-        delta * 0.1
-      );
-    }
-
-    if (sceneOpacity.current > 0) {
-      sceneOpacity.current = THREE.MathUtils.lerp(
-        sceneOpacity.current,
-        0,
-        delta
-      );
-    }
-
-    lineMaterialRef.current.opacity = 0.15;
-
-    // if (end) {
-    //   return;
-    // }
-
-    const scrollOffset = Math.max(0, scroll.offset);
-
-    let friction = 1;
-    let resetCameraRail = true;
-    // LOOK TO CLOSE TEXT SECTIONS
-    textSections.forEach((textSection) => {
-      const distance = textSection.position.distanceTo(
-        cameraGroup.current.position
-      );
-
-      if (distance < FRICTION_DISTANCE) {
-        friction = Math.max(distance / FRICTION_DISTANCE, 0.1);
-        const targetCameraRailPosition = new Vector3(
-          (1 - distance / FRICTION_DISTANCE) * textSection.cameraRailDist,
-          0,
-          0
-        );
-        cameraRail.current.position.lerp(targetCameraRailPosition, delta);
-        resetCameraRail = false;
+      if (window.innerWidth > window.innerHeight) {
+        // LANDSCAPE
+        camera.current.fov = 30;
+        camera.current.position.z = 5;
+      } else {
+        // PORTRAIT
+        camera.current.fov = 80;
+        camera.current.position.z = 2;
       }
-    });
-    if (resetCameraRail) {
-      const targetCameraRailPosition = new Vector3(0, 0, 0);
-      cameraRail.current.position.lerp(targetCameraRailPosition, delta);
-    }
 
-    // CALCULATE LERPED SCROLL OFFSET
-    let lerpedScrollOffset = THREE.MathUtils.lerp(
-      lastScroll.current,
-      scrollOffset,
-      delta * friction
-    );
-    // PROTECT BELOW 0 AND ABOVE 1
-    lerpedScrollOffset = Math.min(lerpedScrollOffset, 1);
-    lerpedScrollOffset = Math.max(lerpedScrollOffset, 0);
+      // if (lastScroll.current <= 0 && scroll.offset > 0) {
+      //   setHasScroll(true);
+      // }
 
-    lastScroll.current = lerpedScrollOffset;
-    // tl.current.seek(lerpedScrollOffset * tl.current.duration());
+      if (sceneOpacity.current < 1) {
+        sceneOpacity.current = THREE.MathUtils.lerp(
+          sceneOpacity.current,
+          1,
+          delta * 0.1
+        );
+      }
 
-    const curPoint = curve.getPoint(lerpedScrollOffset);
+      if (sceneOpacity.current > 0) {
+        sceneOpacity.current = THREE.MathUtils.lerp(
+          sceneOpacity.current,
+          0,
+          delta
+        );
+      }
 
-    // Follow the curve points
-    cameraGroup.current.position.lerp(curPoint, delta * 24);
+      lineMaterialRef.current.opacity = 0.15;
 
-    // Make the group look ahead on the curve
+      // if (end) {
+      //   return;
+      // }
 
-    const lookAtPoint = curve.getPoint(
-      Math.min(lerpedScrollOffset + CURVE_AHEAD_CAMERA, 1)
-    );
+      const scrollOffset = Math.max(0, scroll.offset);
 
-    const currentLookAt = cameraGroup.current.getWorldDirection(
-      new THREE.Vector3()
-    );
-    const targetLookAt = new THREE.Vector3()
-      .subVectors(curPoint, lookAtPoint)
-      .normalize();
+      let friction = 1;
+      let resetCameraRail = true;
+      // LOOK TO CLOSE TEXT SECTIONS
+      textSections.forEach((textSection) => {
+        const distance = textSection.position.distanceTo(
+          cameraGroup.current.position
+        );
 
-    const lookAt = currentLookAt.lerp(targetLookAt, delta * 24);
-    cameraGroup.current.lookAt(
-      cameraGroup.current.position.clone().add(lookAt)
-    );
+        if (distance < FRICTION_DISTANCE) {
+          friction = Math.max(distance / FRICTION_DISTANCE, 0.1);
+          const targetCameraRailPosition = new Vector3(
+            (1 - distance / FRICTION_DISTANCE) * textSection.cameraRailDist,
+            0,
+            0
+          );
+          cameraRail.current.position.lerp(targetCameraRailPosition, delta);
+          resetCameraRail = false;
+        }
+      });
+      if (resetCameraRail) {
+        const targetCameraRailPosition = new Vector3(0, 0, 0);
+        cameraRail.current.position.lerp(targetCameraRailPosition, delta);
+      }
+
+      // CALCULATE LERPED SCROLL OFFSET
+      let lerpedScrollOffset = THREE.MathUtils.lerp(
+        lastScroll.current,
+        scrollOffset,
+        delta * friction
+      );
+      // PROTECT BELOW 0 AND ABOVE 1
+      lerpedScrollOffset = Math.min(lerpedScrollOffset, 1);
+      lerpedScrollOffset = Math.max(lerpedScrollOffset, 0);
+
+      lastScroll.current = lerpedScrollOffset;
+      // tl.current.seek(lerpedScrollOffset * tl.current.duration());
+
+      const curPoint = curve.getPoint(lerpedScrollOffset);
+
+      // Follow the curve points
+      cameraGroup.current.position.lerp(curPoint, delta * 24);
+
+      // Make the group look ahead on the curve
+
+      const lookAtPoint = curve.getPoint(
+        Math.min(lerpedScrollOffset + CURVE_AHEAD_CAMERA, 1)
+      );
+
+      const currentLookAt = cameraGroup.current.getWorldDirection(
+        new THREE.Vector3()
+      );
+      const targetLookAt = new THREE.Vector3()
+        .subVectors(curPoint, lookAtPoint)
+        .normalize();
+
+      const lookAt = currentLookAt.lerp(targetLookAt, delta * 24);
+      cameraGroup.current.lookAt(
+        cameraGroup.current.position.clone().add(lookAt)
+      );
 
 
 
-    if (
-      cameraGroup.current.position.z <
-      curvePoints[curvePoints.length - 1].z + 100
-    ) {
-      // setEnd(true);
-      // planeOutTl.current.play();
+      if (
+        cameraGroup.current.position.z <
+        curvePoints[curvePoints.length - 1].z + 100
+      ) {
+        // setEnd(true);
+        // planeOutTl.current.play();
+      }
     }
   });
 
@@ -337,7 +348,12 @@ export const Timeline = (props) => {
 
   }, []);
 
+  const handleClick = (textSection) => {
+    setMapOpened(true);
+    setOpenMap(textSection.map);
+    console.log('opening' + openMap)
 
+  };
 
 
   return useMemo(
@@ -359,7 +375,9 @@ export const Timeline = (props) => {
         </group>
         {/* TEXT */}
         {textSections.map((textSection, index) => (
-          <TextSection {...textSection} key={index} />
+          <TextSection {...textSection} key={index}
+            onClick={textSection.map ? () => handleClick(textSection) : null}
+          />
         ))}
 
         {/* LINE */}

@@ -6,14 +6,16 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
-const IncomeVsSingleFamilyMapComponent = () => {
+const IncomeVsSingleFamilyMapComponent = (props) => {
+  const { openMap, setOpenMap, setMapOpened } = props;
+
   const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
     "inc4550", "inc5060", "inc6075", "i7599", "i100125", "i125150", "i150200", "in200o"]
   // These are for labels above the sliders
   const incomeLevelTextLow = ["$0", "$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000"];
   const incomeLevelTextHigh = ["$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000", "INF"];
 
-    const [minIndex, setMinIndex] = useState(0);
+  const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(15);
   const [map, setMap] = useState(null);
 
@@ -60,7 +62,7 @@ const IncomeVsSingleFamilyMapComponent = () => {
               single_family: row.only_single_family * 100,
               // This is the query for "%_single_family", round to 2 decimal places
               percentage_single_family: Math.round(row["%_single_family"] * 100) / 100,
-              incu10:  100 * row["incu10"]  / totalPop,
+              incu10: 100 * row["incu10"] / totalPop,
               inc1015: 100 * row["inc1015"] / totalPop,
               inc1520: 100 * row["inc1520"] / totalPop,
               inc2025: 100 * row["inc2025"] / totalPop,
@@ -71,11 +73,11 @@ const IncomeVsSingleFamilyMapComponent = () => {
               inc4550: 100 * row["inc4550"] / totalPop,
               inc5060: 100 * row["inc5060"] / totalPop,
               inc6075: 100 * row["inc6075"] / totalPop,
-              i7599:   100 * row["i7599"]   / totalPop,
+              i7599: 100 * row["i7599"] / totalPop,
               i100125: 100 * row["i100125"] / totalPop,
               i125150: 100 * row["i125150"] / totalPop,
               i150200: 100 * row["i150200"] / totalPop,
-              in200o:  100 * row["in200o"]  / totalPop,
+              in200o: 100 * row["in200o"] / totalPop,
             }
           );
         });
@@ -173,27 +175,27 @@ const IncomeVsSingleFamilyMapComponent = () => {
 
     function updateVisualization(minIndex, maxIndex) {
       csvPromise.then(function (results) {
-          results.data.forEach((row) => {
-              var totalPop = 0;
-              incomeLevels.forEach((level) => {
-                  totalPop += parseInt(row[level], 10) || 0;
-              });
-
-              var totalIncomeWithinRange = 0;
-              for (let i = minIndex; i <= maxIndex; i++) {
-                  totalIncomeWithinRange += parseInt(row[incomeLevels[i]], 10) || 0;
-              }
-
-              map.setFeatureState({
-                  source: "mass-muni",
-                  sourceLayer: "ma_municipalities_degrees-8uvqwo",
-                  id: row.muni_id,
-              }, {
-                  incomeWithinRange: (totalIncomeWithinRange / totalPop) * 100,
-              });
+        results.data.forEach((row) => {
+          var totalPop = 0;
+          incomeLevels.forEach((level) => {
+            totalPop += parseInt(row[level], 10) || 0;
           });
+
+          var totalIncomeWithinRange = 0;
+          for (let i = minIndex; i <= maxIndex; i++) {
+            totalIncomeWithinRange += parseInt(row[incomeLevels[i]], 10) || 0;
+          }
+
+          map.setFeatureState({
+            source: "mass-muni",
+            sourceLayer: "ma_municipalities_degrees-8uvqwo",
+            id: row.muni_id,
+          }, {
+            incomeWithinRange: (totalIncomeWithinRange / totalPop) * 100,
+          });
+        });
       });
-  }
+    }
 
     const updateIncomeDisplay = () => {
       const minIndex = parseInt(document.getElementById('incomeLevelMin').value);
@@ -210,7 +212,7 @@ const IncomeVsSingleFamilyMapComponent = () => {
       incomeLevelMin.addEventListener('input', updateIncomeDisplay);
       incomeLevelMax.addEventListener('input', updateIncomeDisplay);
     }
-    
+
 
     return () => {
       if (incomeLevelMin && incomeLevelMax) {
@@ -248,19 +250,34 @@ const IncomeVsSingleFamilyMapComponent = () => {
     }
   };
 
-  return (
-    <div>
-      <div style={{ position: 'absolute', top: 50, right: 10, zIndex: 10000, backgroundColor: 'aliceblue' }}>
-        <div>
-          Selected Income Range: <span id="selectedIncomeRange"></span>
-          <br />
-          <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
-          <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
+  const handleClick = () => {
+    setOpenMap(null);
+    setMapOpened(false);
+    // setArchiveMapId(null);
+  };
+
+
+  if (openMap === "map2") {
+    return (
+      <div>
+        <div style={{ position: 'absolute', top: 50, right: 10, zIndex: 10000, backgroundColor: 'aliceblue' }}>
+          <div>
+            Selected Income Range: <span id="selectedIncomeRange"></span>
+            <br />
+            <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
+            <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
+          </div>
         </div>
+        <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
+          onClick={handleClick}>
+          BACK
+        </button>
+        <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
       </div>
-      <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 };
 
 export default IncomeVsSingleFamilyMapComponent;
