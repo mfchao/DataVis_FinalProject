@@ -1,5 +1,6 @@
 
 import CoiVsSingleFamilyMapComponent from "./CoiVsSingleFamilyMapComponent";
+import HolcMapComponent from "./HolcMapComponent";
 import IncomeVsSingleFamilyMapComponent from "./IncomeVsSingleFamilyMapComponent";
 
 
@@ -13,6 +14,14 @@ export const MapManager = (props) => {
         // setArchiveMapId(null);
     };
 
+    const displayMap = (openMap) => {
+        switch (openMap) {
+            case "map1": return <CoiVsSingleFamilyMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
+            case "map2": return <IncomeVsSingleFamilyMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
+            case "map3": return <HolcMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
+        }
+    };
+
     return (
         <>
             <div
@@ -24,8 +33,7 @@ export const MapManager = (props) => {
                 </button> */}
 
                 <div className={`z-10 absolute top-0 left-0 w-screen h-screen overflow-y-scroll transition-all ease-in-out duration-700 `}>
-                    <CoiVsSingleFamilyMapComponent openMap={openMap} setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
-                    <IncomeVsSingleFamilyMapComponent openMap={openMap} setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
+                    {displayMap(openMap)}
                 </div>
 
 

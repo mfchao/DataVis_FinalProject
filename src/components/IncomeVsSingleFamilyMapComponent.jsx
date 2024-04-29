@@ -7,7 +7,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
 const IncomeVsSingleFamilyMapComponent = (props) => {
-  const { openMap, setOpenMap, setMapOpened } = props;
+  const { setOpenMap, setMapOpened } = props;
 
   const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
     "inc4550", "inc5060", "inc6075", "i7599", "i100125", "i125150", "i150200", "in200o"]
@@ -16,8 +16,7 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
   const incomeLevelTextHigh = ["$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000", "INF"];
 
   const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(11);
-  const [map, setMap] = useState(null);
+  const [maxIndex, setMaxIndex] = useState(10);
 
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -249,21 +248,21 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     });
   });
 
-const handleMinChange = (event) => {
-  const newMinIndex = parseInt(event.target.value);
-  setMinIndex(newMinIndex);
-  if (newMinIndex >= maxIndex) {
-    setMaxIndex(newMinIndex + 1);
-  }
-};
+  const handleMinChange = (event) => {
+    const newMinIndex = parseInt(event.target.value);
+    setMinIndex(newMinIndex);
+    if (newMinIndex >= maxIndex) {
+      setMaxIndex(newMinIndex + 1);
+    }
+  };
 
-const handleMaxChange = (event) => {
-  const newMaxIndex = parseInt(event.target.value);
-  setMaxIndex(newMaxIndex);
-  if (newMaxIndex <= minIndex) {
-    setMinIndex(newMaxIndex - 1);
-  }
-};
+  const handleMaxChange = (event) => {
+    const newMaxIndex = parseInt(event.target.value);
+    setMaxIndex(newMaxIndex);
+    if (newMaxIndex <= minIndex) {
+      setMinIndex(newMaxIndex - 1);
+    }
+  };
 
   const handleClick = () => {
     setOpenMap(null);
@@ -272,27 +271,23 @@ const handleMaxChange = (event) => {
   };
 
 
-  if (openMap === "map2") {
-    return (
-      <div>
-        <div style={{ position: 'absolute', top: 50, right: 10, zIndex: 10000, backgroundColor: 'aliceblue' }}>
-          <div>
-            Selected Income Range: <span id="selectedIncomeRange"></span>
-            <br />
-            <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
-            <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
-          </div>
+  return (
+    <div>
+      <div style={{ position: 'absolute', top: 50, right: 10, zIndex: 10000, backgroundColor: 'aliceblue' }}>
+        <div>
+          Selected Income Range: <span id="selectedIncomeRange"></span>
+          <br />
+          <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
+          <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
         </div>
-        <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
-          onClick={handleClick}>
-          BACK
-        </button>
-        <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
       </div>
-    );
-  } else {
-    return null;
-  }
+      <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
+        onClick={handleClick}>
+        BACK
+      </button>
+      <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
+    </div>
+  )
 };
 
 export default IncomeVsSingleFamilyMapComponent;

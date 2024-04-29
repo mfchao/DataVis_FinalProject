@@ -99,6 +99,7 @@ export const Timeline = (props) => {
         title: "1938",
         subtitle: `Home Owners Loan Corporation (HOLC) created Residential Security maps for assessing the risk of financing mortgages. Areas were given 4 grades, from A for "best" to D for "hazardous".`,
         image: '../images/children=4.png',
+        map: 'map3'
       },
       {
         cameraRailDist: 1.5,

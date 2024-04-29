@@ -6,7 +6,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
-const HolcMapComponent = () => {
+const HolcMapComponent = (props) => {
+  const { setOpenMap, setMapOpened } = props;
   const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
     "inc4550", "inc5060", "inc6075", "i7599", "i100125", "i125150", "i150200", "in200o"]
   // These are for labels above the sliders
@@ -22,8 +23,10 @@ const HolcMapComponent = () => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
-      zoom: 7.5,
-      center: [-71, 42.2],
+      zoom: 10.85,
+      center: [-71.0626, 42.3347],
+      bearing: -25.4028,
+      pitch: 48.6065,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -154,7 +157,7 @@ const HolcMapComponent = () => {
             ['linear'],
             ['feature-state', 'percentage_single_family'],
             0, '#000000', // Start color for 0%
-            100, '#ffffff'  // End color for 100%
+            100, '#00ff00'  // End color for 100%
           ]
         }
       });
@@ -210,7 +213,7 @@ const HolcMapComponent = () => {
         popup.remove();
       });
 
-            // Event listener to log camera position, zoom level, and bearing
+      // Event listener to log camera position, zoom level, and bearing
       map.on('moveend', () => {
         const center = map.getCenter();
         const zoom = map.getZoom();
@@ -287,8 +290,18 @@ const HolcMapComponent = () => {
     });
   });
 
+  const handleClick = () => {
+    setOpenMap(null);
+    setMapOpened(false);
+    // setArchiveMapId(null);
+  };
+
   return (
     <div>
+      <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
+        onClick={handleClick}>
+        BACK
+      </button>
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
     </div>
   );

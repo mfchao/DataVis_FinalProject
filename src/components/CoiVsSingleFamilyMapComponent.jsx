@@ -7,24 +7,15 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
 const CoiVsSingleFamilyMapComponent = (props) => {
-  const { openMap, setOpenMap, setMapOpened } = props;
 
-  const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
-    "inc4550", "inc5060", "inc6075", "i7599", "i100125", "i125150", "i150200", "in200o"]
-  // These are for labels above the sliders
-  const incomeLevelTextLow = ["$0", "$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000"];
-  const incomeLevelTextHigh = ["$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000", "INF"];
-
-  const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(15);
-  const [map, setMap] = useState(null);
+  const { setOpenMap, setMapOpened } = props;
 
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
       zoom: 9.2,
-      center: [-71.1295, 42.6533],
+      center: [-71.0068, 42.3735],
       bearing: -72,
       pitch: 68.5,
       transformRequest: (url, resourceType) => {
@@ -44,11 +35,6 @@ const CoiVsSingleFamilyMapComponent = (props) => {
     map.on("load", function () {
       csvPromise.then(function (results) {
         results.data.forEach((row) => {
-          var totalPop = 0
-          //calculate sum of population for each municipality
-          incomeLevels.forEach((level) => {
-            totalPop += parseInt(row[level]);
-          })
 
           map.setFeatureState(
             {
@@ -136,8 +122,8 @@ const CoiVsSingleFamilyMapComponent = (props) => {
         // iterate through the object
         var listedFeatures = [
           "municipal",
-          "single_family",
-          "percentage_single_family"
+          "percentage_single_family",
+          "coi_score"
         ];
         for (var key in FeatureState) {
           if (!FeatureState.hasOwnProperty(key)) {
@@ -167,57 +153,10 @@ const CoiVsSingleFamilyMapComponent = (props) => {
       });
 
 
-
-
     });
 
-    function updateVisualization(minIndex, maxIndex) {
-      csvPromise.then(function (results) {
-        results.data.forEach((row) => {
-          var totalPop = 0;
-          incomeLevels.forEach((level) => {
-            totalPop += parseInt(row[level], 10) || 0;
-          });
-
-          var totalIncomeWithinRange = 0;
-          for (let i = minIndex; i <= maxIndex; i++) {
-            totalIncomeWithinRange += parseInt(row[incomeLevels[i]], 10) || 0;
-          }
-
-          map.setFeatureState({
-            source: "mass-muni",
-            sourceLayer: "ma_municipalities_degrees-8uvqwo",
-            id: row.muni_id,
-          }, {
-            incomeWithinRange: (totalIncomeWithinRange / totalPop) * 100,
-          });
-        });
-      });
-    }
-
-    const updateIncomeDisplay = () => {
-      const minIndex = parseInt(document.getElementById('incomeLevelMin').value);
-      const maxIndex = parseInt(document.getElementById('incomeLevelMax').value);
-      const selectedRangeText = `${incomeLevelTextLow[minIndex]} - ${incomeLevelTextHigh[maxIndex]}`;
-      document.getElementById('selectedIncomeRange').textContent = selectedRangeText;
-      updateVisualization(minIndex, maxIndex);
-    };
-
-    const incomeLevelMin = document.getElementById('incomeLevelMin');
-    const incomeLevelMax = document.getElementById('incomeLevelMax');
-
-    if (incomeLevelMin && incomeLevelMax) {
-      incomeLevelMin.addEventListener('input', updateIncomeDisplay);
-      incomeLevelMax.addEventListener('input', updateIncomeDisplay);
-    }
-
-
     return () => {
-      if (incomeLevelMin && incomeLevelMax) {
-        incomeLevelMin.removeEventListener('input', updateIncomeDisplay);
-        incomeLevelMax.removeEventListener('input', updateIncomeDisplay);
-        map.remove();
-      }
+      map.remove();
     };
 
   }, []);
@@ -232,49 +171,21 @@ const CoiVsSingleFamilyMapComponent = (props) => {
     });
   });
 
-  const handleMinChange = (event) => {
-    const newMinIndex = parseInt(event.target.value);
-    setMinIndex(newMinIndex);
-    if (newMinIndex >= maxIndex) {
-      setMaxIndex(newMinIndex + 1);
-    }
-  };
-
-  const handleMaxChange = (event) => {
-    const newMaxIndex = parseInt(event.target.value);
-    setMaxIndex(newMaxIndex);
-    if (newMaxIndex <= minIndex) {
-      setMinIndex(newMaxIndex - 1);
-    }
-  };
-
   const handleClick = () => {
     setOpenMap(null);
     setMapOpened(false);
     // setArchiveMapId(null);
   };
 
-  if (openMap === "map1") {
-    return (
-      <div>
-        <div style={{ position: 'absolute', top: 50, right: 10, zIndex: 10000, backgroundColor: 'aliceblue' }}>
-          <div>
-            Selected Income Range: <span id="selectedIncomeRange"></span>
-            <br />
-            <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
-            <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
-          </div>
-        </div>
-        <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
-          onClick={handleClick}>
-          BACK
-        </button>
-        <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
-      </div>
-    );
-  } else {
-    return null;
-  }
+  return (
+    <div>
+      <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
+        onClick={handleClick}>
+        BACK
+      </button>
+      <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
+    </div>
+  );
 };
 
 export default CoiVsSingleFamilyMapComponent;
