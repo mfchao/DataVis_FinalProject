@@ -6,7 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
-const MapComponent = () => {
+const IncomeVsSingleFamilyMapComponent = () => {
   const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
     "inc4550", "inc5060", "inc6075", "i7599", "i100125", "i125150", "i150200", "in200o"]
   // These are for labels above the sliders
@@ -60,7 +60,7 @@ const MapComponent = () => {
               single_family: row.only_single_family * 100,
               // This is the query for "%_single_family", round to 2 decimal places
               percentage_single_family: Math.round(row["%_single_family"] * 100) / 100,
-              incu10: 100 * row["incu10"] / totalPop,
+              incu10:  100 * row["incu10"]  / totalPop,
               inc1015: 100 * row["inc1015"] / totalPop,
               inc1520: 100 * row["inc1520"] / totalPop,
               inc2025: 100 * row["inc2025"] / totalPop,
@@ -71,11 +71,11 @@ const MapComponent = () => {
               inc4550: 100 * row["inc4550"] / totalPop,
               inc5060: 100 * row["inc5060"] / totalPop,
               inc6075: 100 * row["inc6075"] / totalPop,
-              i7599: 100 * row["i7599"] / totalPop,
+              i7599:   100 * row["i7599"]   / totalPop,
               i100125: 100 * row["i100125"] / totalPop,
               i125150: 100 * row["i125150"] / totalPop,
               i150200: 100 * row["i150200"] / totalPop,
-              in200o: 100 * row["in200o"] / totalPop,
+              in200o:  100 * row["in200o"]  / totalPop,
             }
           );
         });
@@ -263,4 +263,4 @@ const MapComponent = () => {
   );
 };
 
-export default MapComponent;
+export default IncomeVsSingleFamilyMapComponent;

@@ -5,19 +5,18 @@ import { OrbitControls, ScrollControls } from "@react-three/drei";
 import React, { useEffect, useState, useRef } from 'react';
 import { getProject, val, types } from '@theatre/core';
 import { ScrollManager } from './components/ScrollManager';
-import MapComponent from './components/MapComponent'
+import MapComponent from './components/IncomeVsSingleFamilyMapComponent'
+import HolcMapComponent from './components/HolcMapComponent'
+import CoiVsSingleFamilyMapComponent from "./components/CoiVsSingleFamilyMapComponent";
+import IncomeVsSingleFamilyMapComponent from "./components/IncomeVsSingleFamilyMapComponent";
 import { Menu } from './components/Menu';
 import { EffectComposer, Noise } from '@react-three/postprocessing';
-
-
-
 
 
 function App() {
   // const sheet = getProject("Fly Through 1").sheet("Scene")
   const [section, setSection] = useState(null);
   const [currentSection, setCurrentSection] = useState(0);
-
 
   return (
     <>
@@ -40,9 +39,7 @@ function App() {
           </Canvas>
         </div>
         <div style={{ width: '60%' }}>
-          <MapComponent>
-
-          </MapComponent>
+          <CoiVsSingleFamilyMapComponent/>
         </div>
       </div>
 
