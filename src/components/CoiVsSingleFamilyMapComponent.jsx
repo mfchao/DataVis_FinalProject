@@ -23,8 +23,10 @@ const CoiVsSingleFamilyMapComponent = (props) => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
-      zoom: 7.5,
-      center: [-71, 42.2],
+      zoom: 9.2,
+      center: [-71.1295, 42.6533],
+      bearing: -72,
+      pitch: 68.5,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -36,7 +38,7 @@ const CoiVsSingleFamilyMapComponent = (props) => {
     });
 
     const csvUrl =
-      "https://raw.githubusercontent.com/hannohiss/Vis-Mapbox-Website/main/housing_sf_other_w_census.csv"
+      "https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/sfh_w_coi.csv"
     const csvPromise = papaPromise(csvUrl);
 
     map.on("load", function () {
@@ -62,28 +64,12 @@ const CoiVsSingleFamilyMapComponent = (props) => {
               single_family: row.only_single_family * 100,
               // This is the query for "%_single_family", round to 2 decimal places
               percentage_single_family: Math.round(row["%_single_family"] * 100) / 100,
-              incu10: 100 * row["incu10"] / totalPop,
-              inc1015: 100 * row["inc1015"] / totalPop,
-              inc1520: 100 * row["inc1520"] / totalPop,
-              inc2025: 100 * row["inc2025"] / totalPop,
-              inc2530: 100 * row["inc2530"] / totalPop,
-              inc3035: 100 * row["inc3035"] / totalPop,
-              inc3540: 100 * row["inc3540"] / totalPop,
-              inc4045: 100 * row["inc4045"] / totalPop,
-              inc4550: 100 * row["inc4550"] / totalPop,
-              inc5060: 100 * row["inc5060"] / totalPop,
-              inc6075: 100 * row["inc6075"] / totalPop,
-              i7599: 100 * row["i7599"] / totalPop,
-              i100125: 100 * row["i100125"] / totalPop,
-              i125150: 100 * row["i125150"] / totalPop,
-              i150200: 100 * row["i150200"] / totalPop,
-              in200o: 100 * row["in200o"] / totalPop,
+              coi_score: Math.round(row["COI Score"] * 100) / 100
             }
           );
         });
       });
 
-      // YOUR TURN: Add source layer
       map.addSource("mass-muni", {
         type: "vector",
         url: "mapbox://hannohiss.890zal4l",
@@ -101,9 +87,9 @@ const CoiVsSingleFamilyMapComponent = (props) => {
           'fill-extrusion-height': [
             'interpolate',
             ['linear'],
-            ['feature-state', 'incomeWithinRange'],
-            0, 0, // Assuming population is 0, height is 0
-            100, 5000 // Scale up height with population, adjust as needed
+            ['feature-state', 'coi_score'],
+            1, 0, // Assuming population is 0, height is 0
+            9.5, 5000 // Scale up height with population, adjust as needed
           ],
           'fill-extrusion-base': 0, // Base of the extrusions
           'fill-extrusion-opacity': 1, // Adjust the opacity as needed
@@ -117,7 +103,6 @@ const CoiVsSingleFamilyMapComponent = (props) => {
           ]
         }
       });
-
 
       map.addLayer({
         id: "mass-muni-line",
@@ -168,6 +153,19 @@ const CoiVsSingleFamilyMapComponent = (props) => {
         map.getCanvas().style.cursor = "";
         popup.remove();
       });
+
+      // Event listener to log camera position, zoom level, and bearing
+      map.on('moveend', () => {
+        const center = map.getCenter();
+        const zoom = map.getZoom();
+        const bearing = map.getBearing();
+        const pitch = map.getPitch();
+        console.log(`Map center: Latitude ${center.lat}, Longitude ${center.lng}`);
+        console.log(`Zoom level: ${zoom}`);
+        console.log(`Bearing: ${bearing} degrees`);
+        console.log(`Pitch: ${pitch} degrees`)
+      });
+
 
 
 

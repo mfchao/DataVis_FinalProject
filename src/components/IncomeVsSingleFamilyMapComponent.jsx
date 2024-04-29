@@ -16,15 +16,17 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
   const incomeLevelTextHigh = ["$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000", "INF"];
 
   const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(15);
+  const [maxIndex, setMaxIndex] = useState(11);
   const [map, setMap] = useState(null);
 
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
-      zoom: 7.5,
-      center: [-71, 42.2],
+      zoom: 9.54,
+      center: [-71.1815, 42.3611],
+      bearing: 51.6,
+      pitch: 71,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -40,6 +42,8 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     const csvPromise = papaPromise(csvUrl);
 
     map.on("load", function () {
+      updateIncomeDisplay();
+      updateVisualization(minIndex, maxIndex);
       csvPromise.then(function (results) {
         results.data.forEach((row) => {
           var totalPop = 0
@@ -169,6 +173,17 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
         popup.remove();
       });
 
+      // Event listener to log camera position, zoom level, and bearing
+      map.on('moveend', () => {
+        const center = map.getCenter();
+        const zoom = map.getZoom();
+        const bearing = map.getBearing();
+        const pitch = map.getPitch();
+        console.log(`Map center: Latitude ${center.lat}, Longitude ${center.lng}`);
+        console.log(`Zoom level: ${zoom}`);
+        console.log(`Bearing: ${bearing} degrees`);
+        console.log(`Pitch: ${pitch} degrees`)
+      });
 
 
     });
@@ -234,21 +249,21 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     });
   });
 
-  const handleMinChange = (event) => {
-    const newMinIndex = parseInt(event.target.value);
-    setMinIndex(newMinIndex);
-    if (newMinIndex >= maxIndex) {
-      setMaxIndex(newMinIndex + 1);
-    }
-  };
+const handleMinChange = (event) => {
+  const newMinIndex = parseInt(event.target.value);
+  setMinIndex(newMinIndex);
+  if (newMinIndex >= maxIndex) {
+    setMaxIndex(newMinIndex + 1);
+  }
+};
 
-  const handleMaxChange = (event) => {
-    const newMaxIndex = parseInt(event.target.value);
-    setMaxIndex(newMaxIndex);
-    if (newMaxIndex <= minIndex) {
-      setMinIndex(newMaxIndex - 1);
-    }
-  };
+const handleMaxChange = (event) => {
+  const newMaxIndex = parseInt(event.target.value);
+  setMaxIndex(newMaxIndex);
+  if (newMaxIndex <= minIndex) {
+    setMinIndex(newMaxIndex - 1);
+  }
+};
 
   const handleClick = () => {
     setOpenMap(null);
