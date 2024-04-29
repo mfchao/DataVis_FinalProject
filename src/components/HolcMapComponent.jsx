@@ -210,6 +210,18 @@ const HolcMapComponent = () => {
         popup.remove();
       });
 
+            // Event listener to log camera position, zoom level, and bearing
+      map.on('moveend', () => {
+        const center = map.getCenter();
+        const zoom = map.getZoom();
+        const bearing = map.getBearing();
+        const pitch = map.getPitch();
+        console.log(`Map center: Latitude ${center.lat}, Longitude ${center.lng}`);
+        console.log(`Zoom level: ${zoom}`);
+        console.log(`Bearing: ${bearing} degrees`);
+        console.log(`Pitch: ${pitch} degrees`)
+      });
+
 
 
     });
