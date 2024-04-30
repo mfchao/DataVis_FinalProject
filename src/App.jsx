@@ -31,7 +31,7 @@ function App() {
       <Canvas shadows>
         <color attach="background" args={["#ececec"]} />
 
-        <ScrollControls pages={9} damping={0.5} enabled={mapOpened ? false : true}>
+        <ScrollControls pages={9} damping={0} enabled={mapOpened ? false : true} >
           <ScrollManager section={section} onSectionChange={setSection} />
 
           <HtmlWrapper
