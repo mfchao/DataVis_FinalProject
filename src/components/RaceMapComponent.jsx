@@ -6,7 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
-const HolcMapComponent = (props) => {
+const RaceMapComponent = (props) => {
   const { setOpenMap, setMapOpened } = props;
 
   const mapOpacity = .5;
@@ -16,9 +16,9 @@ const HolcMapComponent = (props) => {
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
       zoom: 10.85,
-      center: [-71.0626, 42.3347],
-      bearing: -25.4028,
-      pitch: 48.6065,
+      center: [-71.0746, 42.3609],
+      bearing: -94.19,
+      pitch: 62.60,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -50,69 +50,12 @@ const HolcMapComponent = (props) => {
               municipal: row.muni,
               single_family: row.only_single_family * 100,
               // This is the query for "%_single_family", round to 2 decimal places
-              percentage_single_family: Math.round(row["%_single_family"] * 100) / 100
+              percentage_single_family: Math.round(row["%_single_family"] * 100) / 100,
+              percentage_nhwhite: Math.round(row["nhwhi"] / row["pop"] * 10000) / 100
             }
           );
         });
       });
-
-
-      // Bottom Map
-      map.loadImage('src/data/MA_Boston_1938.png', function (error, image) {
-        if (error) throw error;
-
-        // Add the image as a source to the map
-        map.addSource('bottom-map', {
-          type: 'image',
-          url: 'src/data/MA_Boston_1938.png',
-          coordinates: [
-            [-71.272, 42.376],  // top left corner of the image
-            [-70.9752, 42.375],  // top right corner
-            [-70.969, 42.20], // bottom right corner
-            [-71.276, 42.201]  // bottom left corner
-          ]
-        });
-
-        // Add a new layer to display the image
-        map.addLayer({
-          id: 'bottom-map-layer',
-          type: 'raster',
-          source: 'bottom-map',
-          paint: {
-            'raster-opacity': mapOpacity // Adjust the opacity if needed
-          }
-        });
-
-      });
-
-      // Top Map
-      map.loadImage('src/data/MA_BostonSection2_1938.png', function (error, image) {
-        if (error) throw error;
-
-        // Add the image as a source to the map
-        map.addSource('top-map', {
-          type: 'image',
-          url: 'src/data/MA_BostonSection2_1938.png',
-          coordinates: [
-            [-71.286, 42.4865],  // top left corner of the image
-            [-70.9752, 42.486],  // top right corner
-            [-70.978, 42.343], // bottom right corner
-            [-71.286, 42.34]  // bottom left corner
-          ]
-        });
-
-        // Add a new layer to display the image
-        map.addLayer({
-          id: 'top-map-layer',
-          type: 'raster',
-          source: 'top-map',
-          paint: {
-            'raster-opacity': mapOpacity // Adjust the opacity if needed
-          }
-        });
-
-      });
-
 
       // YOUR TURN: Add source layer
       map.addSource("mass-muni", {
@@ -132,9 +75,9 @@ const HolcMapComponent = (props) => {
           'fill-extrusion-height': [
             'interpolate',
             ['linear'],
-            ['feature-state', 'percentage_single_family'],
-            0, 100,
-            100, 100
+            ['feature-state', 'percentage_nhwhite'],
+            50, 0,
+            100, 2500
           ],
           'fill-extrusion-base': 0, // Base of the extrusions
           'fill-extrusion-opacity': 1, // Adjust the opacity as needed
@@ -143,8 +86,8 @@ const HolcMapComponent = (props) => {
             'interpolate',
             ['linear'],
             ['feature-state', 'percentage_single_family'],
-            0, '#000000', // Start color for 0%
-            100, '#FFFFFF'  // End color for 100%
+            0, '#6BA0C7', // Start color for 0%
+            100, '#CE575E'  // End color for 100%
           ]
         }
       });
@@ -183,7 +126,8 @@ const HolcMapComponent = (props) => {
         var listedFeatures = [
           "municipal",
           "single_family",
-          "percentage_single_family"
+          "percentage_single_family",
+          "percentage_nhwhite"
         ];
         for (var key in FeatureState) {
           if (!FeatureState.hasOwnProperty(key)) {
@@ -245,4 +189,4 @@ const HolcMapComponent = (props) => {
   );
 };
 
-export default HolcMapComponent;
+export default RaceMapComponent;

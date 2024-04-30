@@ -69,9 +69,7 @@ export const Timeline = (props) => {
         ),
         title: "1843",
         subtitle: `First racially restrictive covenant, stating that land not be sold to a "Negro or native of Ireland"`,
-        image: '../images/2-men-sepia.png',
-        map: 'map1'
-
+        image: '../images/2-men-sepia.png'
       },
       {
         cameraRailDist: 1.5,
@@ -83,8 +81,7 @@ export const Timeline = (props) => {
         rotation: [0, -0.1, 0],
         title: "1927",
         subtitle: `The National Association of Real Estate Boards' Code of Ethics creates covenant stating "no part of the property should be used, occupied, sold or leased to black people, unless they were servants, janitors, or chauffeurs living in basements, servants' quarters, or a barn or garage in the rear."`,
-        image: '../images/mom-child-2.png',
-        map: 'map2'
+        image: '../images/mom-child-2.png'
 
 
       },
@@ -98,8 +95,7 @@ export const Timeline = (props) => {
         rotation: [0, 1, 0],
         title: "1938",
         subtitle: `Home Owners Loan Corporation (HOLC) created Residential Security maps for assessing the risk of financing mortgages. Areas were given 4 grades, from A for "best" to D for "hazardous".`,
-        image: '../images/children=4.png',
-        map: 'map3'
+        image: '../images/children=4.png'
       },
       {
         cameraRailDist: 1.5,
@@ -124,9 +120,25 @@ export const Timeline = (props) => {
         rotation: [0, 0, 0],
         title: "1968",
         subtitle: `Redlining is outlawed by the U.S. 1968 Fair Housing Act. Boston establishes the Boston Urban Renewal Groud (BBRG) to provide Black Bostonians FHA-insured loans and mortgages, but only in Dorchester, Mattapan, and Roxbury, areas which were 'red' under the just-outlawed HOLC map system.`,
-        image: '../images/couple.png'
+        image: '../images/couple.png',
+        map: 'holc'
 
       },
+      {
+        cameraRailDist: 1.5,
+        position: new Vector3(
+          curvePoints[4].x - 2,
+          curvePoints[4].y + 1,
+          curvePoints[4].z - 45
+        ),
+        rotation: [0, 0, 0],
+        title: "",
+        subtitle: `While redlining is technically outlawed, the areas which previously excluded minorities maintained a barrier to economic and social mobility through single-family housing zoning maps, which aligned extremely closely with the previously used HOLC maps.  **Click to view interactive map**`,
+        image: '../images/holc_screenshot.png',
+        map: 'holc'
+
+      },
+
       {
         cameraRailDist: -0.5,
         position: new Vector3(
@@ -136,9 +148,22 @@ export const Timeline = (props) => {
         ),
         rotation: [0, 0, 0],
         title: "2018",
-        subtitle: `The impacts of single-family zoning continue to this day. While explicitly segregationist housing policies have gone away, the geographic and economical foundation that they laid has allowed the impacts to carry forward into modern day, largely maintained by exclusionary single-family zoning. `,
+        subtitle: `The impacts of single-family zoning continue to this day. While explicitly segregationist housing policies have gone away, the geographic and economical foundation that they laid has allowed the impacts to carry forward into modern day, largely maintained by exclusionary single-family zoning.`,
         image: '../images/black-child-1.png'
+      },  
 
+      {
+        cameraRailDist: -0.5,
+        position: new Vector3(
+          curvePoints[5].x - 11,
+          curvePoints[5].y + 1.3,
+          curvePoints[5].z - 90
+        ),
+        rotation: [0, 0, 0],
+        title: "",
+        subtitle: `Areas which historically excluded non-white residents remain a much higher percentage white than neighboring areas, correlating directly with percentage of single-family housing zoning **Click to view interactive map**`,
+        image: '../images/race_screenshot.png',
+        map: 'race'
       },
 
       {
@@ -153,17 +178,47 @@ export const Timeline = (props) => {
         subtitle: `The historically lower incomes in these areas have also resulted in historically lower access to quality resources, making it much harder for those born into poverty to escape it. `,
         image: '../images/woman-original.png'
       },
+
+      {
+        cameraRailDist: 8,
+        position: new Vector3(
+          curvePoints[6].x + 6,
+          curvePoints[6].y + 1.3,
+          curvePoints[6].z - 15
+        ),
+        rotation: [0, 0, 0],
+        title: "",
+        subtitle: `DiversityDataKids.org's Child Opportunity Index factors education, health and environment, and social and economic conditions to provide a measure of opportunities provided to children. **click to view interactive map**`,
+        image: '../images/coi_screenshot.png',
+        map: 'coi'
+      },
+
       {
         cameraRailDist: 0,
         position: new Vector3(
-          curvePoints[7].x,
+          curvePoints[7].x - 4,
           curvePoints[7].y + 1.3,
           curvePoints[7].z - 10
         ),
         rotation: [0, 0, 0],
         title: "2022+",
-        subtitle: `The median value of owner-occupied homes stood at $684,900, with median gross rent at $1,981, and median income at $89,212. This indicates a shift from racial to financial segregation, perpetuating exclusionary practices. What implications might this have for the future?`,
+        subtitle: `The median value of owner-occupied homes stood at $684,900, with median gross rent at $1,981, and median income at $89,212. This indicates a shift from racial to financial segregation, perpetuating exclusionary practices. What implications might this have for the future`,
         image: '../images/mom-child.png'
+
+      },
+
+      {
+        cameraRailDist: 0,
+        position: new Vector3(
+          curvePoints[7].x + 4,
+          curvePoints[7].y + 1.3,
+          curvePoints[7].z - 10
+        ),
+        rotation: [0, 0, 0],
+        title: "",
+        subtitle: `Click to view the income disparity across the Greater Boston Area`,
+        image: '../images/income_screenshot.png',
+        map: 'income'
 
       },
     ];
