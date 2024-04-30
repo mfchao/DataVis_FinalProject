@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
-mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
+mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYycm41cGxrNjNsNDMifQ.8ZNsKjRpCDRNEjV5AI4wRg";
 
 const HolcMapComponent = (props) => {
   const { setOpenMap, setMapOpened } = props;
@@ -14,7 +14,7 @@ const HolcMapComponent = (props) => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v11',
+      style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
       zoom: 10.85,
       center: [-71.0626, 42.3347],
       bearing: -25.4028,

@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
-mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
+mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYycm41cGxrNjNsNDMifQ.8ZNsKjRpCDRNEjV5AI4wRg";
 
 const RaceMapComponent = (props) => {
   const { setOpenMap, setMapOpened } = props;
@@ -14,7 +14,7 @@ const RaceMapComponent = (props) => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v11',
+      style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
       zoom: 10.85,
       center: [-71.0746, 42.3609],
       bearing: -94.19,
@@ -185,6 +185,28 @@ const RaceMapComponent = (props) => {
         BACK
       </button>
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
+      <div id="info-bar" style={{
+        position: 'absolute',
+        top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
+        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
+      }}>
+        <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Single-family zoned municipalities have disproportionately whiter populations.</div>
+        <div id="additional-info" style={{}}>
+          Decades after the end of redlining, it is clear that the deliberate racial separation of the past has been maintained geographically, with single family zoning continuing to place barriers to prevent economic mobility for minorities.
+        </div>
+        <div id="legend" style={{ padding: '30px' }}>
+          <h4 style={{ fontSize: 'larger' }}>
+            Legend:
+          </h4>
+          <div>
+            <p>
+              Height represents percentage of population that is non-Hispanic White.
+              <br/>
+              Color represents percentage of housing designated as single-family, with blue being 0% and red being 100% single family housing.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

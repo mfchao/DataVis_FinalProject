@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
-mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
+mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYycm41cGxrNjNsNDMifQ.8ZNsKjRpCDRNEjV5AI4wRg";
 
 const IncomeVsSingleFamilyMapComponent = (props) => {
   const { setOpenMap, setMapOpened } = props;
@@ -21,7 +21,7 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v11',
+      style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
       zoom: 9.54,
       center: [-71.1815, 42.3611],
       bearing: 51.6,
@@ -283,7 +283,7 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
         top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
         boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
       }}>
-        <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Income percentages across the Boston Metropolitan Area.</div>
+        <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Staggering income disparities between municipalities across the Boston Metropolitan Area.</div>
         <div id="additional-info" style={{}}>
           In 2018 - 2022 , the median value of an owner-occupied home was $684,900 and median gross rent $1,981, while the median income in the same timeframe was $89,212. In 1960, 8 years before the 1968 Fair Housing Act outlawed redlining, the median price of an owner-occupied house was $15,900 and median gross rent was $82 dollars. The median regional income for white families at that time was $5,835 while for nonwhite families it was $3,233.
           <br />
