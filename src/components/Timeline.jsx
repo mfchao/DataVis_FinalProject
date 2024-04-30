@@ -169,12 +169,12 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 8,
         position: new Vector3(
-          curvePoints[6].x + 1,
-          curvePoints[6].y + 1.3,
-          curvePoints[6].z + 33
+          curvePoints[7].x + 1,
+          curvePoints[7].y + 1.3,
+          curvePoints[7].z + 33
         ),
         rotation: [0, 0, 0],
-        title: "2018",
+        title: "",
         subtitle: `The historically lower incomes in these areas have also resulted in historically lower access to quality resources, making it much harder for those born into poverty to escape it. `,
         image: '../images/woman-original.png'
       },
@@ -182,12 +182,13 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 8,
         position: new Vector3(
-          curvePoints[6].x + 6,
-          curvePoints[6].y + 1.3,
-          curvePoints[6].z - 15
+          curvePoints[7].x + 6,
+          curvePoints[7].y + 1.3,
+          curvePoints[7].z - 15
         ),
         rotation: [0, 0, 0],
         title: "",
+        /// SELIN REPLACE THIS STUFF WITH YOUR STUFF
         subtitle: `DiversityDataKids.org's Child Opportunity Index factors education, health and environment, and social and economic conditions to provide a measure of opportunities provided to children. **click to view interactive map**`,
         image: '../images/coi_screenshot.png',
         map: 'coi'
@@ -196,12 +197,12 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 0,
         position: new Vector3(
-          curvePoints[7].x - 4,
-          curvePoints[7].y + 1.3,
-          curvePoints[7].z - 10
+          curvePoints[6].x - 4,
+          curvePoints[6].y + 1.3,
+          curvePoints[6].z - 10
         ),
         rotation: [0, 0, 0],
-        title: "2022+",
+        title: "2018+",
         subtitle: `The median value of owner-occupied homes stood at $684,900, with median gross rent at $1,981, and median income at $89,212. This indicates a shift from racial to financial segregation, perpetuating exclusionary practices. What implications might this have for the future`,
         image: '../images/mom-child.png'
 
@@ -210,9 +211,9 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 0,
         position: new Vector3(
-          curvePoints[7].x + 4,
-          curvePoints[7].y + 1.3,
-          curvePoints[7].z - 10
+          curvePoints[6].x + 4,
+          curvePoints[6].y + 1.3,
+          curvePoints[6].z - 10
         ),
         rotation: [0, 0, 0],
         title: "",
