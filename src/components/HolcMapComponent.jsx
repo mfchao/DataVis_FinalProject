@@ -6,24 +6,19 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
-const HolcMapComponent = () => {
-  const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
-    "inc4550", "inc5060", "inc6075", "i7599", "i100125", "i125150", "i150200", "in200o"]
-  // These are for labels above the sliders
-  const incomeLevelTextLow = ["$0", "$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000"];
-  const incomeLevelTextHigh = ["$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000", "INF"];
+const HolcMapComponent = (props) => {
+  const { setOpenMap, setMapOpened } = props;
 
-  const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(15);
-  const [map, setMap] = useState(null);
   const mapOpacity = .5;
 
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
-      zoom: 7.5,
-      center: [-71, 42.2],
+      zoom: 10.85,
+      center: [-71.0626, 42.3347],
+      bearing: -25.4028,
+      pitch: 48.6065,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -41,11 +36,6 @@ const HolcMapComponent = () => {
     map.on("load", function () {
       csvPromise.then(function (results) {
         results.data.forEach((row) => {
-          var totalPop = 0
-          //calculate sum of population for each municipality
-          incomeLevels.forEach((level) => {
-            totalPop += parseInt(row[level]);
-          })
 
           map.setFeatureState(
             {
@@ -144,7 +134,7 @@ const HolcMapComponent = () => {
             ['linear'],
             ['feature-state', 'percentage_single_family'],
             0, 100,
-            100, 2500
+            100, 100
           ],
           'fill-extrusion-base': 0, // Base of the extrusions
           'fill-extrusion-opacity': 1, // Adjust the opacity as needed
@@ -154,7 +144,7 @@ const HolcMapComponent = () => {
             ['linear'],
             ['feature-state', 'percentage_single_family'],
             0, '#000000', // Start color for 0%
-            100, '#ffffff'  // End color for 100%
+            100, '#FFFFFF'  // End color for 100%
           ]
         }
       });
@@ -210,7 +200,7 @@ const HolcMapComponent = () => {
         popup.remove();
       });
 
-            // Event listener to log camera position, zoom level, and bearing
+      // Event listener to log camera position, zoom level, and bearing
       map.on('moveend', () => {
         const center = map.getCenter();
         const zoom = map.getZoom();
@@ -226,55 +216,6 @@ const HolcMapComponent = () => {
 
     });
 
-    function updateVisualization(minIndex, maxIndex) {
-      csvPromise.then(function (results) {
-        results.data.forEach((row) => {
-          var totalPop = 0;
-          incomeLevels.forEach((level) => {
-            totalPop += parseInt(row[level], 10) || 0;
-          });
-
-          var totalIncomeWithinRange = 0;
-          for (let i = minIndex; i <= maxIndex; i++) {
-            totalIncomeWithinRange += parseInt(row[incomeLevels[i]], 10) || 0;
-          }
-
-          map.setFeatureState({
-            source: "mass-muni",
-            sourceLayer: "ma_municipalities_degrees-8uvqwo",
-            id: row.muni_id,
-          }, {
-            incomeWithinRange: (totalIncomeWithinRange / totalPop) * 100,
-          });
-        });
-      });
-    }
-
-    const updateIncomeDisplay = () => {
-      const minIndex = parseInt(document.getElementById('incomeLevelMin').value);
-      const maxIndex = parseInt(document.getElementById('incomeLevelMax').value);
-      const selectedRangeText = `${incomeLevelTextLow[minIndex]} - ${incomeLevelTextHigh[maxIndex]}`;
-      document.getElementById('selectedIncomeRange').textContent = selectedRangeText;
-      updateVisualization(minIndex, maxIndex);
-    };
-
-    const incomeLevelMin = document.getElementById('incomeLevelMin');
-    const incomeLevelMax = document.getElementById('incomeLevelMax');
-
-    if (incomeLevelMin && incomeLevelMax) {
-      incomeLevelMin.addEventListener('input', updateIncomeDisplay);
-      incomeLevelMax.addEventListener('input', updateIncomeDisplay);
-    }
-
-
-    return () => {
-      if (incomeLevelMin && incomeLevelMax) {
-        incomeLevelMin.removeEventListener('input', updateIncomeDisplay);
-        incomeLevelMax.removeEventListener('input', updateIncomeDisplay);
-        map.remove();
-      }
-    };
-
   }, []);
 
   const papaPromise = (url) => new Promise((resolve, reject) => {
@@ -287,9 +228,45 @@ const HolcMapComponent = () => {
     });
   });
 
+  const handleClick = () => {
+    setOpenMap(null);
+    setMapOpened(false);
+    // setArchiveMapId(null);
+  };
+
   return (
     <div>
+      <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
+        onClick={handleClick}>
+        BACK
+      </button>
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
+      <div id="info-bar" style={{
+        position: 'absolute',
+        top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
+        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
+      }}>
+        <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Correlation of areas zoned for single family housing with historical redlining practices.</div>
+        <div id="additional-info" style={{}}>
+          The Home Owners Loan Corporation used 4 grades for their Residential Security maps, using green for "Best", blue for "Still Desirable", yellow for "Definitely Declining," and red for "Hazardous".
+          The area descriptions used when producing these grades focused not on crime statistics or environmental concerns, but on assessments of the residents themselves often on the basis of race, class, religion and nationality.
+          One redlined area in Roxbury was identified as "25% negro" and stated "Negro heavily concentrated north of Ruggles St.". A yellow neighborhood in Cambridge stated "A few negro families have moved in on Dame St. and threaten to spread."
+        </div>
+        <div id="legend" style={{ padding: '30px' }}>
+          <h4 style={{ fontSize: 'larger' }}>
+            Legend:
+          </h4>
+          <div>
+            <p>
+              White overlay displays percentage of housing zoned for only single-family residences as opacity. <br />
+              no overlay = 0% single family housing <br />
+              completely opaque = 100% single family housing
+              <br /> <br />
+              Maps are geo-corrected scans of original HOLC redlining maps.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

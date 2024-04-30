@@ -6,18 +6,19 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
-const CoiVsSingleFamilyMapComponent = (props) => {
-
+const RaceMapComponent = (props) => {
   const { setOpenMap, setMapOpened } = props;
+
+  const mapOpacity = .5;
 
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
-      zoom: 9.2,
-      center: [-71.0068, 42.3735],
-      bearing: -72,
-      pitch: 68.5,
+      zoom: 10.85,
+      center: [-71.0746, 42.3609],
+      bearing: -94.19,
+      pitch: 62.60,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -29,7 +30,7 @@ const CoiVsSingleFamilyMapComponent = (props) => {
     });
 
     const csvUrl =
-      "https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/sfh_w_coi.csv"
+      "https://raw.githubusercontent.com/hannohiss/Vis-Mapbox-Website/main/housing_sf_other_w_census.csv"
     const csvPromise = papaPromise(csvUrl);
 
     map.on("load", function () {
@@ -50,12 +51,13 @@ const CoiVsSingleFamilyMapComponent = (props) => {
               single_family: row.only_single_family * 100,
               // This is the query for "%_single_family", round to 2 decimal places
               percentage_single_family: Math.round(row["%_single_family"] * 100) / 100,
-              coi_score: Math.round(row["COI Score"] * 100) / 100
+              percentage_nhwhite: Math.round(row["nhwhi"] / row["pop"] * 10000) / 100
             }
           );
         });
       });
 
+      // YOUR TURN: Add source layer
       map.addSource("mass-muni", {
         type: "vector",
         url: "mapbox://hannohiss.890zal4l",
@@ -73,9 +75,9 @@ const CoiVsSingleFamilyMapComponent = (props) => {
           'fill-extrusion-height': [
             'interpolate',
             ['linear'],
-            ['feature-state', 'coi_score'],
-            1, 0, // Assuming population is 0, height is 0
-            9.5, 5000 // Scale up height with population, adjust as needed
+            ['feature-state', 'percentage_nhwhite'],
+            50, 0,
+            100, 2500
           ],
           'fill-extrusion-base': 0, // Base of the extrusions
           'fill-extrusion-opacity': 1, // Adjust the opacity as needed
@@ -90,6 +92,7 @@ const CoiVsSingleFamilyMapComponent = (props) => {
         }
       });
 
+
       map.addLayer({
         id: "mass-muni-line",
         type: "line",
@@ -101,7 +104,7 @@ const CoiVsSingleFamilyMapComponent = (props) => {
         },
         paint: {
           "line-color": "#D8CAC1",
-          "line-width": .11,
+          "line-width": .5,
         },
       });
 
@@ -122,8 +125,9 @@ const CoiVsSingleFamilyMapComponent = (props) => {
         // iterate through the object
         var listedFeatures = [
           "municipal",
+          "single_family",
           "percentage_single_family",
-          "coi_score"
+          "percentage_nhwhite"
         ];
         for (var key in FeatureState) {
           if (!FeatureState.hasOwnProperty(key)) {
@@ -153,11 +157,8 @@ const CoiVsSingleFamilyMapComponent = (props) => {
       });
 
 
-    });
 
-    return () => {
-      map.remove();
-    };
+    });
 
   }, []);
 
@@ -188,4 +189,4 @@ const CoiVsSingleFamilyMapComponent = (props) => {
   );
 };
 
-export default CoiVsSingleFamilyMapComponent;
+export default RaceMapComponent;

@@ -7,7 +7,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
 
 const IncomeVsSingleFamilyMapComponent = (props) => {
-  const { openMap, setOpenMap, setMapOpened } = props;
+  const { setOpenMap, setMapOpened } = props;
 
   const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
     "inc4550", "inc5060", "inc6075", "i7599", "i100125", "i125150", "i150200", "in200o"]
@@ -16,8 +16,7 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
   const incomeLevelTextHigh = ["$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000", "INF"];
 
   const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(11);
-  const [map, setMap] = useState(null);
+  const [maxIndex, setMaxIndex] = useState(10);
 
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -249,21 +248,21 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     });
   });
 
-const handleMinChange = (event) => {
-  const newMinIndex = parseInt(event.target.value);
-  setMinIndex(newMinIndex);
-  if (newMinIndex >= maxIndex) {
-    setMaxIndex(newMinIndex + 1);
-  }
-};
+  const handleMinChange = (event) => {
+    const newMinIndex = parseInt(event.target.value);
+    setMinIndex(newMinIndex);
+    if (newMinIndex >= maxIndex) {
+      setMaxIndex(newMinIndex + 1);
+    }
+  };
 
-const handleMaxChange = (event) => {
-  const newMaxIndex = parseInt(event.target.value);
-  setMaxIndex(newMaxIndex);
-  if (newMaxIndex <= minIndex) {
-    setMinIndex(newMaxIndex - 1);
-  }
-};
+  const handleMaxChange = (event) => {
+    const newMaxIndex = parseInt(event.target.value);
+    setMaxIndex(newMaxIndex);
+    if (newMaxIndex <= minIndex) {
+      setMinIndex(newMaxIndex - 1);
+    }
+  };
 
   const handleClick = () => {
     setOpenMap(null);
@@ -272,27 +271,50 @@ const handleMaxChange = (event) => {
   };
 
 
-  if (openMap === "map2") {
-    return (
-      <div>
-        <div style={{ position: 'absolute', top: 50, right: 10, zIndex: 10000, backgroundColor: 'aliceblue' }}>
+  return (
+    <div>
+      <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
+        onClick={handleClick}>
+        BACK
+      </button>
+      <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
+      <div id="info-bar" style={{
+        position: 'absolute',
+        top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
+        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
+      }}>
+        <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Income percentages across the Boston Metropolitan Area.</div>
+        <div id="additional-info" style={{}}>
+          In 2018 - 2022 , the median value of an owner-occupied home was $684,900 and median gross rent $1,981, while the median income in the same timeframe was $89,212. In 1960, 8 years before the 1968 Fair Housing Act outlawed redlining, the median price of an owner-occupied house was $15,900 and median gross rent was $82 dollars. The median regional income for white families at that time was $5,835 while for nonwhite families it was $3,233.
+          <br />
+          Those who had the upper hand in property ownership in the 1960s have accumulated a massive amount of wealth through no more than land ownership. The inability to increase housing in these regions through single-family zoning has artificially created a limited supply for a very real growing demand for housing, creating a nearly impassible financial barrier to mobility that replaced that which was established with historical redlining.
+          <br />
+          Default position of $0 - $75,000 annual household income represents a range entirely below the median value of $89,212.
+        </div>
+        <div>
+          <br />
+          Selected Income Range: <span id="selectedIncomeRange"></span>
+          <br />
+          <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
+          <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
+        </div>
+
+        <div id="legend" style={{ padding: '30px' }}>
+          <h4 style={{ fontSize: 'larger' }}>
+            Legend:
+          </h4>
           <div>
-            Selected Income Range: <span id="selectedIncomeRange"></span>
-            <br />
-            <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
-            <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
+            <p>
+              Percent of household incomes within the selected range is represented as height.
+              <br />
+              Percentage of housing zoned for single-family only is shown as blue to red for 0 to 100%.
+
+            </p>
           </div>
         </div>
-        <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
-          onClick={handleClick}>
-          BACK
-        </button>
-        <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
       </div>
-    );
-  } else {
-    return null;
-  }
+    </div>
+  )
 };
 
 export default IncomeVsSingleFamilyMapComponent;
