@@ -273,19 +273,46 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
 
   return (
     <div>
-      <div style={{ position: 'absolute', top: 50, right: 10, zIndex: 10000, backgroundColor: 'aliceblue' }}>
-        <div>
-          Selected Income Range: <span id="selectedIncomeRange"></span>
-          <br />
-          <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
-          <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
-        </div>
-      </div>
       <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
         onClick={handleClick}>
         BACK
       </button>
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
+      <div id="info-bar" style={{
+        position: 'absolute',
+        top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
+        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
+      }}>
+        <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Income percentages across the Boston Metropolitan Area.</div>
+        <div id="additional-info" style={{}}>
+          In 2018 - 2022 , the median value of an owner-occupied home was $684,900 and median gross rent $1,981, while the median income in the same timeframe was $89,212. In 1960, 8 years before the 1968 Fair Housing Act outlawed redlining, the median price of an owner-occupied house was $15,900 and median gross rent was $82 dollars. The median regional income for white families at that time was $5,835 while for nonwhite families it was $3,233.
+          <br />
+          Those who had the upper hand in property ownership in the 1960s have accumulated a massive amount of wealth through no more than land ownership. The inability to increase housing in these regions through single-family zoning has artificially created a limited supply for a very real growing demand for housing, creating a nearly impassible financial barrier to mobility that replaced that which was established with historical redlining.
+          <br />
+          Default position of $0 - $75,000 annual household income represents a range entirely below the median value of $89,212.
+        </div>
+        <div>
+          <br />
+          Selected Income Range: <span id="selectedIncomeRange"></span>
+          <br />
+          <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
+          <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
+        </div>
+
+        <div id="legend" style={{ padding: '30px' }}>
+          <h4 style={{ fontSize: 'larger' }}>
+            Legend:
+          </h4>
+          <div>
+            <p>
+              Percent of household incomes within the selected range is represented as height.
+              <br />
+              Percentage of housing zoned for single-family only is shown as blue to red for 0 to 100%.
+
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 };

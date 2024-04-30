@@ -241,6 +241,32 @@ const HolcMapComponent = (props) => {
         BACK
       </button>
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
+      <div id="info-bar" style={{
+        position: 'absolute',
+        top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
+        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
+      }}>
+        <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Correlation of areas zoned for single family housing with historical redlining practices.</div>
+        <div id="additional-info" style={{}}>
+          The Home Owners Loan Corporation used 4 grades for their Residential Security maps, using green for "Best", blue for "Still Desirable", yellow for "Definitely Declining," and red for "Hazardous".
+          The area descriptions used when producing these grades focused not on crime statistics or environmental concerns, but on assessments of the residents themselves often on the basis of race, class, religion and nationality.
+          One redlined area in Roxbury was identified as "25% negro" and stated "Negro heavily concentrated north of Ruggles St.". A yellow neighborhood in Cambridge stated "A few negro families have moved in on Dame St. and threaten to spread."
+        </div>
+        <div id="legend" style={{ padding: '30px' }}>
+          <h4 style={{ fontSize: 'larger' }}>
+            Legend:
+          </h4>
+          <div>
+            <p>
+              White overlay displays percentage of housing zoned for only single-family residences as opacity. <br />
+              no overlay = 0% single family housing <br />
+              completely opaque = 100% single family housing
+              <br /> <br />
+              Maps are geo-corrected scans of original HOLC redlining maps.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
