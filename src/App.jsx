@@ -22,6 +22,10 @@ function App() {
   const [mapOpened, setMapOpened] = useState(false);
   const [openMap, setOpenMap] = useState(null);
 
+  const [openStats, setOpenStats] = useState(false);
+
+
+
 
 
   return (
@@ -32,7 +36,7 @@ function App() {
         <color attach="background" args={["#ececec"]} />
 
         <ScrollControls pages={10} damping={0.5} enabled={mapOpened ? false : true}>
-          
+
           <ScrollManager section={section} onSectionChange={setSection} />
 
           <HtmlWrapper
@@ -58,12 +62,18 @@ function App() {
         </div> 
       </div> */}
 
-    {currentSection === 10 ? <Statistics /> : null}
+      {/* {currentSection === 10 ? <Statistics /> : null} */}
 
       <Menu
         onSectionChange={setSection}
         currentSection={currentSection}
+        setOpenMap={setOpenMap}
+        setMapOpened={setMapOpened}
+
       />
+
+
+
 
     </>
   );

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 
 export const Menu = (props) => {
-    const { onSectionChange, currentSection } = props;
+    const { onSectionChange, currentSection, setOpenMap, setMapOpened } = props;
 
     const [section, setSection] = useState(null);
 
@@ -11,12 +11,17 @@ export const Menu = (props) => {
     const [lineWidth, setLineWidth] = useState(null);
 
     const handleClick = (section, currentSection) => {
-
-
         setSection(section);
         onSectionChange(currentSection);
         console.log(currentSection);
+        setOpenStats(false);
+    }
 
+    const openStatsFunction = (section, currentSection) => {
+        setSection(section);
+        onSectionChange(currentSection);
+        setMapOpened(true);
+        setOpenMap("stat");
     }
 
 
@@ -57,16 +62,15 @@ export const Menu = (props) => {
                     <div className="absolute ml-1.5 top-0 w-full h-0.5 bg-black bg-opacity-50 opacity-20"></div>
                 </div>
                 <div className="flex flex-row SF-Compact-Semibold text-xs tracking-wider mt-3 opacity-60 justify-between w-full">
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 1 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 1)}>1843</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 2 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 2)}>1927</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 3 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 3)}> 1938</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${section && section === 1960 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1960, 4)}>1960</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${section && section === 1968 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1968, 4.6)}>1968</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 || currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 6)}>2018</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection >= 9 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 9)}>2022</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => openStatsFunction(null, 10)}>Statistics</p>
 
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 1 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(1)}>1843</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 2 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(2)}>1927</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 3 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(3)}> 1938</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 4 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(4)}>1960</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 5 || currentSection === 6 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(5)}>1968</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 || currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(6)}>2018</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection >= 9 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(9)}>2022</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(10)}>Statistics</p>
-                    
                 </div>
             </div>
 

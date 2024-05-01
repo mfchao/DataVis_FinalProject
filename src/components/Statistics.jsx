@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import * as d3 from 'd3';
-import 'mapbox-gl/dist/mapbox-gl.css'; 
-import MyData from './data-1.json'; 
+import 'mapbox-gl/dist/mapbox-gl.css';
+import MyData from './data-1.json';
 import '../styles.css';
 
 
@@ -52,20 +52,20 @@ const Statistics = (props) => {
         mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYycm41cGxrNjNsNDMifQ.8ZNsKjRpCDRNEjV5AI4wRg";
 
         const newMap = new mapboxgl.Map({
-          container: 'map',
-          style: 'mapbox://styles/selindursunn/clvjpb4wz069501pkdvkhb2i7',
-          zoom: 10.85,
-          center: [-71.0626, 42.3347],
-          bearing: -25.4028,
-          pitch: 48.6065,
-          transformRequest: (url, resourceType) => {
-            if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
-              return {
-                url: url.replace("?", "?pluginName=dataJoins&")
-              }
+            container: 'map',
+            style: 'mapbox://styles/selindursunn/clvjpb4wz069501pkdvkhb2i7',
+            zoom: 10.85,
+            center: [-71.0626, 42.3347],
+            bearing: -25.4028,
+            pitch: 48.6065,
+            transformRequest: (url, resourceType) => {
+                if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
+                    return {
+                        url: url.replace("?", "?pluginName=dataJoins&")
+                    }
+                }
+                return { url };
             }
-            return { url };
-          }
         });
 
         setMap(newMap);
@@ -87,7 +87,7 @@ const Statistics = (props) => {
     }, [currentSceneIndex, map, data]);
 
     const updateChart = (sceneIndex) => {
-        const svg = d3.select("#chart").html(''); 
+        const svg = d3.select("#chart").html('');
 
         if (!data.length) {
             console.log("Data is not loaded yet.");
@@ -99,7 +99,7 @@ const Statistics = (props) => {
         const margin = { top: 20, right: 20, bottom: 30, left: 50 };
 
         svg.attr("width", width)
-           .attr("height", height);
+            .attr("height", height);
 
         const x = d3.scaleBand()
             .domain(data.map(d => d.muni))
@@ -115,10 +115,10 @@ const Statistics = (props) => {
             .selectAll("rect")
             .data(data)
             .join("rect")
-                .attr("x", d => x(d.muni))
-                .attr("y", d => y(d.z_score_education))
-                .attr("height", d => Math.max(0, y(0) - y(d.z_score_education)))
-                .attr("width", x.bandwidth());
+            .attr("x", d => x(d.muni))
+            .attr("y", d => y(d.z_score_education))
+            .attr("height", d => Math.max(0, y(0) - y(d.z_score_education)))
+            .attr("width", x.bandwidth());
 
         svg.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -141,27 +141,39 @@ const Statistics = (props) => {
         }
     };
 
+    const handleClick = () => {
+        setOpenMap(null);
+        setMapOpened(false);
+        // setArchiveMapId(null);
+    };
+
     return (
-        <div className="relative w-full h-full">
-            <div id="map" className="absolute top-0 right-0 bottom-0 left-0"></div>
-            <div className="absolute top-5 left-5">
-                <button onClick={goToPreviousScene} disabled={currentSceneIndex === 0}>
-                    Previous
-                </button>
-                <button onClick={goToNextScene} disabled={currentSceneIndex === scenes.length - 1}>
-                    Next
-                </button>
-            </div>
-            <div id="info-bar" className="absolute top-5 right-5 h-[90%] w-1/3 bg-[rgba(1,0,21,0.75)] p-5 rounded-lg text-gray-300 text-sm">
-                <div id="municipality-name" className="text-lg font-bold text-white mb-5">{scenes[currentSceneIndex].content}</div>
-                <div id="additional-info">{scenes[currentSceneIndex].additionalInfo}</div>
-                <svg id="chart" className="flex w-full h-96 mt-12"></svg>
-                <div id="legend" className="absolute bottom-12 left-0 p-5">
-                    <h4 className="text-lg">Legend:</h4>
-                    {/* Legends can be dynamically generated */}
+        <>
+            <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }}
+                onClick={handleClick}>
+                BACK
+            </button>
+            <div className="relative w-full h-full">
+                <div id="map" className="absolute top-0 right-0 bottom-0 left-0"></div>
+                <div className="absolute top-5 left-5">
+                    <button onClick={goToPreviousScene} disabled={currentSceneIndex === 0}>
+                        Previous
+                    </button>
+                    <button onClick={goToNextScene} disabled={currentSceneIndex === scenes.length - 1}>
+                        Next
+                    </button>
+                </div>
+                <div id="info-bar" className="absolute top-5 right-5 h-[90%] w-1/3 bg-[rgba(1,0,21,0.75)] p-5 rounded-lg text-gray-300 text-sm">
+                    <div id="municipality-name" className="text-lg font-bold text-white mb-5">{scenes[currentSceneIndex].content}</div>
+                    <div id="additional-info">{scenes[currentSceneIndex].additionalInfo}</div>
+                    <svg id="chart" className="flex w-full h-96 mt-12"></svg>
+                    <div id="legend" className="absolute bottom-12 left-0 p-5">
+                        <h4 className="text-lg">Legend:</h4>
+                        {/* Legends can be dynamically generated */}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
