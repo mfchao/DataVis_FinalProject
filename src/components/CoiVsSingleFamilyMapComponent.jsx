@@ -14,10 +14,10 @@ const CoiVsSingleFamilyMapComponent = (props) => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
-      zoom: 9.2,
-      center: [-71.0068, 42.3735],
-      bearing: -72,
-      pitch: 68.5,
+      zoom: 9.61, //10.85,
+      center: [-71.0913, 42.4047], // [-71.0746, 42.3609],
+      bearing: -83, //-94.19,
+      pitch: 55, //62.60,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -119,19 +119,8 @@ const CoiVsSingleFamilyMapComponent = (props) => {
 
         var FeatureState = muni[0].state; // Feature state
         var content = "";
-        // iterate through the object
-        var listedFeatures = [
-          "municipal",
-          "percentage_single_family",
-          "coi_score"
-        ];
-        for (var key in FeatureState) {
-          if (!FeatureState.hasOwnProperty(key)) {
-            continue;
-          }
-          if (listedFeatures.includes(key))
-            content += "<b>" + key + "</b>" + ": " + FeatureState[key] + "<br>";
-        }
+        content += "<b>" + FeatureState["municipal"] + "</b>" + "<br>";
+        content += "<b>" + Math.round(FeatureState["coi_score"]) + "</b>" + " COI (Child Opportunity Index)" + "<br>";
         popup.setLngLat(e.lngLat).setHTML(content).addTo(map);
       });
 
