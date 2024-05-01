@@ -58,13 +58,13 @@ const HolcMapComponent = (props) => {
 
 
       // Bottom Map
-      map.loadImage('src/data/MA_Boston_1938.png', function (error, image) {
+      map.loadImage('https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_Boston_1938.png', function (error, image) {
         if (error) throw error;
 
         // Add the image as a source to the map
         map.addSource('bottom-map', {
           type: 'image',
-          url: 'src/data/MA_Boston_1938.png',
+          url: 'https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_Boston_1938.png',
           coordinates: [
             [-71.272, 42.376],  // top left corner of the image
             [-70.9752, 42.375],  // top right corner
@@ -86,13 +86,13 @@ const HolcMapComponent = (props) => {
       });
 
       // Top Map
-      map.loadImage('src/data/MA_BostonSection2_1938.png', function (error, image) {
+      map.loadImage('https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_BostonSection2_1938.png', function (error, image) {
         if (error) throw error;
 
         // Add the image as a source to the map
         map.addSource('top-map', {
           type: 'image',
-          url: 'src/data/MA_BostonSection2_1938.png',
+          url: 'https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_BostonSection2_1938.png',
           coordinates: [
             [-71.286, 42.4865],  // top left corner of the image
             [-70.9752, 42.486],  // top right corner
