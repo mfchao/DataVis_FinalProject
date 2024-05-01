@@ -3,7 +3,6 @@ import mapboxgl from 'mapbox-gl';
 import * as d3 from 'd3';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MyData from './data-1.json';
-import '../styles.css';
 
 
 const scenes = [
