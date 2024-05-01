@@ -57,7 +57,6 @@ export const Menu = (props) => {
                     <div className="absolute ml-1.5 top-0 w-full h-0.5 bg-black bg-opacity-50 opacity-20"></div>
                 </div>
                 <div className="flex flex-row SF-Compact-Semibold text-xs tracking-wider mt-3 opacity-60 justify-between w-full">
-<<<<<<< HEAD
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 1 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 1)}>1843</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 2 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 2)}>1927</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 3 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 3)}> 1938</p>
@@ -67,18 +66,6 @@ export const Menu = (props) => {
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection >= 9 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 9)}>2022</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(10)}>Statistics</p>
 
-=======
-
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 1 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(1)}>1843</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 2 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(2)}>1927</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 3 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(3)}> 1938</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 4 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(4)}>1960</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 5 || currentSection === 6 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(5)}>1968</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 || currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(6)}>2018</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection >= 9 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(9)}>2022</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(10)}>Statistics</p>
-                    
->>>>>>> 3c66456e91dfcbc8657c43042464c21479af8d59
                 </div>
             </div>
 
