@@ -7,7 +7,8 @@ import { useFrame } from "@react-three/fiber";
 
 
 
-export const TextSection = ({ header, title, subtitle, caption, image, imagePosition, ...props }) => {
+export const TextSection = ({ header, title, subtitle, caption, image, scale, imagePosition, ...props }) => {
+    const [imageAspect, setImageAspect] = useState(1);
 
     return (
         <group {...props}>
@@ -78,8 +79,8 @@ export const TextSection = ({ header, title, subtitle, caption, image, imagePosi
                 <Image
                     url={image}
                     transparent
-                    scale={[2, 2, 2]}
-                    position={[-0.7, -1.1, -0.2]}
+                    scale={scale}
+                    position={imagePosition}
                     fragmentShader={fadeOnBeforeCompileFlat}
                 >
                 </Image>

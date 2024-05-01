@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
-mapboxgl.accessToken = "pk.eyJ1IjoiaGFubm9oaXNzIiwiYSI6ImNsdWd6NnNtNzBjaGkybHAyMXAwZW95dnYifQ.ugCpnrkxesS79JfAl9fhJw";
+mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYycm41cGxrNjNsNDMifQ.8ZNsKjRpCDRNEjV5AI4wRg";
 
 const HolcMapComponent = (props) => {
   const { setOpenMap, setMapOpened } = props;
@@ -14,11 +14,11 @@ const HolcMapComponent = (props) => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v11',
+      style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
       zoom: 10.85,
       center: [-71.0626, 42.3347],
-      bearing: -25.4028,
-      pitch: 48.6065,
+      // bearing: -25.4028,
+      // pitch: 48.6065,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -58,13 +58,13 @@ const HolcMapComponent = (props) => {
 
 
       // Bottom Map
-      map.loadImage('src/data/MA_Boston_1938.png', function (error, image) {
+      map.loadImage('https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_Boston_1938.png', function (error, image) {
         if (error) throw error;
 
         // Add the image as a source to the map
         map.addSource('bottom-map', {
           type: 'image',
-          url: 'src/data/MA_Boston_1938.png',
+          url: 'https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_Boston_1938.png',
           coordinates: [
             [-71.272, 42.376],  // top left corner of the image
             [-70.9752, 42.375],  // top right corner
@@ -86,13 +86,13 @@ const HolcMapComponent = (props) => {
       });
 
       // Top Map
-      map.loadImage('src/data/MA_BostonSection2_1938.png', function (error, image) {
+      map.loadImage('https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_BostonSection2_1938.png', function (error, image) {
         if (error) throw error;
 
         // Add the image as a source to the map
         map.addSource('top-map', {
           type: 'image',
-          url: 'src/data/MA_BostonSection2_1938.png',
+          url: 'https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_BostonSection2_1938.png',
           coordinates: [
             [-71.286, 42.4865],  // top left corner of the image
             [-70.9752, 42.486],  // top right corner
@@ -179,19 +179,8 @@ const HolcMapComponent = (props) => {
 
         var FeatureState = muni[0].state; // Feature state
         var content = "";
-        // iterate through the object
-        var listedFeatures = [
-          "municipal",
-          "single_family",
-          "percentage_single_family"
-        ];
-        for (var key in FeatureState) {
-          if (!FeatureState.hasOwnProperty(key)) {
-            continue;
-          }
-          if (listedFeatures.includes(key))
-            content += "<b>" + key + "</b>" + ": " + FeatureState[key] + "<br>";
-        }
+        content += "<b>" + FeatureState["municipal"] + "</b>" + "<br>";
+        content += "<b>" + Math.round(FeatureState["percentage_single_family"]) + "% </b>" + "Single Family Homes" + "<br>";
         popup.setLngLat(e.lngLat).setHTML(content).addTo(map);
       });
 
@@ -256,11 +245,42 @@ const HolcMapComponent = (props) => {
           <h4 style={{ fontSize: 'larger' }}>
             Legend:
           </h4>
+          <div
+            class="image-container"
+            style={{
+              display: 'flex',
+              width: '60%',
+              padding: '20px',
+              margin: '10px auto'
+            }}
+          >
+            <h5>100% Single Family Housing</h5>
+            <img
+              src="src/data/SFH.png"
+              alt="Single Family Housing"
+              style={{
+                flex: 1,
+                width: '50%',
+                height: 'auto',
+              }}
+            />
+            <h5>0% Single Family Housing</h5>
+            <img
+              src="src/data/NSFH.png"
+              alt="No Single Family Housing"
+              style={{
+                flex: 1,
+                width: '50%',
+                height: 'auto',
+              }}
+            />
+          </div>
+
           <div>
             <p>
-              White overlay displays percentage of housing zoned for only single-family residences as opacity. <br />
+              {/* White overlay displays percentage of housing zoned for only single-family residences as opacity. <br />
               no overlay = 0% single family housing <br />
-              completely opaque = 100% single family housing
+              completely opaque = 100% single family housing */}
               <br /> <br />
               Maps are geo-corrected scans of original HOLC redlining maps.
             </p>

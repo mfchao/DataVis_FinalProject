@@ -1,11 +1,23 @@
+import { useFrame } from "@react-three/fiber";
 import { useEffect, useState } from "react";
 
 
 export const Menu = (props) => {
     const { onSectionChange, currentSection } = props;
 
+    const [section, setSection] = useState(null);
+
 
     const [lineWidth, setLineWidth] = useState(null);
+
+    const handleClick = (section, currentSection) => {
+
+
+        setSection(section);
+        onSectionChange(currentSection);
+        console.log(currentSection);
+
+    }
 
 
     useEffect(() => {
@@ -17,22 +29,24 @@ export const Menu = (props) => {
             setLineWidth("w-[11.5rem]");
         } else if (currentSection === 3) {
             setLineWidth("w-[21.5rem]");
-        } else if (currentSection === 4) {
+        } else if (section && section === 1960 || currentSection === 4) {
             setLineWidth("w-[31.5rem]");
-        } else if (currentSection === 5) {
+        } else if (section && section === 1968 || currentSection === 4.6) {
             setLineWidth("w-[41.5rem]");
         } else if (currentSection === 6) {
             setLineWidth("w-[45.5rem]");
         } else if (currentSection === 7) {
             setLineWidth("w-[51.5rem]");
         } else if (currentSection === 8) {
-            setLineWidth("w-[56.5rem]");
+            setLineWidth("w-[66.5rem]");
         } else if (currentSection >= 9) {
             setLineWidth("w-[61.6rem]");
         } else {
             setLineWidth("w-[1rem]");
         }
-    }, [currentSection]);
+    }, [currentSection, section]);
+
+
 
     return (
         <>
@@ -43,6 +57,7 @@ export const Menu = (props) => {
                     <div className="absolute ml-1.5 top-0 w-full h-0.5 bg-black bg-opacity-50 opacity-20"></div>
                 </div>
                 <div className="flex flex-row SF-Compact-Semibold text-xs tracking-wider mt-3 opacity-60 justify-between w-full">
+<<<<<<< HEAD
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 1 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(1)}>1843</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 2 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(2)}>1927</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 3 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(3)}> 1938</p>
@@ -53,6 +68,15 @@ export const Menu = (props) => {
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(10)}>Statistics</p>
                     
 
+=======
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 1 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 1)}>1843</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 2 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 2)}>1927</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 3 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 3)}> 1938</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${section && section === 1960 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1960, 4)}>1960</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${section && section === 1968 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1968, 4.6)}>1968</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 || currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 6)}>2018</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection >= 9 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 9)}>2022</p>
+>>>>>>> 0d13fd854ee069cabb84ae52382df56fb22f65db
                 </div>
             </div>
 
