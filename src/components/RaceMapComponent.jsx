@@ -15,10 +15,10 @@ const RaceMapComponent = (props) => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
-      zoom: 10.85,
-      center: [-71.0746, 42.3609],
-      bearing: -94.19,
-      pitch: 62.60,
+      zoom: 9.61, //10.85,
+      center: [-71.0913, 42.4047], // [-71.0746, 42.3609],
+      bearing: -83, //-94.19,
+      pitch: 55, //62.60,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -129,13 +129,8 @@ const RaceMapComponent = (props) => {
           "percentage_single_family",
           "percentage_nhwhite"
         ];
-        for (var key in FeatureState) {
-          if (!FeatureState.hasOwnProperty(key)) {
-            continue;
-          }
-          if (listedFeatures.includes(key))
-            content += "<b>" + key + "</b>" + ": " + FeatureState[key] + "<br>";
-        }
+        content += "<b>" + FeatureState["municipal"] + "</b>" + "<br>";
+        content += "<b>" + Math.round(FeatureState["percentage_nhwhite"]) + "% </b>" + "None White Residents" + "<br>";
         popup.setLngLat(e.lngLat).setHTML(content).addTo(map);
       });
 
@@ -201,7 +196,7 @@ const RaceMapComponent = (props) => {
           <div>
             <p>
               Height represents percentage of population that is non-Hispanic White.
-              <br/>
+              <br />
               Color represents percentage of housing designated as single-family, with blue being 0% and red being 100% single family housing.
             </p>
           </div>

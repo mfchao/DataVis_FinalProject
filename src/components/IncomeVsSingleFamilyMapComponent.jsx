@@ -22,10 +22,10 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
-      zoom: 9.54,
-      center: [-71.1815, 42.3611],
-      bearing: 51.6,
-      pitch: 71,
+      zoom: 9.61, //10.85,
+      center: [-71.0913, 42.4047], // [-71.0746, 42.3609],
+      bearing: -83, //-94.19,
+      pitch: 55, //62.60,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -151,19 +151,8 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
 
         var FeatureState = muni[0].state; // Feature state
         var content = "";
-        // iterate through the object
-        var listedFeatures = [
-          "municipal",
-          "single_family",
-          "percentage_single_family"
-        ];
-        for (var key in FeatureState) {
-          if (!FeatureState.hasOwnProperty(key)) {
-            continue;
-          }
-          if (listedFeatures.includes(key))
-            content += "<b>" + key + "</b>" + ": " + FeatureState[key] + "<br>";
-        }
+        content += "<b>" + FeatureState["municipal"] + "</b>" + "<br>";
+        // content += "<b>" + Math.round(FeatureState["percentage_single_family"]) + "% </b>" + "Single Family Homes" + "<br>";
         popup.setLngLat(e.lngLat).setHTML(content).addTo(map);
       });
 
