@@ -50,6 +50,8 @@ export const Menu = (props) => {
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 5 || currentSection === 6 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(5)}>1968</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 || currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(6)}>2018</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection >= 9 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(9)}>2022</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(10)}>Statistics</p>
+                    
 
                 </div>
             </div>

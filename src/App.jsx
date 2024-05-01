@@ -12,7 +12,7 @@ import IncomeVsSingleFamilyMapComponent from "./components/IncomeVsSingleFamilyM
 import { Menu } from './components/Menu';
 import { EffectComposer, Noise } from '@react-three/postprocessing';
 import { HtmlWrapper } from './components/HtmlWrapper';
-
+import Statistics from './components/Statistics';
 
 function App() {
   // const sheet = getProject("Fly Through 1").sheet("Scene")
@@ -31,7 +31,7 @@ function App() {
       <Canvas shadows>
         <color attach="background" args={["#ececec"]} />
 
-        <ScrollControls pages={9} damping={0.5} enabled={mapOpened ? false : true}>
+        <ScrollControls pages={10} damping={0.5} enabled={mapOpened ? false : true}>
           <ScrollManager section={section} onSectionChange={setSection} />
 
           <HtmlWrapper
@@ -57,7 +57,7 @@ function App() {
         </div> 
       </div> */}
 
-
+    {currentSection === 10 ? <Statistics /> : null}
 
       <Menu
         onSectionChange={setSection}

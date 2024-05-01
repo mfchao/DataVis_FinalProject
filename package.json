@@ -15,6 +15,7 @@
     "@theatre/core": "0.5",
     "@theatre/r3f": "0.5",
     "@theatre/studio": "0.5",
+    "d3": "^7.9.0",
     "gsap": "^3.12.5",
     "lamina": "^1.1.23",
     "mapbox-gl": "^3.3.0",
