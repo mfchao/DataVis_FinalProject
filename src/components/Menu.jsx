@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 
 export const Menu = (props) => {
-    const { onSectionChange, currentSection } = props;
+    const { onSectionChange, currentSection, setOpenMap, setMapOpened } = props;
 
     const [section, setSection] = useState(null);
 
@@ -11,12 +11,17 @@ export const Menu = (props) => {
     const [lineWidth, setLineWidth] = useState(null);
 
     const handleClick = (section, currentSection) => {
-
-
         setSection(section);
         onSectionChange(currentSection);
         console.log(currentSection);
+        setOpenStats(false);
+    }
 
+    const openStatsFunction = (section, currentSection) => {
+        setSection(section);
+        onSectionChange(currentSection);
+        setMapOpened(true);
+        setOpenMap("stat");
     }
 
 
@@ -64,7 +69,7 @@ export const Menu = (props) => {
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${section && section === 1968 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1968, 4.6)}>1968</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 || currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 6)}>2018</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection >= 9 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 9)}>2022</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => onSectionChange(10)}>Statistics</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => openStatsFunction(null, 10)}>Statistics</p>
 
                 </div>
             </div>
