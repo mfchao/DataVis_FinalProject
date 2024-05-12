@@ -347,8 +347,8 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
       <div id="info-bar" style={{
         position: 'absolute',
-        top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
-        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
+        top: '20px', right: '20px', height: '90%', width: '35%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '10px', paddingTop: '20px',
+        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '14px', color: 'rgb(218, 218, 218)'
       }}>
         <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Staggering income disparities between municipalities across the Boston Metropolitan Area.</div>
         <div id="additional-info" style={{}}>
