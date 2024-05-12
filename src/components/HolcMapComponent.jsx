@@ -27,7 +27,8 @@ const HolcMapComponent = (props) => {
           }
         }
         return { url };
-      }
+      },
+      scrollZoom: false
     });
 
     const csvUrl =

@@ -11,6 +11,9 @@ import Statistics from "./Statistics";
 export const MapManager = (props) => {
     const { currentSection, setMapOpened, openMap, setOpenMap } = props;
 
+
+
+
     const handleClick = () => {
         setOpenMap(null);
         setMapOpened(false);

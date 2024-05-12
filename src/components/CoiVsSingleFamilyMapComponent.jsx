@@ -23,7 +23,8 @@ const CoiVsSingleFamilyMapComponent = (props) => {
           }
         }
         return { url };
-      }
+      },
+      scrollZoom: false
     });
 
     const csvUrl = "https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/sfh_w_coi.csv";

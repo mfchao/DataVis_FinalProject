@@ -131,7 +131,8 @@ const RaceMapComponent = (props) => {
           }
         }
         return { url };
-      }
+      },
+      scrollZoom: false
     });
 
     mapRef.current = map;  // Step 2: Assign the ref to the map

@@ -40,7 +40,8 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
           }
         }
         return { url };
-      }
+      },
+      scrollZoom: false
     });
 
     const csvUrl =
