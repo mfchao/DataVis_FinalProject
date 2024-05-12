@@ -3,6 +3,8 @@ import CoiVsSingleFamilyMapComponent from "./CoiVsSingleFamilyMapComponent";
 import HolcMapComponent from "./HolcMapComponent";
 import IncomeVsSingleFamilyMapComponent from "./IncomeVsSingleFamilyMapComponent";
 import RaceMapComponent from "./RaceMapComponent";
+import Statistics from "./Statistics";
+
 
 
 
@@ -21,6 +23,10 @@ export const MapManager = (props) => {
             case "income": return <IncomeVsSingleFamilyMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
             case "holc": return <HolcMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
             case "race": return <RaceMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
+            case "stat": return <Statistics setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
+
+
+
         }
     };
 

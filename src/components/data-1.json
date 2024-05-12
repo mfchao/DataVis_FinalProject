@@ -1,0 +1,1377 @@
+[{"muni_id": 35,
+        "muni": "Boston",
+        "z_score_education": 0.022036433326196,
+        "z_score_health": 0.0533510161214489,
+        "z_score_social": 0.0498037710647812,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 73,
+        "muni": "Dedham",
+        "z_score_education": 0.095221743,
+        "z_score_health": 0.061269026,
+        "z_score_social": 0.15431103,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 100,
+        "muni": "Framingham",
+        "z_score_education": 0.0288664809624309,
+        "z_score_health": 0.042901429604118,
+        "z_score_social": 0.0629843792089674,
+        "only_single_family": 0,
+        "%_single_family": 86.3575001236447
+    },
+    {
+        "muni_id": 141,
+        "muni": "Hudson",
+        "z_score_education": 0.041018173,
+        "z_score_health": 0.061582707,
+        "z_score_social": 0.16338146,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 107,
+        "muni": "Gloucester",
+        "z_score_education": 0.040273856,
+        "z_score_health": 0.065586023,
+        "z_score_social": 0.071251363,
+        "only_single_family": 0,
+        "%_single_family": 3.34465474459346
+    },
+    {
+        "muni_id": 136,
+        "muni": "Holliston",
+        "z_score_education": 0.11072563,
+        "z_score_health": 0.077707589,
+        "z_score_social": 0.22288108,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 262,
+        "muni": "Saugus",
+        "z_score_education": 0.047656164,
+        "z_score_health": 0.062207047,
+        "z_score_social": 0.074789263,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 163,
+        "muni": "Lynn",
+        "z_score_education": -0.045157770080234,
+        "z_score_health": 0.0366714603014722,
+        "z_score_social": -0.136052885680097,
+        "only_single_family": 0,
+        "%_single_family": 38.8049023782738
+    },
+    {
+        "muni_id": 177,
+        "muni": "Medway",
+        "z_score_education": 0.11208835,
+        "z_score_health": 0.074045211,
+        "z_score_social": 0.20189159,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 207,
+        "muni": "Newton",
+        "z_score_education": 0.14191647,
+        "z_score_health": 0.050511103,
+        "z_score_social": 0.21429724,
+        "only_single_family": 0,
+        "%_single_family": 77.1680474686319
+    },
+    {
+        "muni_id": 198,
+        "muni": "Natick",
+        "z_score_education": 0.1145961,
+        "z_score_health": 0.070950009,
+        "z_score_social": 0.22983308,
+        "only_single_family": 0,
+        "%_single_family": 92.6628460685157
+    },
+    {
+        "muni_id": 208,
+        "muni": "Norfolk",
+        "z_score_education": 0.1124248699999999,
+        "z_score_health": 0.076655291,
+        "z_score_social": 0.1041861099999999,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 23,
+        "muni": "Bedford",
+        "z_score_education": 0.092784911,
+        "z_score_health": 0.078142539,
+        "z_score_social": 0.27638346,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 264,
+        "muni": "Scituate",
+        "z_score_education": 0.1214601,
+        "z_score_health": 0.079553701,
+        "z_score_social": 0.13899821,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 284,
+        "muni": "Stoneham",
+        "z_score_education": 0.08064343,
+        "z_score_health": 0.044233888,
+        "z_score_social": 0.18696409,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 285,
+        "muni": "Stoughton",
+        "z_score_education": 0.048227303,
+        "z_score_health": 0.054292012,
+        "z_score_social": 0.042648818,
+        "only_single_family": 0,
+        "%_single_family": 87.6513548739784
+    },
+    {
+        "muni_id": 2,
+        "muni": "Acton",
+        "z_score_education": 0.098878305847927,
+        "z_score_health": 0.0690449131261331,
+        "z_score_social": 0.2561362257924314,
+        "only_single_family": 0,
+        "%_single_family": 3.39519044960655
+    },
+    {
+        "muni_id": 305,
+        "muni": "Wakefield",
+        "z_score_education": 0.10101783,
+        "z_score_health": 0.064867273,
+        "z_score_social": 0.18919268,
+        "only_single_family": 0,
+        "%_single_family": 1.35775662730308
+    },
+    {
+        "muni_id": 307,
+        "muni": "Walpole",
+        "z_score_education": 0.11634448,
+        "z_score_health": 0.044291615,
+        "z_score_social": 0.17117,
+        "only_single_family": 0,
+        "%_single_family": 90.5154437846051
+    },
+    {
+        "muni_id": 315,
+        "muni": "Wayland",
+        "z_score_education": 0.15516871,
+        "z_score_health": 0.073948845,
+        "z_score_social": 0.31846857,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 30,
+        "muni": "Beverly",
+        "z_score_education": 0.0614609269999999,
+        "z_score_health": 0.040870644,
+        "z_score_social": 0.074603543,
+        "only_single_family": 0,
+        "%_single_family": 28.5679848284158
+    },
+    {
+        "muni_id": 67,
+        "muni": "Concord",
+        "z_score_education": 0.13437694,
+        "z_score_health": 0.045656316,
+        "z_score_social": 0.13073432,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 317,
+        "muni": "Wellesley",
+        "z_score_education": 0.15437895,
+        "z_score_health": 0.081273369,
+        "z_score_social": 0.22563542,
+        "only_single_family": 0,
+        "%_single_family": 84.0042266891497
+    },
+    {
+        "muni_id": 344,
+        "muni": "Winchester",
+        "z_score_education": 0.13971443,
+        "z_score_health": 0.065556601,
+        "z_score_social": 0.28710976,
+        "only_single_family": 0,
+        "%_single_family": 79.8977493230552
+    },
+    {
+        "muni_id": 40,
+        "muni": "Braintree",
+        "z_score_education": 0.10693084,
+        "z_score_health": 0.066371851,
+        "z_score_social": 0.12194084,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 46,
+        "muni": "Brookline",
+        "z_score_education": 0.1166035146814018,
+        "z_score_health": 0.0714888182179821,
+        "z_score_social": 0.1859726627514339,
+        "only_single_family": 0,
+        "%_single_family": 69.4747089270653
+    },
+    {
+        "muni_id": 49,
+        "muni": "Cambridge",
+        "z_score_education": 0.1127637353115634,
+        "z_score_health": 0.040661238173993,
+        "z_score_social": 0.1257358898627049,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 50,
+        "muni": "Canton",
+        "z_score_education": 0.10550892,
+        "z_score_health": 0.06943661,
+        "z_score_social": 0.1818215,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 144,
+        "muni": "Ipswich",
+        "z_score_education": 0.06257271,
+        "z_score_health": 0.069494955,
+        "z_score_social": 0.11744007,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 142,
+        "muni": "Hull",
+        "z_score_education": 0.046690226,
+        "z_score_health": 0.052380826,
+        "z_score_social": 0.10423128,
+        "only_single_family": 0,
+        "%_single_family": 81.2814264475629
+    },
+    {
+        "muni_id": 48,
+        "muni": "Burlington",
+        "z_score_education": 0.0954345989999999,
+        "z_score_health": 0.043947108,
+        "z_score_social": 0.18864509,
+        "only_single_family": 0,
+        "%_single_family": 89.9046508368596
+    },
+    {
+        "muni_id": 170,
+        "muni": "Marlborough",
+        "z_score_education": 0.015453367,
+        "z_score_health": 0.046488311,
+        "z_score_social": 0.11327732,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 243,
+        "muni": "Quincy",
+        "z_score_education": 0.0379271852230092,
+        "z_score_health": 0.0486267481890985,
+        "z_score_social": 0.0475891197657905,
+        "only_single_family": 0,
+        "%_single_family": 40.9768195693939
+    },
+    {
+        "muni_id": 92,
+        "muni": "Essex",
+        "z_score_education": 0.097667933,
+        "z_score_health": 0.062842526,
+        "z_score_social": 0.20028192,
+        "only_single_family": 0,
+        "%_single_family": 0.148950953145011
+    },
+    {
+        "muni_id": 171,
+        "muni": "Marshfield",
+        "z_score_education": 0.082687914,
+        "z_score_health": 0.076142006,
+        "z_score_social": 0.1112418,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 10,
+        "muni": "Arlington",
+        "z_score_education": 0.1567971801048675,
+        "z_score_health": 0.0646458036363642,
+        "z_score_social": 0.2437567565424115,
+        "only_single_family": 0,
+        "%_single_family": 66.8365256219994
+    },
+    {
+        "muni_id": 101,
+        "muni": "Franklin",
+        "z_score_education": 0.1037945,
+        "z_score_health": 0.047661144,
+        "z_score_social": 0.17868221,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 189,
+        "muni": "Milton",
+        "z_score_education": 0.081657223,
+        "z_score_health": 0.067235164,
+        "z_score_social": 0.26146507,
+        "only_single_family": 0,
+        "%_single_family": 98.1117177171913
+    },
+    {
+        "muni_id": 131,
+        "muni": "Hingham",
+        "z_score_education": 0.12393802,
+        "z_score_health": 0.068346664,
+        "z_score_social": 0.16180752,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 168,
+        "muni": "Marblehead",
+        "z_score_education": 0.14531992,
+        "z_score_health": 0.063875191,
+        "z_score_social": 0.12649581,
+        "only_single_family": 0,
+        "%_single_family": 88.4360937594057
+    },
+    {
+        "muni_id": 14,
+        "muni": "Ashland",
+        "z_score_education": 0.079076178,
+        "z_score_health": 0.049990002,
+        "z_score_social": 0.22082558,
+        "only_single_family": 0,
+        "%_single_family": 85.0623965152113
+    },
+    {
+        "muni_id": 133,
+        "muni": "Holbrook",
+        "z_score_education": 0.0095664142,
+        "z_score_health": 0.079249889,
+        "z_score_social": 0.099305585,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 298,
+        "muni": "Topsfield",
+        "z_score_education": 0.072614446,
+        "z_score_health": 0.0898725169999999,
+        "z_score_social": 0.26628178,
+        "only_single_family": 0,
+        "%_single_family": 98.9609131510746
+    },
+    {
+        "muni_id": 251,
+        "muni": "Rockland",
+        "z_score_education": 0.038201958,
+        "z_score_health": 0.0479031089999999,
+        "z_score_social": 0.10774965,
+        "only_single_family": 0,
+        "%_single_family": 54.1779845738064
+    },
+    {
+        "muni_id": 220,
+        "muni": "Norwood",
+        "z_score_education": 0.092078105,
+        "z_score_health": 0.06299489,
+        "z_score_social": 0.13016449,
+        "only_single_family": 0,
+        "%_single_family": 57.1573679007298
+    },
+    {
+        "muni_id": 157,
+        "muni": "Lincoln",
+        "z_score_education": 0.12216072,
+        "z_score_health": 0.08288832,
+        "z_score_social": 0.29012808,
+        "only_single_family": 0,
+        "%_single_family": 97.4919036334278
+    },
+    {
+        "muni_id": 155,
+        "muni": "Lexington",
+        "z_score_education": 0.1391319751687816,
+        "z_score_health": 0.0746677479989365,
+        "z_score_social": 0.2695595507908244,
+        "only_single_family": 0,
+        "%_single_family": 51.7782625815056
+    },
+    {
+        "muni_id": 184,
+        "muni": "Middleton",
+        "z_score_education": 0.051912237,
+        "z_score_health": 0.0796972439999999,
+        "z_score_social": 0.013163244,
+        "only_single_family": 0,
+        "%_single_family": 23.7871795618028
+    },
+    {
+        "muni_id": 158,
+        "muni": "Littleton",
+        "z_score_education": 0.069481373,
+        "z_score_health": 0.07165242,
+        "z_score_social": 0.18721607,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 164,
+        "muni": "Lynnfield",
+        "z_score_education": 0.10620656,
+        "z_score_health": 0.058822036,
+        "z_score_social": 0.20306198,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 175,
+        "muni": "Medfield",
+        "z_score_education": 0.11774147,
+        "z_score_health": 0.073006742,
+        "z_score_social": 0.19626524,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 165,
+        "muni": "Malden",
+        "z_score_education": 0.020648077,
+        "z_score_health": 0.03032339,
+        "z_score_social": -0.0051870514,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 178,
+        "muni": "Melrose",
+        "z_score_education": 0.12567165,
+        "z_score_health": 0.06994535,
+        "z_score_social": 0.18232067,
+        "only_single_family": 0,
+        "%_single_family": 28.8664567790849
+    },
+    {
+        "muni_id": 199,
+        "muni": "Needham",
+        "z_score_education": 0.15134478,
+        "z_score_health": 0.084807754,
+        "z_score_social": 0.2852689,
+        "only_single_family": 0,
+        "%_single_family": 85.0046565163045
+    },
+    {
+        "muni_id": 166,
+        "muni": "Manchester",
+        "z_score_education": 0.12213223,
+        "z_score_health": 0.090895176,
+        "z_score_social": 0.063285127,
+        "only_single_family": 0,
+        "%_single_family": 95.4114385330929
+    },
+    {
+        "muni_id": 185,
+        "muni": "Milford",
+        "z_score_education": 0.056091305,
+        "z_score_health": 0.046815529,
+        "z_score_social": 0.0666022,
+        "only_single_family": 0,
+        "%_single_family": 87.2219333821032
+    },
+    {
+        "muni_id": 176,
+        "muni": "Medford",
+        "z_score_education": 0.038017537,
+        "z_score_health": 0.047759682,
+        "z_score_social": 0.1490932,
+        "only_single_family": 0,
+        "%_single_family": 53.1486772471564
+    },
+    {
+        "muni_id": 336,
+        "muni": "Weymouth",
+        "z_score_education": 0.060046889,
+        "z_score_health": 0.041739259,
+        "z_score_social": 0.040564232,
+        "only_single_family": 0,
+        "%_single_family": 80.6151538801345
+    },
+    {
+        "muni_id": 57,
+        "muni": "Chelsea",
+        "z_score_education": -0.034581896,
+        "z_score_health": 0.045438766,
+        "z_score_social": -0.15863539,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 174,
+        "muni": "Maynard",
+        "z_score_education": 0.063831583,
+        "z_score_health": 0.039836653,
+        "z_score_social": 0.18656637,
+        "only_single_family": 0,
+        "%_single_family": 82.0906797437867
+    },
+    {
+        "muni_id": 213,
+        "muni": "North Reading",
+        "z_score_education": 0.12462473,
+        "z_score_health": 0.069542028,
+        "z_score_social": 0.23966224,
+        "only_single_family": 0,
+        "%_single_family": 1.14132175659971
+    },
+    {
+        "muni_id": 229,
+        "muni": "Peabody",
+        "z_score_education": 0.01417623,
+        "z_score_health": 0.027282609,
+        "z_score_social": 0.075185828,
+        "only_single_family": 0,
+        "%_single_family": 89.0655598963908
+    },
+    {
+        "muni_id": 187,
+        "muni": "Millis",
+        "z_score_education": 0.085723482,
+        "z_score_health": 0.085386053,
+        "z_score_social": 0.16681841,
+        "only_single_family": 0,
+        "%_single_family": 88.9074700068768
+    },
+    {
+        "muni_id": 248,
+        "muni": "Revere",
+        "z_score_education": -0.0049364641,
+        "z_score_health": 0.012893608,
+        "z_score_social": -0.030634187,
+        "only_single_family": 0,
+        "%_single_family": 2.81379785413883
+    },
+    {
+        "muni_id": 269,
+        "muni": "Sherborn",
+        "z_score_education": 0.11167261,
+        "z_score_health": 0.082643315,
+        "z_score_social": 0.2192537199999999,
+        "only_single_family": 0,
+        "%_single_family": 99.8685208481675
+    },
+    {
+        "muni_id": 246,
+        "muni": "Reading",
+        "z_score_education": 0.10401782,
+        "z_score_health": 0.038891271,
+        "z_score_social": 0.2347869,
+        "only_single_family": 0,
+        "%_single_family": 97.8664559078424
+    },
+    {
+        "muni_id": 219,
+        "muni": "Norwell",
+        "z_score_education": 0.095478073,
+        "z_score_health": 0.079552419,
+        "z_score_social": 0.16335203,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 266,
+        "muni": "Sharon",
+        "z_score_education": 0.12773599,
+        "z_score_health": 0.062975533,
+        "z_score_social": 0.20899045,
+        "only_single_family": 0,
+        "%_single_family": 98.4283190307621
+    },
+    {
+        "muni_id": 231,
+        "muni": "Pembroke",
+        "z_score_education": 0.098049581,
+        "z_score_health": 0.081360571,
+        "z_score_social": 0.12257975,
+        "only_single_family": 0,
+        "%_single_family": 96.3995633123408
+    },
+    {
+        "muni_id": 26,
+        "muni": "Belmont",
+        "z_score_education": 0.16457798,
+        "z_score_health": 0.06489823,
+        "z_score_social": 0.23568472,
+        "only_single_family": 0,
+        "%_single_family": 75.0166180336951
+    },
+    {
+        "muni_id": 274,
+        "muni": "Somerville",
+        "z_score_education": 0.020837933103478,
+        "z_score_health": 0.054218426747743,
+        "z_score_social": 0.1235251478589323,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 244,
+        "muni": "Randolph",
+        "z_score_education": -0.0093299896,
+        "z_score_health": 0.057870544,
+        "z_score_social": -0.04806608,
+        "only_single_family": 0,
+        "%_single_family": 97.781328489833
+    },
+    {
+        "muni_id": 252,
+        "muni": "Rockport",
+        "z_score_education": 0.060892526,
+        "z_score_health": 0.072998635,
+        "z_score_social": 0.091427296,
+        "only_single_family": 0,
+        "%_single_family": 73.2090725946021
+    },
+    {
+        "muni_id": 25,
+        "muni": "Bellingham",
+        "z_score_education": 0.062652156,
+        "z_score_health": 0.069251373,
+        "z_score_social": 0.11251877,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 258,
+        "muni": "Salem",
+        "z_score_education": 0.014080597,
+        "z_score_health": 0.054406505,
+        "z_score_social": -0.043584842,
+        "only_single_family": 0,
+        "%_single_family": 69.1355227351497
+    },
+    {
+        "muni_id": 346,
+        "muni": "Winthrop",
+        "z_score_education": 0.066468045,
+        "z_score_health": 0.037644878,
+        "z_score_social": 0.086662531,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 277,
+        "muni": "Southborough",
+        "z_score_education": 0.1094045599999999,
+        "z_score_health": 0.070929602,
+        "z_score_social": 0.22021335,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 335,
+        "muni": "Westwood",
+        "z_score_education": 0.15797761,
+        "z_score_health": 0.066031709,
+        "z_score_social": 0.2823669,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 291,
+        "muni": "Swampscott",
+        "z_score_education": 0.11544532,
+        "z_score_health": 0.068926662,
+        "z_score_social": 0.13236232,
+        "only_single_family": 0,
+        "%_single_family": 77.8499666112588
+    },
+    {
+        "muni_id": 286,
+        "muni": "Stow",
+        "z_score_education": 0.13365825,
+        "z_score_health": 0.084820449,
+        "z_score_social": 0.27335441,
+        "only_single_family": 0,
+        "%_single_family": 0.0345961613154492
+    },
+    {
+        "muni_id": 288,
+        "muni": "Sudbury",
+        "z_score_education": 0.13523094,
+        "z_score_health": 0.07856331,
+        "z_score_social": 0.25514296,
+        "only_single_family": 0,
+        "%_single_family": 99.780012299142
+    },
+    {
+        "muni_id": 308,
+        "muni": "Waltham",
+        "z_score_education": 0.0281999579981087,
+        "z_score_health": 0.0563429534388228,
+        "z_score_social": 0.1518190545358824,
+        "only_single_family": 0,
+        "%_single_family": 76.0792793846205
+    },
+    {
+        "muni_id": 347,
+        "muni": "Woburn",
+        "z_score_education": 0.071858682,
+        "z_score_health": 0.024410648,
+        "z_score_social": 0.13898242,
+        "only_single_family": 0,
+        "%_single_family": 62.5805030292823
+    },
+    {
+        "muni_id": 350,
+        "muni": "Wrentham",
+        "z_score_education": 0.099954262,
+        "z_score_health": 0.082698166,
+        "z_score_social": 0.21494234,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 314,
+        "muni": "Watertown",
+        "z_score_education": 0.095150381,
+        "z_score_health": 0.04854494,
+        "z_score_social": 0.2099296199999999,
+        "only_single_family": 0,
+        "%_single_family": 25.2830482844381
+    },
+    {
+        "muni_id": 37,
+        "muni": "Boxborough",
+        "z_score_education": 0.090183936,
+        "z_score_health": 0.084684186,
+        "z_score_social": 0.16579776,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 333,
+        "muni": "Weston",
+        "z_score_education": 0.16039243,
+        "z_score_health": 0.078151926,
+        "z_score_social": 0.22349314,
+        "only_single_family": 0,
+        "%_single_family": 99.2056108049385
+    },
+    {
+        "muni_id": 342,
+        "muni": "Wilmington",
+        "z_score_education": 0.079490162,
+        "z_score_health": 0.045079321,
+        "z_score_social": 0.20386662,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 65,
+        "muni": "Cohasset",
+        "z_score_education": 0.097233847,
+        "z_score_health": 0.081806324,
+        "z_score_social": 0.09621577,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 51,
+        "muni": "Carlisle",
+        "z_score_education": 0.095061198,
+        "z_score_health": 0.091481224,
+        "z_score_social": 0.28129223,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 71,
+        "muni": "Danvers",
+        "z_score_education": 0.066152744,
+        "z_score_health": 0.0392459,
+        "z_score_social": 0.1023580699999999,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 93,
+        "muni": "Everett",
+        "z_score_education": -0.015437096,
+        "z_score_health": 0.032376047,
+        "z_score_social": -0.1000644,
+        "only_single_family": 0,
+        "%_single_family": 0.0
+    },
+    {
+        "muni_id": 99,
+        "muni": "Foxborough",
+        "z_score_education": 0,
+        "z_score_health": 0,
+        "z_score_social": 0,
+        "only_single_family": 0,
+        "%_single_family": 92.7863691876401
+    },
+    {
+        "muni_id": 187,
+        "muni": "Millis",
+        "z_score_education": 0.085723482,
+        "z_score_health": 0.085386053,
+        "z_score_social": 0.16681841,
+        "only_single_family": 1,
+        "%_single_family": 88.9074700068768
+    },
+    {
+        "muni_id": 185,
+        "muni": "Milford",
+        "z_score_education": 0.056091305,
+        "z_score_health": 0.046815529,
+        "z_score_social": 0.0666022,
+        "only_single_family": 1,
+        "%_single_family": 87.2219333821032
+    },
+    {
+        "muni_id": 207,
+        "muni": "Newton",
+        "z_score_education": 0.14191647,
+        "z_score_health": 0.050511103,
+        "z_score_social": 0.21429724,
+        "only_single_family": 1,
+        "%_single_family": 77.1680474686319
+    },
+    {
+        "muni_id": 258,
+        "muni": "Salem",
+        "z_score_education": 0.014080597,
+        "z_score_health": 0.054406505,
+        "z_score_social": -0.043584842,
+        "only_single_family": 1,
+        "%_single_family": 69.1355227351497
+    },
+    {
+        "muni_id": 288,
+        "muni": "Sudbury",
+        "z_score_education": 0.13523094,
+        "z_score_health": 0.07856331,
+        "z_score_social": 0.25514296,
+        "only_single_family": 1,
+        "%_single_family": 99.780012299142
+    },
+    {
+        "muni_id": 2,
+        "muni": "Acton",
+        "z_score_education": 0.098878305847927,
+        "z_score_health": 0.0690449131261331,
+        "z_score_social": 0.2561362257924314,
+        "only_single_family": 1,
+        "%_single_family": 3.39519044960655
+    },
+    {
+        "muni_id": 317,
+        "muni": "Wellesley",
+        "z_score_education": 0.15437895,
+        "z_score_health": 0.081273369,
+        "z_score_social": 0.22563542,
+        "only_single_family": 1,
+        "%_single_family": 84.0042266891497
+    },
+    {
+        "muni_id": 82,
+        "muni": "Duxbury",
+        "z_score_education": 0.095679626,
+        "z_score_health": 0.080931246,
+        "z_score_social": 0.16129121,
+        "only_single_family": 1,
+        "%_single_family": 100.0
+    },
+    {
+        "muni_id": 166,
+        "muni": "Manchester",
+        "z_score_education": 0.12213223,
+        "z_score_health": 0.090895176,
+        "z_score_social": 0.063285127,
+        "only_single_family": 1,
+        "%_single_family": 95.4114385330929
+    },
+    {
+        "muni_id": 285,
+        "muni": "Stoughton",
+        "z_score_education": 0.048227303,
+        "z_score_health": 0.054292012,
+        "z_score_social": 0.042648818,
+        "only_single_family": 1,
+        "%_single_family": 87.6513548739784
+    },
+    {
+        "muni_id": 178,
+        "muni": "Melrose",
+        "z_score_education": 0.12567165,
+        "z_score_health": 0.06994535,
+        "z_score_social": 0.18232067,
+        "only_single_family": 1,
+        "%_single_family": 28.8664567790849
+    },
+    {
+        "muni_id": 107,
+        "muni": "Gloucester",
+        "z_score_education": 0.040273856,
+        "z_score_health": 0.065586023,
+        "z_score_social": 0.071251363,
+        "only_single_family": 1,
+        "%_single_family": 3.34465474459346
+    },
+    {
+        "muni_id": 100,
+        "muni": "Framingham",
+        "z_score_education": 0.0288664809624309,
+        "z_score_health": 0.042901429604118,
+        "z_score_social": 0.0629843792089674,
+        "only_single_family": 1,
+        "%_single_family": 86.3575001236447
+    },
+    {
+        "muni_id": 10,
+        "muni": "Arlington",
+        "z_score_education": 0.1567971801048675,
+        "z_score_health": 0.0646458036363642,
+        "z_score_social": 0.2437567565424115,
+        "only_single_family": 1,
+        "%_single_family": 66.8365256219994
+    },
+    {
+        "muni_id": 14,
+        "muni": "Ashland",
+        "z_score_education": 0.079076178,
+        "z_score_health": 0.049990002,
+        "z_score_social": 0.22082558,
+        "only_single_family": 1,
+        "%_single_family": 85.0623965152113
+    },
+    {
+        "muni_id": 139,
+        "muni": "Hopkinton",
+        "z_score_education": 0.11458629,
+        "z_score_health": 0.066385329,
+        "z_score_social": 0.2400416699999999,
+        "only_single_family": 1,
+        "%_single_family": 100.0
+    },
+    {
+        "muni_id": 122,
+        "muni": "Hanover",
+        "z_score_education": 0.08386153,
+        "z_score_health": 0.075075269,
+        "z_score_social": 0.17399567,
+        "only_single_family": 1,
+        "%_single_family": 100.0
+    },
+    {
+        "muni_id": 142,
+        "muni": "Hull",
+        "z_score_education": 0.046690226,
+        "z_score_health": 0.052380826,
+        "z_score_social": 0.10423128,
+        "only_single_family": 1,
+        "%_single_family": 81.2814264475629
+    },
+    {
+        "muni_id": 155,
+        "muni": "Lexington",
+        "z_score_education": 0.1391319751687816,
+        "z_score_health": 0.0746677479989365,
+        "z_score_social": 0.2695595507908244,
+        "only_single_family": 1,
+        "%_single_family": 51.7782625815056
+    },
+    {
+        "muni_id": 157,
+        "muni": "Lincoln",
+        "z_score_education": 0.12216072,
+        "z_score_health": 0.08288832,
+        "z_score_social": 0.29012808,
+        "only_single_family": 1,
+        "%_single_family": 97.4919036334278
+    },
+    {
+        "muni_id": 196,
+        "muni": "Nahant",
+        "z_score_education": 0.056766842,
+        "z_score_health": 0.057597622,
+        "z_score_social": 0.08058776,
+        "only_single_family": 1,
+        "%_single_family": 100.0
+    },
+    {
+        "muni_id": 163,
+        "muni": "Lynn",
+        "z_score_education": -0.045157770080234,
+        "z_score_health": 0.0366714603014722,
+        "z_score_social": -0.136052885680097,
+        "only_single_family": 1,
+        "%_single_family": 38.8049023782738
+    },
+    {
+        "muni_id": 305,
+        "muni": "Wakefield",
+        "z_score_education": 0.10101783,
+        "z_score_health": 0.064867273,
+        "z_score_social": 0.18919268,
+        "only_single_family": 1,
+        "%_single_family": 1.35775662730308
+    },
+    {
+        "muni_id": 168,
+        "muni": "Marblehead",
+        "z_score_education": 0.14531992,
+        "z_score_health": 0.063875191,
+        "z_score_social": 0.12649581,
+        "only_single_family": 1,
+        "%_single_family": 88.4360937594057
+    },
+    {
+        "muni_id": 333,
+        "muni": "Weston",
+        "z_score_education": 0.16039243,
+        "z_score_health": 0.078151926,
+        "z_score_social": 0.22349314,
+        "only_single_family": 1,
+        "%_single_family": 99.2056108049385
+    },
+    {
+        "muni_id": 174,
+        "muni": "Maynard",
+        "z_score_education": 0.063831583,
+        "z_score_health": 0.039836653,
+        "z_score_social": 0.18656637,
+        "only_single_family": 1,
+        "%_single_family": 82.0906797437867
+    },
+    {
+        "muni_id": 336,
+        "muni": "Weymouth",
+        "z_score_education": 0.060046889,
+        "z_score_health": 0.041739259,
+        "z_score_social": 0.040564232,
+        "only_single_family": 1,
+        "%_single_family": 80.6151538801345
+    },
+    {
+        "muni_id": 243,
+        "muni": "Quincy",
+        "z_score_education": 0.0379271852230092,
+        "z_score_health": 0.0486267481890985,
+        "z_score_social": 0.0475891197657905,
+        "only_single_family": 1,
+        "%_single_family": 40.9768195693939
+    },
+    {
+        "muni_id": 176,
+        "muni": "Medford",
+        "z_score_education": 0.038017537,
+        "z_score_health": 0.047759682,
+        "z_score_social": 0.1490932,
+        "only_single_family": 1,
+        "%_single_family": 53.1486772471564
+    },
+    {
+        "muni_id": 231,
+        "muni": "Pembroke",
+        "z_score_education": 0.098049581,
+        "z_score_health": 0.081360571,
+        "z_score_social": 0.12257975,
+        "only_single_family": 1,
+        "%_single_family": 96.3995633123408
+    },
+    {
+        "muni_id": 198,
+        "muni": "Natick",
+        "z_score_education": 0.1145961,
+        "z_score_health": 0.070950009,
+        "z_score_social": 0.22983308,
+        "only_single_family": 1,
+        "%_single_family": 92.6628460685157
+    },
+    {
+        "muni_id": 184,
+        "muni": "Middleton",
+        "z_score_education": 0.051912237,
+        "z_score_health": 0.0796972439999999,
+        "z_score_social": 0.013163244,
+        "only_single_family": 1,
+        "%_single_family": 23.7871795618028
+    },
+    {
+        "muni_id": 189,
+        "muni": "Milton",
+        "z_score_education": 0.081657223,
+        "z_score_health": 0.067235164,
+        "z_score_social": 0.26146507,
+        "only_single_family": 1,
+        "%_single_family": 98.1117177171913
+    },
+    {
+        "muni_id": 199,
+        "muni": "Needham",
+        "z_score_education": 0.15134478,
+        "z_score_health": 0.084807754,
+        "z_score_social": 0.2852689,
+        "only_single_family": 1,
+        "%_single_family": 85.0046565163045
+    },
+    {
+        "muni_id": 269,
+        "muni": "Sherborn",
+        "z_score_education": 0.11167261,
+        "z_score_health": 0.082643315,
+        "z_score_social": 0.2192537199999999,
+        "only_single_family": 1,
+        "%_single_family": 99.8685208481675
+    },
+    {
+        "muni_id": 213,
+        "muni": "North Reading",
+        "z_score_education": 0.12462473,
+        "z_score_health": 0.069542028,
+        "z_score_social": 0.23966224,
+        "only_single_family": 1,
+        "%_single_family": 1.14132175659971
+    },
+    {
+        "muni_id": 220,
+        "muni": "Norwood",
+        "z_score_education": 0.092078105,
+        "z_score_health": 0.06299489,
+        "z_score_social": 0.13016449,
+        "only_single_family": 1,
+        "%_single_family": 57.1573679007298
+    },
+    {
+        "muni_id": 320,
+        "muni": "Wenham",
+        "z_score_education": 0.13279016,
+        "z_score_health": 0.082566798,
+        "z_score_social": 0.18274508,
+        "only_single_family": 1,
+        "%_single_family": 100.0
+    },
+    {
+        "muni_id": 298,
+        "muni": "Topsfield",
+        "z_score_education": 0.072614446,
+        "z_score_health": 0.0898725169999999,
+        "z_score_social": 0.26628178,
+        "only_single_family": 1,
+        "%_single_family": 98.9609131510746
+    },
+    {
+        "muni_id": 229,
+        "muni": "Peabody",
+        "z_score_education": 0.01417623,
+        "z_score_health": 0.027282609,
+        "z_score_social": 0.075185828,
+        "only_single_family": 1,
+        "%_single_family": 89.0655598963908
+    },
+    {
+        "muni_id": 246,
+        "muni": "Reading",
+        "z_score_education": 0.10401782,
+        "z_score_health": 0.038891271,
+        "z_score_social": 0.2347869,
+        "only_single_family": 1,
+        "%_single_family": 97.8664559078424
+    },
+    {
+        "muni_id": 248,
+        "muni": "Revere",
+        "z_score_education": -0.0049364641,
+        "z_score_health": 0.012893608,
+        "z_score_social": -0.030634187,
+        "only_single_family": 1,
+        "%_single_family": 2.81379785413883
+    },
+    {
+        "muni_id": 244,
+        "muni": "Randolph",
+        "z_score_education": -0.0093299896,
+        "z_score_health": 0.057870544,
+        "z_score_social": -0.04806608,
+        "only_single_family": 1,
+        "%_single_family": 97.781328489833
+    },
+    {
+        "muni_id": 251,
+        "muni": "Rockland",
+        "z_score_education": 0.038201958,
+        "z_score_health": 0.0479031089999999,
+        "z_score_social": 0.10774965,
+        "only_single_family": 1,
+        "%_single_family": 54.1779845738064
+    },
+    {
+        "muni_id": 252,
+        "muni": "Rockport",
+        "z_score_education": 0.060892526,
+        "z_score_health": 0.072998635,
+        "z_score_social": 0.091427296,
+        "only_single_family": 1,
+        "%_single_family": 73.2090725946021
+    },
+    {
+        "muni_id": 26,
+        "muni": "Belmont",
+        "z_score_education": 0.16457798,
+        "z_score_health": 0.06489823,
+        "z_score_social": 0.23568472,
+        "only_single_family": 1,
+        "%_single_family": 75.0166180336951
+    },
+    {
+        "muni_id": 266,
+        "muni": "Sharon",
+        "z_score_education": 0.12773599,
+        "z_score_health": 0.062975533,
+        "z_score_social": 0.20899045,
+        "only_single_family": 1,
+        "%_single_family": 98.4283190307621
+    },
+    {
+        "muni_id": 286,
+        "muni": "Stow",
+        "z_score_education": 0.13365825,
+        "z_score_health": 0.084820449,
+        "z_score_social": 0.27335441,
+        "only_single_family": 1,
+        "%_single_family": 0.0345961613154492
+    },
+    {
+        "muni_id": 291,
+        "muni": "Swampscott",
+        "z_score_education": 0.11544532,
+        "z_score_health": 0.068926662,
+        "z_score_social": 0.13236232,
+        "only_single_family": 1,
+        "%_single_family": 77.8499666112588
+    },
+    {
+        "muni_id": 46,
+        "muni": "Brookline",
+        "z_score_education": 0.1166035146814018,
+        "z_score_health": 0.0714888182179821,
+        "z_score_social": 0.1859726627514339,
+        "only_single_family": 1,
+        "%_single_family": 69.4747089270653
+    },
+    {
+        "muni_id": 307,
+        "muni": "Walpole",
+        "z_score_education": 0.11634448,
+        "z_score_health": 0.044291615,
+        "z_score_social": 0.17117,
+        "only_single_family": 1,
+        "%_single_family": 90.5154437846051
+    },
+    {
+        "muni_id": 308,
+        "muni": "Waltham",
+        "z_score_education": 0.0281999579981087,
+        "z_score_health": 0.0563429534388228,
+        "z_score_social": 0.1518190545358824,
+        "only_single_family": 1,
+        "%_single_family": 76.0792793846205
+    },
+    {
+        "muni_id": 314,
+        "muni": "Watertown",
+        "z_score_education": 0.095150381,
+        "z_score_health": 0.04854494,
+        "z_score_social": 0.2099296199999999,
+        "only_single_family": 1,
+        "%_single_family": 25.2830482844381
+    },
+    {
+        "muni_id": 30,
+        "muni": "Beverly",
+        "z_score_education": 0.0614609269999999,
+        "z_score_health": 0.040870644,
+        "z_score_social": 0.074603543,
+        "only_single_family": 1,
+        "%_single_family": 28.5679848284158
+    },
+    {
+        "muni_id": 344,
+        "muni": "Winchester",
+        "z_score_education": 0.13971443,
+        "z_score_health": 0.065556601,
+        "z_score_social": 0.28710976,
+        "only_single_family": 1,
+        "%_single_family": 79.8977493230552
+    },
+    {
+        "muni_id": 347,
+        "muni": "Woburn",
+        "z_score_education": 0.071858682,
+        "z_score_health": 0.024410648,
+        "z_score_social": 0.13898242,
+        "only_single_family": 1,
+        "%_single_family": 62.5805030292823
+    },
+    {
+        "muni_id": 34,
+        "muni": "Bolton",
+        "z_score_education": 0.12833086,
+        "z_score_health": 0.083779342,
+        "z_score_social": 0.3021152,
+        "only_single_family": 1,
+        "%_single_family": 100.0
+    },
+    {
+        "muni_id": 48,
+        "muni": "Burlington",
+        "z_score_education": 0.0954345989999999,
+        "z_score_health": 0.043947108,
+        "z_score_social": 0.18864509,
+        "only_single_family": 1,
+        "%_single_family": 89.9046508368596
+    },
+    {
+        "muni_id": 92,
+        "muni": "Essex",
+        "z_score_education": 0.097667933,
+        "z_score_health": 0.062842526,
+        "z_score_social": 0.20028192,
+        "only_single_family": 1,
+        "%_single_family": 0.148950953145011
+    },
+    {
+        "muni_id": 78,
+        "muni": "Dover",
+        "z_score_education": 0.094968013,
+        "z_score_health": 0.082743108,
+        "z_score_social": 0.26589066,
+        "only_single_family": 1,
+        "%_single_family": 100.0
+    }
+]
