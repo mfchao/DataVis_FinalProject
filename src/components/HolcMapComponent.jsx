@@ -16,10 +16,10 @@ const HolcMapComponent = (props) => {
     const newMap = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
-      zoom: 10.85,
-      center: [-71.0626, 42.3347],
-      // bearing: -25.4028,
-      // pitch: 48.6065,
+      zoom: 10.365,
+      center: [-71.068, 42.353],
+      bearing: 0,
+      pitch: 0,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -37,6 +37,7 @@ const HolcMapComponent = (props) => {
 
     newMap.on("load", function () {
       csvPromise.then(function (results) {
+        console.log(results.data);
         results.data.forEach((row) => {
 
           newMap.setFeatureState(
@@ -139,7 +140,7 @@ const HolcMapComponent = (props) => {
             100, 100
           ],
           'fill-extrusion-base': 0, // Base of the extrusions
-          'fill-extrusion-opacity': HolcToSfSlider, // Adjust the opacity as needed
+          'fill-extrusion-opacity': Number(HolcToSfSlider), // Adjust the opacity as needed
           // Maintain the color from the existing layer
           'fill-extrusion-color': [
             'interpolate',
@@ -166,6 +167,8 @@ const HolcMapComponent = (props) => {
           "line-width": .5,
         },
       });
+
+
 
       var popup = new mapboxgl.Popup({
         closeButton: false,
@@ -206,12 +209,7 @@ const HolcMapComponent = (props) => {
       setMap(newMap)
 
       const updateDisplay = (event) => {
-
         setHolcToSfSlider(event.target.value);
-
-
-        // Log the current slider value to the console (optional)
-        console.log('Slider adjusted to:', sliderValue);
       };
 
       const HolcToSfSliderElement = document.getElementById('HolcToSf');
@@ -224,18 +222,15 @@ const HolcMapComponent = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log("!!!", HolcToSfSlider);
     if (!map) return;
-    // Adjust the opacity of the raster layers based on the slider value
     try {
-      map.setPaintProperty('bottom-map-layer', 'raster-opacity', 1 - HolcToSfSlider);
-      map.setPaintProperty('top-map-layer', 'raster-opacity', 1 - HolcToSfSlider);
-
-      // Optionally adjust the fill-extrusion opacity if that's intended to change
-      map.setPaintProperty('mass-muni-extrusion', 'fill-extrusion-opacity', HolcToSfSlider);
+      var sliderValue = Number(HolcToSfSlider);
+      console.log("!!!", sliderValue);
+      map.setPaintProperty('bottom-map-layer', 'raster-opacity', 1 - sliderValue);
+      map.setPaintProperty('top-map-layer', 'raster-opacity', 1 - sliderValue);
+      map.setPaintProperty('mass-muni-extrusion', 'fill-extrusion-opacity', sliderValue);
     } catch (error) {
       console.error('Failed to set paint property:', error);
-      console.log('Map object:', map);
     }
 
   }, [HolcToSfSlider])
@@ -266,19 +261,20 @@ const HolcMapComponent = (props) => {
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
       <div id="info-bar" style={{
         position: 'absolute',
-        top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
-        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
+        top: '20px', right: '20px', height: '90%', width: '35%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
+        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '14px', color: 'rgb(218, 218, 218)'
       }}>
         <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Correlation of areas zoned for single family housing with historical redlining practices.</div>
         <div id="additional-info" style={{}}>
           The Home Owners Loan Corporation used 4 grades for their Residential Security maps, using green for "Best", blue for "Still Desirable", yellow for "Definitely Declining," and red for "Hazardous".
           The area descriptions used when producing these grades focused not on crime statistics or environmental concerns, but on assessments of the residents themselves often on the basis of race, class, religion and nationality.
           One redlined area in Roxbury was identified as "25% negro" and stated "Negro heavily concentrated north of Ruggles St.". A yellow neighborhood in Cambridge stated "A few negro families have moved in on Dame St. and threaten to spread."
-          <br />
+          <br /> <br/>
           Adjust the slider to see how the single-family zoning maps correspond to the HOLC redlining maps.
         </div>
+        <br/>
         <input type="range" id="HolcToSf" min="0" max="1" value={HolcToSfSlider} step=".01" style={{ width: 200 }} />
-        <div id="legend" style={{ padding: '30px' }}>
+        <div id="legend" style={{ padding: '10px', backgroundColor: 'rgba(1, 0, 21, 0.75)' }}>
           <h4 style={{ fontSize: 'larger' }}>
             Legend:
           </h4>
@@ -286,9 +282,8 @@ const HolcMapComponent = (props) => {
             class="image-container"
             style={{
               display: 'flex',
-              width: '60%',
-              padding: '20px',
-              margin: '10px auto'
+              width: '35%',
+              padding: '30px',
             }}
           >
             <h5>100% Single Family Housing</h5>
@@ -299,6 +294,7 @@ const HolcMapComponent = (props) => {
                 flex: 1,
                 width: '50%',
                 height: 'auto',
+                margin: '5px'
               }}
             />
             <h5>0% Single Family Housing</h5>
@@ -309,6 +305,7 @@ const HolcMapComponent = (props) => {
                 flex: 1,
                 width: '50%',
                 height: 'auto',
+                margin: '5px'
               }}
             />
           </div>
@@ -318,7 +315,6 @@ const HolcMapComponent = (props) => {
               {/* White overlay displays percentage of housing zoned for only single-family residences as opacity. <br />
               no overlay = 0% single family housing <br />
               completely opaque = 100% single family housing */}
-              <br /> <br />
               Maps are geo-corrected scans of original HOLC redlining maps.
             </p>
           </div>
