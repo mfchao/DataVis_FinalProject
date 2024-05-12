@@ -237,9 +237,10 @@ const RaceMapComponent = (props) => {
         var FeatureState = muni[0].state; // Feature state
         var content = "";
         // iterate through the object
+        content += "<div style='user-select: none; pointer-events: none;'>";
         content += "<b>" + FeatureState["municipal"] + "</b>" + "<br>";
         content += "<b>" + Math.round(FeatureState["percentage_non_white"]) + "% </b>" + "None White Residents" + "<br>";
-        // iterate through the object FeatureState
+        content += "</div>";
         // for (var key in FeatureState) {
         //   if (key !== "municipal" && key !== "white") {
         //     content += "<b>" + key + ": " + FeatureState[key] + "%</b>" + "<br>";
