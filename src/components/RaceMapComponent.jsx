@@ -317,7 +317,7 @@ const RaceMapComponent = (props) => {
               </p>
             </div>
           </div>
-          <div id="navigation">
+          <div id="navigation" style={{ display: 'flex', justifyContent: 'space-between' }}>
             <button id="previous-scene" onClick={goToPreviousScene} style={{ visibility: 'hidden' }}>
               <img src="../images/left-arrow.png" alt="Previous" style={{ width: '40px', height: '40px' }} />
             </button>
