@@ -22,6 +22,7 @@ function App() {
   const [mapOpened, setMapOpened] = useState(false);
   const [openMap, setOpenMap] = useState(null);
 
+  const [scroll, setScroll] = useState(0)
   const [openStats, setOpenStats] = useState(false);
 
 
@@ -39,7 +40,7 @@ function App() {
         // enabled={mapOpened ? false : true}
         >
 
-          <ScrollManager section={section} onSectionChange={setSection} />
+          <ScrollManager section={section} onSectionChange={setSection} setScroll={setScroll} />
 
           <HtmlWrapper
             currentSection={currentSection}
@@ -71,6 +72,8 @@ function App() {
         currentSection={currentSection}
         setOpenMap={setOpenMap}
         setMapOpened={setMapOpened}
+        mapOpened={mapOpened}
+        scroll={scroll}
 
       />
 

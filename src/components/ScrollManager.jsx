@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 
 export const ScrollManager = (props) => {
-    const { section, onSectionChange } = props;
+    const { section, onSectionChange, setScroll } = props;
 
     const data = useScroll();
     const lastScroll = useRef(0);
@@ -34,6 +34,8 @@ export const ScrollManager = (props) => {
             lastScroll.current = data.scroll.current;
             return;
         }
+
+        // setScroll(data.scroll.current)
 
         //Smooth Scroll forward
         // const curSection = Math.floor(data.scroll.current * totalPages);

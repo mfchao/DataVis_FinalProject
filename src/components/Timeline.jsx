@@ -65,7 +65,7 @@ export const Timeline = (props) => {
         position: new Vector3(
           curvePoints[1].x - 7,
           curvePoints[1].y,
-          curvePoints[1].z + 18
+          curvePoints[1].z + 25
         ),
         title: "1843",
         subtitle: `First racially restrictive covenant, stating that land not be sold to a "Negro or native of Ireland"`,
@@ -74,13 +74,13 @@ export const Timeline = (props) => {
         imagePosition: [-0.9, -1.1, -0.2]
       },
       {
-        cameraRailDist: 1.5,
+        cameraRailDist: 0.5,
         position: new Vector3(
-          curvePoints[2].x - 0.5,
+          curvePoints[2].x - 18,
           curvePoints[2].y + 0.8,
-          curvePoints[2].z + 40
+          curvePoints[2].z + 75
         ),
-        rotation: [0, -0.1, 0],
+        rotation: [0, -0.5, 0],
         title: "1927",
         subtitle: `The National Association of Real Estate Boards' Code of Ethics creates covenant stating "no part of the property should be used, occupied, sold or leased to black people, unless they were servants, janitors, or chauffeurs living in basements, servants' quarters, or a barn or garage in the rear."`,
         image: '../images/mom-child-2.png',
@@ -92,9 +92,9 @@ export const Timeline = (props) => {
       {
         cameraRailDist: -1,
         position: new Vector3(
-          curvePoints[3].x + 48,
+          curvePoints[3].x + 130,
           curvePoints[3].y + 1,
-          curvePoints[3].z + 70
+          curvePoints[3].z + 130
         ),
         rotation: [0, 1, 0],
         title: "1938",
@@ -106,11 +106,11 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 1.5,
         position: new Vector3(
-          curvePoints[4].x - 96,
+          curvePoints[4].x - 185,
           curvePoints[4].y + 0.5,
-          curvePoints[4].z + 95
+          curvePoints[4].z + 170
         ),
-        rotation: [0, -1, 0],
+        rotation: [0, -0.5, 0],
         title: "1960",
         subtitle: `Median price of owner-occupied housing in Boston is $15,900 and median gross monthly rent is $82 ($984 annualy).`,
         image: '../images/couple-2.png',
@@ -121,11 +121,11 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 1.5,
         position: new Vector3(
-          curvePoints[4].x + 4,
+          curvePoints[4].x - 2,
           curvePoints[4].y + 1,
-          curvePoints[4].z - 9
+          curvePoints[4].z + 10
         ),
-        rotation: [0, 0, 0],
+        rotation: [0, -0.5, 0],
         title: "1968",
         subtitle: `Redlining is outlawed by the U.S. 1968 Fair Housing Act. Boston establishes the Boston Urban Renewal Groud (BBRG) to provide Black Bostonians FHA-insured loans and mortgages, but only in Dorchester, Mattapan, and Roxbury, areas which were 'red' under the just-outlawed HOLC map system.`,
         image: '../images/couple.png',
@@ -134,29 +134,29 @@ export const Timeline = (props) => {
         map: 'holc'
 
       },
-      {
-        cameraRailDist: 1.5,
-        position: new Vector3(
-          curvePoints[4].x - 2,
-          curvePoints[4].y + 1,
-          curvePoints[4].z - 45
-        ),
-        rotation: [0, 0, 0],
-        title: "",
-        subtitle: `While redlining is technically outlawed, the areas which previously excluded minorities maintained a barrier to economic and social mobility through single-family housing zoning maps, which aligned extremely closely with the previously used HOLC maps.  **Click to view interactive map**`,
-        image: '../images/holc_screenshot.png',
-        scale: [4.2, 3, 2],
-        imagePosition: [-2.4, -1.1, -0.2],
-        map: 'holc'
+      // {
+      //   cameraRailDist: 1.5,
+      //   position: new Vector3(
+      //     curvePoints[4].x - 2,
+      //     curvePoints[4].y + 1,
+      //     curvePoints[4].z - 45
+      //   ),
+      //   rotation: [0, 0, 0],
+      //   title: "",
+      //   subtitle: `While redlining is technically outlawed, the areas which previously excluded minorities maintained a barrier to economic and social mobility through single-family housing zoning maps, which aligned extremely closely with the previously used HOLC maps.  **Click to view interactive map**`,
+      //   image: '../images/holc_screenshot.png',
+      //   scale: [4.2, 3, 2],
+      //   imagePosition: [-2.4, -1.1, -0.2],
+      //   map: 'holc'
 
-      },
+      // },
 
       {
-        cameraRailDist: -0.5,
+        cameraRailDist: 0,
         position: new Vector3(
-          curvePoints[5].x - 11,
+          curvePoints[5].x - 9,
           curvePoints[5].y + 1.3,
-          curvePoints[5].z - 60
+          curvePoints[5].z - 110
         ),
         rotation: [0, 0, 0],
         title: "2018",
@@ -166,21 +166,21 @@ export const Timeline = (props) => {
         imagePosition: [-0.7, -1.1, -0.2]
       },
 
-      {
-        cameraRailDist: -0.5,
-        position: new Vector3(
-          curvePoints[5].x - 11,
-          curvePoints[5].y + 1.3,
-          curvePoints[5].z - 90
-        ),
-        rotation: [0, 0, 0],
-        title: "",
-        subtitle: `Areas which historically excluded non-white residents remain a much higher percentage white than neighboring areas, correlating directly with percentage of single-family housing zoning **Click to view interactive map**`,
-        image: '../images/race_screenshot.png',
-        scale: [4.4, 3, 2],
-        imagePosition: [-2.5, -1.1, -0.2],
-        map: 'race'
-      },
+      // {
+      //   cameraRailDist: -0.5,
+      //   position: new Vector3(
+      //     curvePoints[5].x - 11,
+      //     curvePoints[5].y + 1.3,
+      //     curvePoints[5].z - 90
+      //   ),
+      //   rotation: [0, 0, 0],
+      //   title: "",
+      //   subtitle: `Areas which historically excluded non-white residents remain a much higher percentage white than neighboring areas, correlating directly with percentage of single-family housing zoning **Click to view interactive map**`,
+      //   image: '../images/race_screenshot.png',
+      //   scale: [4.4, 3, 2],
+      //   imagePosition: [-2.5, -1.1, -0.2],
+      //   map: 'race'
+      // },
 
       {
         cameraRailDist: 0,
@@ -197,22 +197,22 @@ export const Timeline = (props) => {
         imagePosition: [-0.9, -1.1, -0.2]
       },
 
-      {
-        cameraRailDist: 0,
-        position: new Vector3(
-          curvePoints[6].x + 4,
-          curvePoints[6].y + 1.3,
-          curvePoints[6].z - 10
-        ),
-        rotation: [0, 0, 0],
-        title: "",
-        subtitle: `Click to view the income disparity across the Greater Boston Area`,
-        image: '../images/income_screenshot.png',
-        scale: [5, 3, 2],
-        imagePosition: [-1.2, -2.1, -0.2],
-        map: 'income'
+      // {
+      //   cameraRailDist: 0,
+      //   position: new Vector3(
+      //     curvePoints[6].x + 4,
+      //     curvePoints[6].y + 1.3,
+      //     curvePoints[6].z - 10
+      //   ),
+      //   rotation: [0, 0, 0],
+      //   title: "",
+      //   subtitle: `Click to view the income disparity across the Greater Boston Area`,
+      //   image: '../images/income_screenshot.png',
+      //   scale: [5, 3, 2],
+      //   imagePosition: [-1.2, -2.1, -0.2],
+      //   map: 'income'
 
-      },
+      // },
 
       {
         cameraRailDist: 0,
@@ -223,7 +223,7 @@ export const Timeline = (props) => {
         ),
         rotation: [0, 0, 0],
         title: "",
-        subtitle: `The historically lower incomes in these areas have also resulted in historically lower access to quality resources, making it much harder for those born into poverty to escape it. `,
+        subtitle: `The historically lower incomes in these areas have also resulted in historically lower access to quality resources, making it much harder for those born into poverty to escape it. DiversityDataKids.org's Child Opportunity Index factors education, health and environment, and social and economic conditions to provide a measure of opportunities provided to children.`,
         image: '../images/woman-original.png',
         scale: 3,
         imagePosition: [-1.4, -1.1, -0.2]
@@ -232,18 +232,17 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 0,
         position: new Vector3(
-          curvePoints[7].x + 2,
+          curvePoints[7].x - 3,
           curvePoints[7].y + 1.3,
           curvePoints[7].z - 15
         ),
         rotation: [0, 0, 0],
-        title: "",
-        /// SELIN REPLACE THIS STUFF WITH YOUR STUFF
-        subtitle: `DiversityDataKids.org's Child Opportunity Index factors education, health and environment, and social and economic conditions to provide a measure of opportunities provided to children. **click to view interactive map**`,
-        image: '../images/coi_screenshot.png',
-        scale: [5.8, 2.8, 2],
-        imagePosition: [-3.4, -1.4, -0.2],
-        map: 'coi'
+        title: "So What?",
+        subtitle: `Conclusion Text`,
+        // image: '../images/coi_screenshot.png',
+        // scale: [5.8, 2.8, 2],
+        // imagePosition: [-3.4, -1.4, -0.2],
+        // map: 'coi'
       },
     ];
   }, []);
@@ -269,9 +268,9 @@ export const Timeline = (props) => {
   useFrame((_state, delta) => {
     if (mapOpened) {
       // Set camera position to look at 0
-      // cameraGroup.current.position.lerp(new Vector3(0, 0, 0), delta * 24);
-      // Set camera target to look at 0
-      cameraGroup.current.lookAt(new Vector3(0, 0, 0));
+      // cameraGroup.current.position.lerp(new Vector3(0, 0, 0), delta * 20);
+      cameraGroup.current.lookAt(new Vector3(0, 0, 0))
+
     } else {
 
       if (window.innerWidth > window.innerHeight) {

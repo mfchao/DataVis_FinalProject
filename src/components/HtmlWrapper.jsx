@@ -36,11 +36,11 @@ export const HtmlWrapper = (props) => {
 
     useFrame(() => {
 
-
-        if (scrollData.scroll.current > 0.6 && scrollData.scroll.current < 0.65) {
+        // console.log(scrollData.scroll.current)
+        if (scrollData.scroll.current > 0.58 && scrollData.scroll.current < 0.6) {
             setMapOpened(true);
             setOpenMap('holc');
-        } else if (scrollData.scroll.current > 0.77 && scrollData.scroll.current < 0.82) {
+        } else if (scrollData.scroll.current > 0.785 && scrollData.scroll.current < 0.81) {
             setMapOpened(true);
             setOpenMap('race');
         } else if (scrollData.scroll.current > 0.87 && scrollData.scroll.current < 0.92) {

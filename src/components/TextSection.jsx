@@ -1,14 +1,19 @@
 import { Text, Image } from "@react-three/drei";
 import { extend } from '@react-three/fiber'
 import { useEffect, useRef, useState } from "react";
+import { MeshBasicMaterial, PlaneGeometry, TextureLoader } from "three";
 import { fadeOnBeforeCompileFlat } from "../utils/fadeMaterial";
 import gsap from "gsap";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 
 
 
 export const TextSection = ({ header, title, subtitle, caption, image, scale, imagePosition, ...props }) => {
     const [imageAspect, setImageAspect] = useState(1);
+    let texture;
+    if (image) {
+        texture = useLoader(TextureLoader, image);
+    }
 
     return (
         <group {...props}>
@@ -51,7 +56,7 @@ export const TextSection = ({ header, title, subtitle, caption, image, scale, im
                 anchorX={"left"}
                 anchorY="top"
                 fontSize={0.2}
-                maxWidth={2.5}
+                maxWidth={3}
             // font={"./fonts/Inter-Regular.ttf"}
             >
                 {subtitle}
@@ -75,17 +80,13 @@ export const TextSection = ({ header, title, subtitle, caption, image, scale, im
                     onBeforeCompile={fadeOnBeforeCompileFlat}
                 />
             </Text>
-            {image && (
-                <Image
-                    url={image}
-                    transparent
-                    scale={scale}
-                    position={imagePosition}
-                    fragmentShader={fadeOnBeforeCompileFlat}
-                >
-                </Image>
-
-
+            {image && texture && (
+                <mesh position={imagePosition} scale={scale} >
+                    <planeGeometry args={[1, 1.2, 1]} />
+                    <meshStandardMaterial transparent onBeforeCompile={fadeOnBeforeCompileFlat}>
+                        <primitive attach="map" object={texture} />
+                    </meshStandardMaterial>
+                </mesh>
             )}
         </group >
     );
