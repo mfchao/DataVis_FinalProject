@@ -23,18 +23,23 @@ const scenes = [
     additionalInfo: "The suburbs however are predominantly single-family zoned, making it difficult for non-white residents to move there.",
     zoom: 9.857428010993623,
     center: [-71.13856498878486, 42.38619457149531],
-    bearing: -61.400000000001455,
-    pitch: 36.00000000000006,
+    bearing: -11.400000000001455,
+    pitch: 46.00000000000006,
+    // zoom: 9.932585283036186,
+    // center: [-71.1919093544517, 42.31710718816527],
+    // bearing: 0,
+    // pitch: 65.543216182992104,
     clickable: false
   },
   {
     name: "Scene 3",
     content: "Single-family zones represent a wall against racial diversity.",
     additionalInfo: "The demographic data shows, how the predominantly white single family housing municipalities are not accessible for people of other race.",
-    zoom: 9.932585283036186,
-    center: [-71.1919093544517, 42.31710718816527],
-    bearing: 0,
-    pitch: 54.543216182992104,
+
+    zoom: 10,
+    center: [-71.16277247227424, 42.321083406448],
+    bearing: 70,
+    pitch: 75,
     clickable: false
   }
 ];
@@ -56,9 +61,6 @@ const RaceMapComponent = (props) => {
     //   enableMapClick();
     // }
     zoomToScene(scene);
-    if (scene.name === "Scene 2") {
-      selectChelsea();
-    }
   }
 
   function goToNextScene() {
@@ -77,20 +79,14 @@ const RaceMapComponent = (props) => {
 
   function zoomToScene(scene) {
     console.log("Map: ", mapRef.current);
-    // map.flyTo({
-    //   center: scene.center,
-    //   zoom: scene.zoom,
-    //   bearing: scene.bearing,
-    //   pitch: scene.pitch,
-    //   essential: true
-    // });
     if (mapRef.current) {  // Check if the map instance is available
       mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
         center: scene.center,
         zoom: scene.zoom,
         bearing: scene.bearing,
         pitch: scene.pitch,
-        essential: true
+        essential: true,
+        speed: 0.3
       });
     }
   }
@@ -159,7 +155,7 @@ const RaceMapComponent = (props) => {
               // This is the query for "%_single_family", round to 2 decimal places
               percentage_single_family: Math.round(row["%_single_family"] * 100) / 100,
               percentage_nhwhite: Math.round(row["nhwhi"] / row["pop"] * 10000) / 100,
-              white: Math.round((1 - row["nhwhi"] / row["pop"]) * 10000) / 100,
+              percentage_non_white: Math.round((1 - row["nhwhi"] / row["pop"]) * 10000) / 100,
               absolute_non_white: Math.max(0, row["pop"] - row["nhwhi"]),
             }
           );
@@ -184,9 +180,12 @@ const RaceMapComponent = (props) => {
           'fill-extrusion-height': [
             'interpolate',
             ['linear'],
-            ['feature-state', 'absolute_non_white'],
+            // ['feature-state', 'absolute_non_white'],
+            // 10, 0,
+            // 50000, 5000
+            ['feature-state', 'percentage_non_white'],
             10, 0,
-            50000, 5000
+            100, 10000
           ],
           'fill-extrusion-base': 0, // Base of the extrusions
           'fill-extrusion-opacity': 1, // Adjust the opacity as needed
@@ -201,21 +200,27 @@ const RaceMapComponent = (props) => {
         }
       });
 
-
-      map.addLayer({
-        id: "mass-muni-line",
-        type: "line",
-        source: "mass-muni",
-        "source-layer": "ma_municipalities_degrees-8uvqwo",
-        layout: {
-          "line-join": "round",
-          "line-cap": "round",
-        },
-        paint: {
-          "line-color": "#D8CAC1",
-          "line-width": .5,
-        },
+      map.setLight({
+        'anchor': 'map',
+        'color': 'white',
+        'intensity': 100,
+        'position': [45, 180, 80]
       });
+
+      // map.addLayer({
+      //   id: "mass-muni-line",
+      //   type: "line",
+      //   source: "mass-muni",
+      //   "source-layer": "ma_municipalities_degrees-8uvqwo",
+      //   layout: {
+      //     "line-join": "round",
+      //     "line-cap": "round",
+      //   },
+      //   paint: {
+      //     "line-color": "#D8CAC1",
+      //     "line-width": .5,
+      //   },
+      // });
 
       var popup = new mapboxgl.Popup({
         closeButton: false,
@@ -233,7 +238,7 @@ const RaceMapComponent = (props) => {
         var content = "";
         // iterate through the object
         content += "<b>" + FeatureState["municipal"] + "</b>" + "<br>";
-        content += "<b>" + Math.round(FeatureState["white"]) + "% </b>" + "None White Residents" + "<br>";
+        content += "<b>" + Math.round(FeatureState["percentage_non_white"]) + "% </b>" + "None White Residents" + "<br>";
         // iterate through the object FeatureState
         // for (var key in FeatureState) {
         //   if (key !== "municipal" && key !== "white") {
@@ -302,7 +307,7 @@ const RaceMapComponent = (props) => {
           <div id="legend" style={{ padding: '30px' }}>
             <div>
               <p style={{ fontSize: '15px', marginBottom: '20px' }}>
-                <b>Height</b> represents population of non-Hispanic White residents.
+                <b>Height</b> represents % population of non-Hispanic White residents.
               </p>
               <p style={{ fontSize: '15px', marginTop: '20px' }}>
                 <ul>
