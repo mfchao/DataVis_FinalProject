@@ -9,11 +9,11 @@ mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYyc
 const scenes = [
   {
     name: "Scene 1",
-    content: "The non white population gets trapped in the city center.",
+    content: "The non-white population gets trapped in the city center.",
     additionalInfo: "Decades after the end of redlining, it is clear that the deliberate racial separation of the past has been maintained geographically, with single family zoning continuing to place barriers to prevent economic mobility for minorities.",
     zoom: 9.499999999999998,
     center: [-70.94930477840957, 42.48069048320767],
-    bearing: -99.80000000000007,
+    bearing: -60.80000000000007,
     pitch: 67.99999999999987,
     clickable: false
   },
@@ -239,7 +239,7 @@ const RaceMapComponent = (props) => {
         // iterate through the object
         content += "<div style='user-select: none; pointer-events: none;'>";
         content += "<b>" + FeatureState["municipal"] + "</b>" + "<br>";
-        content += "<b>" + Math.round(FeatureState["percentage_non_white"]) + "% </b>" + "None White Residents" + "<br>";
+        content += "<b>" + Math.round(FeatureState["percentage_non_white"]) + "% </b>" + "Non-White Residents" + "<br>";
         content += "</div>";
         // for (var key in FeatureState) {
         //   if (key !== "municipal" && key !== "white") {
