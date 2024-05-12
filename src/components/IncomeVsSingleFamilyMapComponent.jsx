@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Papa from 'papaparse';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -7,6 +7,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYycm41cGxrNjNsNDMifQ.8ZNsKjRpCDRNEjV5AI4wRg";
 
 const IncomeVsSingleFamilyMapComponent = (props) => {
+  const mapRef = useRef(null);
+
   const { setOpenMap, setMapOpened } = props;
 
   const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
@@ -179,6 +181,7 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
         console.log(`Bearing: ${bearing} degrees`);
         console.log(`Pitch: ${pitch} degrees`)
       });
+      mapRef.current = map;
 
 
     });
@@ -241,9 +244,39 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     const midIncomeGroup = document.getElementById('midIncomeGroup');
     const highIncomeGroup = document.getElementById('highIncomeGroup');
 
-    const lowClickHandler = () => SetIncomeRangeAndView(0, 9, "low");
-    const midClickHandler = () => SetIncomeRangeAndView(10, 13, "mid");
-    const highClickHandler = () => SetIncomeRangeAndView(14, 15, "high");
+    const lowClickHandler = () => {
+      SetIncomeRangeAndView(0, 9, "low");
+      mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
+        center: [-70.882, 42.442],
+        zoom: 9.7,
+        bearing: 38.23,
+        pitch: 75.1,
+        essential: true,
+        speed: 0.3
+      });
+    };
+    const midClickHandler = () => {
+      SetIncomeRangeAndView(10, 13, "mid");
+      mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
+        center: [-71.047, 42.357],
+        zoom: 9.58,
+        bearing: 52.94,
+        pitch: 66.6,
+        essential: true,
+        speed: 0.3
+      });
+    }
+    const highClickHandler = () => {
+      SetIncomeRangeAndView(14, 15, "high");
+      mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
+        center: [-71.088, 42.411],
+        zoom: 9.89,
+        bearing: -85.788,
+        pitch: 63.595,
+        essential: true,
+        speed: 0.3
+      });
+    }
 
     if (incomeLevelMin && incomeLevelMax) {
       incomeLevelMin.addEventListener('input', updateIncomeDisplay);
