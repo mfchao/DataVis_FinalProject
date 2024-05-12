@@ -15,17 +15,24 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
   const incomeLevelTextLow = ["$0", "$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000"];
   const incomeLevelTextHigh = ["$10,000", "$15,000", "$20,000", "$25,000", "$30,000", "$35,000", "$40,000", "$45,000", "$50,000", "$60,000", "$75,000", "$100,000", "$125,000", "$150,000", "$200,000", "INF"];
 
-  const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(10);
+  const [minIndex, setMinIndex] = useState(14);
+  const [maxIndex, setMaxIndex] = useState(15);
+  const [showSliders, setShowSliders] = useState(false);
+  const [zoom, setZoom] = useState(9.61);
+  const [center, setCenter] = useState([-71.0913, 42.47]);
+  const [bearing, setBearing] = useState(-83);
+  const [pitch, setPitch] = useState(55);
+  const [selectedRange, setSelectedRange] = useState(2);
 
   useEffect(() => {
+
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
-      zoom: 9.61, //10.85,
-      center: [-71.0913, 42.4047], // [-71.0746, 42.3609],
-      bearing: -83, //-94.19,
-      pitch: 55, //62.60,
+      zoom: zoom,
+      center: center,
+      bearing: bearing,
+      pitch: pitch,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
           return {
@@ -176,6 +183,8 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
 
     });
 
+
+
     function updateVisualization(minIndex, maxIndex) {
       csvPromise.then(function (results) {
         results.data.forEach((row) => {
@@ -203,29 +212,60 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     const updateIncomeDisplay = () => {
       const minIndex = parseInt(document.getElementById('incomeLevelMin').value);
       const maxIndex = parseInt(document.getElementById('incomeLevelMax').value);
+      console.log(minIndex, maxIndex);
       const selectedRangeText = `${incomeLevelTextLow[minIndex]} - ${incomeLevelTextHigh[maxIndex]}`;
       document.getElementById('selectedIncomeRange').textContent = selectedRangeText;
       updateVisualization(minIndex, maxIndex);
     };
 
+    const SetIncomeRangeAndView = (min, max, button) => {
+      setMinIndex(min);
+      setMaxIndex(max);
+      updateVisualization(min, max)
+      if (button == "low") {
+        setSelectedRange(0);
+      }
+      if (button == "mid") {
+        setSelectedRange(1);
+      }
+      if (button == "high") {
+        setSelectedRange(2);
+      }
+    };
+
+
+
     const incomeLevelMin = document.getElementById('incomeLevelMin');
     const incomeLevelMax = document.getElementById('incomeLevelMax');
+    const lowIncomeGroup = document.getElementById('lowIncomeGroup');
+    const midIncomeGroup = document.getElementById('midIncomeGroup');
+    const highIncomeGroup = document.getElementById('highIncomeGroup');
+
+    const lowClickHandler = () => SetIncomeRangeAndView(0, 9, "low");
+    const midClickHandler = () => SetIncomeRangeAndView(10, 13, "mid");
+    const highClickHandler = () => SetIncomeRangeAndView(14, 15, "high");
 
     if (incomeLevelMin && incomeLevelMax) {
       incomeLevelMin.addEventListener('input', updateIncomeDisplay);
       incomeLevelMax.addEventListener('input', updateIncomeDisplay);
+      lowIncomeGroup.addEventListener('click', lowClickHandler);
+      midIncomeGroup.addEventListener('click', midClickHandler);
+      highIncomeGroup.addEventListener('click', highClickHandler);
     }
-
 
     return () => {
       if (incomeLevelMin && incomeLevelMax) {
         incomeLevelMin.removeEventListener('input', updateIncomeDisplay);
         incomeLevelMax.removeEventListener('input', updateIncomeDisplay);
+        lowIncomeGroup.removeEventListener('click', lowClickHandler);
+        midIncomeGroup.removeEventListener('click', midClickHandler);
+        highIncomeGroup.removeEventListener('click', highClickHandler);
         map.remove();
       }
     };
 
   }, []);
+
 
   const papaPromise = (url) => new Promise((resolve, reject) => {
     Papa.parse(url, {
@@ -259,6 +299,11 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     // setArchiveMapId(null);
   };
 
+  const toggleSliders = () => {
+    setShowSliders(!showSliders);
+    setSelectedRange(-1);
+  }
+
 
   return (
     <div>
@@ -277,18 +322,48 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
           In 2018 - 2022 , the median value of an owner-occupied home was $684,900 and median gross rent $1,981, while the median income in the same timeframe was $89,212. In 1960, 8 years before the 1968 Fair Housing Act outlawed redlining, the median price of an owner-occupied house was $15,900 and median gross rent was $82 dollars. The median regional income for white families at that time was $5,835 while for nonwhite families it was $3,233.
           <br />
           Those who had the upper hand in property ownership in the 1960s have accumulated a massive amount of wealth through no more than land ownership. The inability to increase housing in these regions through single-family zoning has artificially created a limited supply for a very real growing demand for housing, creating a nearly impassible financial barrier to mobility that replaced that which was established with historical redlining.
-          <br />
-          Default position of $0 - $75,000 annual household income represents a range entirely below the median value of $89,212.
         </div>
+
+        <style>
+          {`
+        .range-btn {
+          padding: 1px 2px;
+          margin: 5px;
+          background-color: black;
+          border: 2px solid #ccc;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .range-btn.selected {
+          color: white;
+          border-color: blue;
+        }
+        .range-btn:hover {
+          background-color: #e2e2e2;
+        }
+      `}
+        </style>
         <div>
+          <button className={`range-btn ${selectedRange === 0 ? "selected" : ""}`} id="lowIncomeGroup">Lowest 1/3 Income (0-60k)</button>
           <br />
+          <button className={`range-btn ${selectedRange === 1 ? "selected" : ""}`} id="midIncomeGroup">Medium 1/3 Income (60-150k)</button>
+          <br />
+          <button className={`range-btn ${selectedRange === 2 ? "selected" : ""}`} id="highIncomeGroup">Highest 1/3 Income (150k+)</button>
+          <br />
+          <button className={`range-btn ${selectedRange === 3 ? "selected" : ""}`} onClick={toggleSliders} id="customRange">custom range</button>
+          {/* Existing UI elements */}
+        </div>
+
+        <div style={{ visibility: showSliders ? 'visible' : 'hidden' }}>
           Selected Income Range: <span id="selectedIncomeRange"></span>
           <br />
           <input type="range" id="incomeLevelMin" min="0" max="15" value={minIndex} onChange={handleMinChange} step="1" style={{ width: 200 }} />
           <input type="range" id="incomeLevelMax" min="0" max="15" value={maxIndex} onChange={handleMaxChange} step="1" style={{ width: 200 }} />
+
         </div>
 
-        <div id="legend" style={{ padding: '30px' }}>
+        <div id="legend" style={{ padding: '5px' }}>
           <h4 style={{ fontSize: 'larger' }}>
             Legend:
           </h4>
@@ -300,9 +375,12 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
 
             </p>
           </div>
+
         </div>
       </div>
-    </div>
+
+
+    </div >
   )
 };
 

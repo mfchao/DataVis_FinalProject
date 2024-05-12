@@ -8,11 +8,12 @@ mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYyc
 
 const HolcMapComponent = (props) => {
   const { setOpenMap, setMapOpened } = props;
+  const [map, setMap] = useState(null);
 
-  const mapOpacity = .5;
+  const [HolcToSfSlider, setHolcToSfSlider] = useState(0.1);
 
   useEffect(() => {
-    const map = new mapboxgl.Map({
+    const newMap = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
       zoom: 10.85,
@@ -33,11 +34,11 @@ const HolcMapComponent = (props) => {
       "https://raw.githubusercontent.com/hannohiss/Vis-Mapbox-Website/main/housing_sf_other_w_census.csv"
     const csvPromise = papaPromise(csvUrl);
 
-    map.on("load", function () {
+    newMap.on("load", function () {
       csvPromise.then(function (results) {
         results.data.forEach((row) => {
 
-          map.setFeatureState(
+          newMap.setFeatureState(
             {
               // your source tileset and source layer
               source: "mass-muni",
@@ -58,11 +59,11 @@ const HolcMapComponent = (props) => {
 
 
       // Bottom Map
-      map.loadImage('https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_Boston_1938.png', function (error, image) {
+      newMap.loadImage('https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_Boston_1938.png', function (error, image) {
         if (error) throw error;
 
-        // Add the image as a source to the map
-        map.addSource('bottom-map', {
+        // Add the image as a source to the newMap
+        newMap.addSource('bottom-map', {
           type: 'image',
           url: 'https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_Boston_1938.png',
           coordinates: [
@@ -74,23 +75,23 @@ const HolcMapComponent = (props) => {
         });
 
         // Add a new layer to display the image
-        map.addLayer({
+        newMap.addLayer({
           id: 'bottom-map-layer',
           type: 'raster',
           source: 'bottom-map',
           paint: {
-            'raster-opacity': mapOpacity // Adjust the opacity if needed
+            'raster-opacity': 1 - HolcToSfSlider // Adjust the opacity if needed
           }
         });
 
       });
 
       // Top Map
-      map.loadImage('https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_BostonSection2_1938.png', function (error, image) {
+      newMap.loadImage('https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_BostonSection2_1938.png', function (error, image) {
         if (error) throw error;
 
-        // Add the image as a source to the map
-        map.addSource('top-map', {
+        // Add the image as a source to the newMap
+        newMap.addSource('top-map', {
           type: 'image',
           url: 'https://raw.githubusercontent.com/mfchao/DataVis_FinalProject/main/src/data/MA_BostonSection2_1938.png',
           coordinates: [
@@ -102,12 +103,12 @@ const HolcMapComponent = (props) => {
         });
 
         // Add a new layer to display the image
-        map.addLayer({
+        newMap.addLayer({
           id: 'top-map-layer',
           type: 'raster',
           source: 'top-map',
           paint: {
-            'raster-opacity': mapOpacity // Adjust the opacity if needed
+            'raster-opacity': 1 - HolcToSfSlider // Adjust the opacity if needed
           }
         });
 
@@ -115,13 +116,13 @@ const HolcMapComponent = (props) => {
 
 
       // YOUR TURN: Add source layer
-      map.addSource("mass-muni", {
+      newMap.addSource("mass-muni", {
         type: "vector",
         url: "mapbox://hannohiss.890zal4l",
         promoteId: "muni_id",
       });
 
-      map.addLayer({
+      newMap.addLayer({
         id: "mass-muni-extrusion",
         type: "fill-extrusion",
         source: "mass-muni",
@@ -137,7 +138,7 @@ const HolcMapComponent = (props) => {
             100, 100
           ],
           'fill-extrusion-base': 0, // Base of the extrusions
-          'fill-extrusion-opacity': 1, // Adjust the opacity as needed
+          'fill-extrusion-opacity': HolcToSfSlider, // Adjust the opacity as needed
           // Maintain the color from the existing layer
           'fill-extrusion-color': [
             'interpolate',
@@ -150,7 +151,7 @@ const HolcMapComponent = (props) => {
       });
 
 
-      map.addLayer({
+      newMap.addLayer({
         id: "mass-muni-line",
         type: "line",
         source: "mass-muni",
@@ -170,10 +171,10 @@ const HolcMapComponent = (props) => {
         closeOnClick: false,
       });
 
-      map.on("mousemove", "mass-muni-extrusion", function (e) {
-        map.getCanvas().style.cursor = "pointer";
+      newMap.on("mousemove", "mass-muni-extrusion", function (e) {
+        newMap.getCanvas().style.cursor = "pointer";
 
-        var muni = map.queryRenderedFeatures(e.point, {
+        var muni = newMap.queryRenderedFeatures(e.point, {
           layers: ["mass-muni-extrusion"],
         });
 
@@ -181,31 +182,63 @@ const HolcMapComponent = (props) => {
         var content = "";
         content += "<b>" + FeatureState["municipal"] + "</b>" + "<br>";
         content += "<b>" + Math.round(FeatureState["percentage_single_family"]) + "% </b>" + "Single Family Homes" + "<br>";
-        popup.setLngLat(e.lngLat).setHTML(content).addTo(map);
+        popup.setLngLat(e.lngLat).setHTML(content).addTo(newMap);
       });
 
-      map.on("mouseleave", "muni-fill", function () {
-        map.getCanvas().style.cursor = "";
+      newMap.on("mouseleave", "muni-fill", function () {
+        newMap.getCanvas().style.cursor = "";
         popup.remove();
       });
 
       // Event listener to log camera position, zoom level, and bearing
-      map.on('moveend', () => {
-        const center = map.getCenter();
-        const zoom = map.getZoom();
-        const bearing = map.getBearing();
-        const pitch = map.getPitch();
+      newMap.on('moveend', () => {
+        const center = newMap.getCenter();
+        const zoom = newMap.getZoom();
+        const bearing = newMap.getBearing();
+        const pitch = newMap.getPitch();
         console.log(`Map center: Latitude ${center.lat}, Longitude ${center.lng}`);
         console.log(`Zoom level: ${zoom}`);
         console.log(`Bearing: ${bearing} degrees`);
         console.log(`Pitch: ${pitch} degrees`)
       });
 
+      setMap(newMap)
+
+      const updateDisplay = (event) => {
+
+        setHolcToSfSlider(event.target.value);
+
+
+        // Log the current slider value to the console (optional)
+        console.log('Slider adjusted to:', sliderValue);
+      };
+
+      const HolcToSfSliderElement = document.getElementById('HolcToSf');
+      HolcToSfSliderElement.addEventListener('input', updateDisplay);
+
 
 
     });
 
   }, []);
+
+  useEffect(() => {
+    console.log("!!!", HolcToSfSlider);
+    if (!map) return;
+    // Adjust the opacity of the raster layers based on the slider value
+    try {
+      map.setPaintProperty('bottom-map-layer', 'raster-opacity', 1 - HolcToSfSlider);
+      map.setPaintProperty('top-map-layer', 'raster-opacity', 1 - HolcToSfSlider);
+
+      // Optionally adjust the fill-extrusion opacity if that's intended to change
+      map.setPaintProperty('mass-muni-extrusion', 'fill-extrusion-opacity', HolcToSfSlider);
+    } catch (error) {
+      console.error('Failed to set paint property:', error);
+      console.log('Map object:', map);
+    }
+
+  }, [HolcToSfSlider])
+
 
   const papaPromise = (url) => new Promise((resolve, reject) => {
     Papa.parse(url, {
@@ -240,7 +273,10 @@ const HolcMapComponent = (props) => {
           The Home Owners Loan Corporation used 4 grades for their Residential Security maps, using green for "Best", blue for "Still Desirable", yellow for "Definitely Declining," and red for "Hazardous".
           The area descriptions used when producing these grades focused not on crime statistics or environmental concerns, but on assessments of the residents themselves often on the basis of race, class, religion and nationality.
           One redlined area in Roxbury was identified as "25% negro" and stated "Negro heavily concentrated north of Ruggles St.". A yellow neighborhood in Cambridge stated "A few negro families have moved in on Dame St. and threaten to spread."
+          <br />
+          Adjust the slider to see how the single-family zoning maps correspond to the HOLC redlining maps.
         </div>
+        <input type="range" id="HolcToSf" min="0" max="1" value={HolcToSfSlider} step=".01" style={{ width: 200 }} />
         <div id="legend" style={{ padding: '30px' }}>
           <h4 style={{ fontSize: 'larger' }}>
             Legend:
