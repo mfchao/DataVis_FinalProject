@@ -16,9 +16,9 @@ const HolcMapComponent = (props) => {
     const newMap = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/selindursunn/clvmvhh2z045m01pefzng2rzp',
-      zoom: 10.85,
-      center: [-71.121, 42.365],
-      bearing: -91.988,
+      zoom: 10.365,
+      center: [-71.068, 42.353],
+      bearing: 0,
       pitch: 0,
       transformRequest: (url, resourceType) => {
         if (url.startsWith('http://api.mapbox.com') || url.startsWith('http://tiles.mapbox.com')) {
@@ -260,19 +260,20 @@ const HolcMapComponent = (props) => {
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
       <div id="info-bar" style={{
         position: 'absolute',
-        top: '20px', right: '20px', height: '90%', width: '30%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
-        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '12px', color: 'rgb(218, 218, 218)'
+        top: '20px', right: '20px', height: '90%', width: '35%', backgroundColor: 'rgba(1, 0, 21, 0.75)', padding: '20px',
+        boxSizing: 'border-box', borderRadius: '10px', fontStyle: 'Poppins', fontSize: '14px', color: 'rgb(218, 218, 218)'
       }}>
         <div id="municipality-name" style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', padding: '0px', marginBottom: '20px' }}>Correlation of areas zoned for single family housing with historical redlining practices.</div>
         <div id="additional-info" style={{}}>
           The Home Owners Loan Corporation used 4 grades for their Residential Security maps, using green for "Best", blue for "Still Desirable", yellow for "Definitely Declining," and red for "Hazardous".
           The area descriptions used when producing these grades focused not on crime statistics or environmental concerns, but on assessments of the residents themselves often on the basis of race, class, religion and nationality.
           One redlined area in Roxbury was identified as "25% negro" and stated "Negro heavily concentrated north of Ruggles St.". A yellow neighborhood in Cambridge stated "A few negro families have moved in on Dame St. and threaten to spread."
-          <br />
+          <br /> <br/>
           Adjust the slider to see how the single-family zoning maps correspond to the HOLC redlining maps.
         </div>
+        <br/>
         <input type="range" id="HolcToSf" min="0" max="1" value={HolcToSfSlider} step=".01" style={{ width: 200 }} />
-        <div id="legend" style={{ padding: '30px', backgroundColor: 'rgba(1, 0, 21, 0.75)' }}>
+        <div id="legend" style={{ padding: '10px', backgroundColor: 'rgba(1, 0, 21, 0.75)' }}>
           <h4 style={{ fontSize: 'larger' }}>
             Legend:
           </h4>
@@ -280,8 +281,8 @@ const HolcMapComponent = (props) => {
             class="image-container"
             style={{
               display: 'flex',
-              width: '60%',
-              padding: '20px',
+              width: '35%',
+              padding: '30px',
             }}
           >
             <h5>100% Single Family Housing</h5>
