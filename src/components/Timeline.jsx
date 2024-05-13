@@ -238,7 +238,7 @@ export const Timeline = (props) => {
         ),
         rotation: [0, 0, 0],
         title: "So What?",
-        subtitle: `Conclusion Text`,
+        conclusion: `The data has shown us that to address the shortage of affordable housing effectively, it is essential to implement zoning reforms. These reforms should focus on permitting higher housing density, allowing smaller homes, and promoting mixed-use and inclusionary zoning. Such changes will help dismantle the barriers imposed by current exclusionary zoning practices, making housing more accessible and affordable for low- to moderate-income individuals from diverse backgrounds.`,
         // image: '../images/coi_screenshot.png',
         // scale: [5.8, 2.8, 2],
         // imagePosition: [-3.4, -1.4, -0.2],
