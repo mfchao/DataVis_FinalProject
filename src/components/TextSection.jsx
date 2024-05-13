@@ -8,7 +8,7 @@ import { useFrame, useLoader } from "@react-three/fiber";
 
 
 
-export const TextSection = ({ header, title, subtitle, caption, image, scale, imagePosition, ...props }) => {
+export const TextSection = ({ header, title, subtitle, caption, conclusion, image, scale, imagePosition, ...props }) => {
     const [imageAspect, setImageAspect] = useState(1);
     let texture;
     if (image) {
@@ -77,6 +77,21 @@ export const TextSection = ({ header, title, subtitle, caption, image, scale, im
             // font={"./fonts/Inter-Regular.ttf"}
             >
                 {caption}
+                <meshStandardMaterial
+                    color={"white"}
+                    onBeforeCompile={fadeOnBeforeCompileFlat}
+                />
+            </Text>
+            <Text
+                color="white"
+                anchorX={"left"}
+                anchorY="top"
+                fontSize={0.2}
+                maxWidth={6.5}
+                position={[0, -0.8, 0]}
+            // font={"./fonts/Inter-Regular.ttf"}
+            >
+                {conclusion}
                 <meshStandardMaterial
                     color={"white"}
                     onBeforeCompile={fadeOnBeforeCompileFlat}

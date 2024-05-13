@@ -325,35 +325,35 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
   }, [index]);
 
 
-  function updateScrollScene(index) {
-    if (index == 0) {
-      setIndex(0)
-    } else if (index == 1) {
-      setIndex(1)
-    } else if (index == 2) {
-      setIndex(2)
-    } else {
-      setIndex(null)
-    }
-  }
-  useEffect(() => {
-    const updateScene = () => {
-      if (scroll > 0.87 && scroll < 0.88) {
-        updateScrollScene(0);
-      } else if (scroll > 0.89 && scroll < 0.90) {
-        updateScrollScene(1);
-      } else if (scroll > 0.91 && scroll < 0.92) {
-        updateScrollScene(2);
-      }
-      animationRef.current = requestAnimationFrame(updateScene);
-    }
+  // function updateScrollScene(index) {
+  //   if (index == 0) {
+  //     setIndex(0)
+  //   } else if (index == 1) {
+  //     setIndex(1)
+  //   } else if (index == 2) {
+  //     setIndex(2)
+  //   } else {
+  //     setIndex(null)
+  //   }
+  // }
+  // useEffect(() => {
+  //   const updateScene = () => {
+  //     if (scroll > 0.87 && scroll < 0.88) {
+  //       updateScrollScene(0);
+  //     } else if (scroll > 0.89 && scroll < 0.90) {
+  //       updateScrollScene(1);
+  //     } else if (scroll > 0.91 && scroll < 0.92) {
+  //       updateScrollScene(2);
+  //     }
+  //     animationRef.current = requestAnimationFrame(updateScene);
+  //   }
 
-    animationRef.current = requestAnimationFrame(updateScene);
+  //   animationRef.current = requestAnimationFrame(updateScene);
 
-    return () => {
-      cancelAnimationFrame(animationRef.current);
-    };
-  }, [scroll]);
+  //   return () => {
+  //     cancelAnimationFrame(animationRef.current);
+  //   };
+  // }, [scroll]);
 
 
 
