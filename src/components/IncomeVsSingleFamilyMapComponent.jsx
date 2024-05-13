@@ -8,6 +8,7 @@ mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYyc
 
 const IncomeVsSingleFamilyMapComponent = (props) => {
   const mapRef = useRef(null);
+  const csvPromise = useRef(null);
   const animationRef = useRef(null);
   const [sceneloaded, setSceneLoaded] = useState(false);
   const [index, setIndex] = useState(null);
@@ -51,12 +52,12 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
 
     const csvUrl =
       "https://raw.githubusercontent.com/hannohiss/Vis-Mapbox-Website/main/housing_sf_other_w_census.csv"
-    const csvPromise = papaPromise(csvUrl);
+    csvPromise.current = papaPromise(csvUrl);
 
     map.on("load", function () {
       updateIncomeDisplay();
       updateVisualization(minIndex, maxIndex);
-      csvPromise.then(function (results) {
+      csvPromise.current.then(function (results) {
         results.data.forEach((row) => {
           var totalPop = 0
           //calculate sum of population for each municipality
@@ -190,124 +191,6 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
 
     });
 
-
-
-    function updateVisualization(minIndex, maxIndex) {
-      csvPromise.then(function (results) {
-        results.data.forEach((row) => {
-          var totalPop = 0;
-          incomeLevels.forEach((level) => {
-            totalPop += parseInt(row[level], 10) || 0;
-          });
-
-          var totalIncomeWithinRange = 0;
-          for (let i = minIndex; i <= maxIndex; i++) {
-            totalIncomeWithinRange += parseInt(row[incomeLevels[i]], 10) || 0;
-          }
-
-          map.setFeatureState({
-            source: "mass-muni",
-            sourceLayer: "ma_municipalities_degrees-8uvqwo",
-            id: row.muni_id,
-          }, {
-            incomeWithinRange: (totalIncomeWithinRange / totalPop) * 100,
-          });
-        });
-      });
-    }
-
-    const updateIncomeDisplay = () => {
-      const minIndex = parseInt(document.getElementById('incomeLevelMin').value);
-      const maxIndex = parseInt(document.getElementById('incomeLevelMax').value);
-      console.log(minIndex, maxIndex);
-      const selectedRangeText = `${incomeLevelTextLow[minIndex]} - ${incomeLevelTextHigh[maxIndex]}`;
-      document.getElementById('selectedIncomeRange').textContent = selectedRangeText;
-      updateVisualization(minIndex, maxIndex);
-    };
-
-    const SetIncomeRangeAndView = (min, max, button) => {
-      setMinIndex(min);
-      setMaxIndex(max);
-      updateVisualization(min, max)
-      if (button == "low") {
-        setSelectedRange(0);
-      }
-      if (button == "mid") {
-        setSelectedRange(1);
-      }
-      if (button == "high") {
-        setSelectedRange(2);
-      }
-    };
-
-
-
-
-
-
-
-
-    const incomeLevelMin = document.getElementById('incomeLevelMin');
-    const incomeLevelMax = document.getElementById('incomeLevelMax');
-    const lowIncomeGroup = document.getElementById('lowIncomeGroup');
-    const midIncomeGroup = document.getElementById('midIncomeGroup');
-    const highIncomeGroup = document.getElementById('highIncomeGroup');
-
-    const lowClickHandler = () => {
-      SetIncomeRangeAndView(0, 9, "low");
-      mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
-        center: [-70.882, 42.442],
-        zoom: 9.7,
-        bearing: 38.23,
-        pitch: 75.1,
-        essential: true,
-        speed: 0.3
-      });
-    };
-    const midClickHandler = () => {
-      SetIncomeRangeAndView(10, 13, "mid");
-      mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
-        center: [-71.047, 42.357],
-        zoom: 9.58,
-        bearing: 52.94,
-        pitch: 66.6,
-        essential: true,
-        speed: 0.3
-      });
-    }
-    const highClickHandler = () => {
-      SetIncomeRangeAndView(14, 15, "high");
-      mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
-        center: [-71.088, 42.411],
-        zoom: 9.89,
-        bearing: -85.788,
-        pitch: 63.595,
-        essential: true,
-        speed: 0.3
-      });
-    }
-
-    if (index) {
-      if (index == 0) {
-        lowClickHandler();
-        setIndex(null)
-      } else if (index == 1) {
-        midClickHandler();
-        setIndex(null)
-      } else if (index == 2) {
-        highClickHandler();
-        setIndex(null)
-      }
-    }
-
-    if (incomeLevelMin && incomeLevelMax) {
-      incomeLevelMin.addEventListener('input', updateIncomeDisplay);
-      incomeLevelMax.addEventListener('input', updateIncomeDisplay);
-      lowIncomeGroup.addEventListener('click', lowClickHandler);
-      midIncomeGroup.addEventListener('click', midClickHandler);
-      highIncomeGroup.addEventListener('click', highClickHandler);
-    }
-
     return () => {
       if (incomeLevelMin && incomeLevelMax) {
         incomeLevelMin.removeEventListener('input', updateIncomeDisplay);
@@ -322,7 +205,119 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     };
 
 
-  }, [index]);
+  }, []);
+
+
+  function updateVisualization(minIndex, maxIndex) {
+    csvPromise.current.then(function (results) {
+      results.data.forEach((row) => {
+        var totalPop = 0;
+        incomeLevels.forEach((level) => {
+          totalPop += parseInt(row[level], 10) || 0;
+        });
+
+        var totalIncomeWithinRange = 0;
+        for (let i = minIndex; i <= maxIndex; i++) {
+          totalIncomeWithinRange += parseInt(row[incomeLevels[i]], 10) || 0;
+        }
+
+        mapRef.current.setFeatureState({
+          source: "mass-muni",
+          sourceLayer: "ma_municipalities_degrees-8uvqwo",
+          id: row.muni_id,
+        }, {
+          incomeWithinRange: (totalIncomeWithinRange / totalPop) * 100,
+        });
+      });
+    });
+  }
+
+  const updateIncomeDisplay = () => {
+    const minIndex = parseInt(document.getElementById('incomeLevelMin').value);
+    const maxIndex = parseInt(document.getElementById('incomeLevelMax').value);
+    console.log(minIndex, maxIndex);
+    const selectedRangeText = `${incomeLevelTextLow[minIndex]} - ${incomeLevelTextHigh[maxIndex]}`;
+    document.getElementById('selectedIncomeRange').textContent = selectedRangeText;
+    updateVisualization(minIndex, maxIndex);
+  };
+
+  const SetIncomeRangeAndView = (min, max, button) => {
+    setMinIndex(min);
+    setMaxIndex(max);
+    updateVisualization(min, max)
+    if (button == "low") {
+      setSelectedRange(0);
+    }
+    if (button == "mid") {
+      setSelectedRange(1);
+    }
+    if (button == "high") {
+      setSelectedRange(2);
+    }
+  };
+
+  const incomeLevelMin = document.getElementById('incomeLevelMin');
+  const incomeLevelMax = document.getElementById('incomeLevelMax');
+  const lowIncomeGroup = document.getElementById('lowIncomeGroup');
+  const midIncomeGroup = document.getElementById('midIncomeGroup');
+  const highIncomeGroup = document.getElementById('highIncomeGroup');
+
+  const lowClickHandler = () => {
+    SetIncomeRangeAndView(0, 9, "low");
+    mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
+      center: [-70.882, 42.442],
+      zoom: 9.7,
+      bearing: 38.23,
+      pitch: 75.1,
+      essential: true,
+      speed: 0.3
+    });
+  };
+
+  const midClickHandler = () => {
+    SetIncomeRangeAndView(10, 13, "mid");
+    mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
+      center: [-71.047, 42.357],
+      zoom: 9.58,
+      bearing: 52.94,
+      pitch: 66.6,
+      essential: true,
+      speed: 0.3
+    });
+  }
+  
+  const highClickHandler = () => {
+    SetIncomeRangeAndView(14, 15, "high");
+    mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
+      center: [-71.088, 42.411],
+      zoom: 9.89,
+      bearing: -85.788,
+      pitch: 63.595,
+      essential: true,
+      speed: 0.3
+    });
+  }
+
+  if (index) {
+    if (index == 0) {
+      lowClickHandler();
+      setIndex(null)
+    } else if (index == 1) {
+      midClickHandler();
+      setIndex(null)
+    } else if (index == 2) {
+      highClickHandler();
+      setIndex(null)
+    }
+  }
+
+  if (incomeLevelMin && incomeLevelMax) {
+    incomeLevelMin.addEventListener('input', updateIncomeDisplay);
+    incomeLevelMax.addEventListener('input', updateIncomeDisplay);
+    lowIncomeGroup.addEventListener('click', lowClickHandler);
+    midIncomeGroup.addEventListener('click', midClickHandler);
+    highIncomeGroup.addEventListener('click', highClickHandler);
+  }
 
 
   // function updateScrollScene(index) {
