@@ -52,7 +52,7 @@ export const HtmlWrapper = (props) => {
             } else if (scrollData.scroll.current > 0.87 && scrollData.scroll.current < 0.92) {
                 setMapOpened(true);
                 setOpenMap('income');
-            } else if (scrollData.scroll.current > 0.98 && scrollData.scroll.current < 1.0) {
+            } else if (scrollData.scroll.current > 0.98 && scrollData.scroll.current < 0.99) {
                 setMapOpened(true);
                 setOpenMap('coi');
             } else {

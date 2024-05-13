@@ -8,7 +8,7 @@ import { useFrame, useLoader } from "@react-three/fiber";
 
 
 
-export const TextSection = ({ header, title, subtitle, caption, conclusion, image, scale, imagePosition, ...props }) => {
+export const TextSection = ({ header, title, subtitle, caption, conclusion, image, scale, imagePosition, names, ack, ...props }) => {
     const [imageAspect, setImageAspect] = useState(1);
 
     const scrollData = useScroll();
@@ -108,6 +108,43 @@ export const TextSection = ({ header, title, subtitle, caption, conclusion, imag
             // font={"./fonts/Inter-Regular.ttf"}
             >
                 {caption}
+                <meshStandardMaterial
+                    color={"white"}
+                    onBeforeCompile={fadeOnBeforeCompileFlat}
+                />
+            </Text>
+            <Text
+
+                color="white"
+                anchorX={"left"}
+                anchorY="bottom"
+                fontSize={0.12}
+                maxWidth={5}
+                position={[0, -1.5, 0]}
+                fillOpacity={1}
+
+            // font={"./fonts/Inter-Regular.ttf"}
+            >
+                {names}
+                <meshStandardMaterial
+                    color={"white"}
+                    onBeforeCompile={fadeOnBeforeCompileFlat}
+                />
+            </Text>
+            <Text
+
+                color="white"
+                anchorX={"left"}
+                anchorY="bottom"
+                fontSize={0.12}
+                maxWidth={5}
+                position={[0, -3.8, 0]}
+                fillOpacity={1}
+
+            // font={"./fonts/Inter-Regular.ttf"}
+            >
+
+                {ack}
                 <meshStandardMaterial
                     color={"white"}
                     onBeforeCompile={fadeOnBeforeCompileFlat}

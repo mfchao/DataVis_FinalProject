@@ -59,6 +59,7 @@ export const Timeline = (props) => {
         header: "Welcome to the",
         title: "Timeline of Exclusionary Zoning",
         caption: ` Scroll to begin`,
+        names: "David Burke, Maggie Chao, Hanno Hiss, Selin Dursun"
       },
       {
         cameraRailDist: -1,
@@ -239,6 +240,7 @@ export const Timeline = (props) => {
         rotation: [0, 0, 0],
         title: "So What?",
         conclusion: `The data has shown us that to address the shortage of affordable housing effectively, it is essential to implement zoning reforms. These reforms should focus on permitting higher housing density, allowing smaller homes, and promoting mixed-use and inclusionary zoning. Such changes will help dismantle the barriers imposed by current exclusionary zoning practices, making housing more accessible and affordable for low- to moderate-income individuals from diverse backgrounds.`,
+        ack: "Acknowledgements: MAPC, COI Single Family Housing, data.diversitydatakids.org, Dataset of Metro Boston municipalities with single family zoning vs other housing zoning,  "
         // image: '../images/coi_screenshot.png',
         // scale: [5.8, 2.8, 2],
         // imagePosition: [-3.4, -1.4, -0.2],
