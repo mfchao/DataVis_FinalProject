@@ -12,7 +12,7 @@ export const Menu = (props) => {
     const handleClick = (section, currentSection) => {
         setSection(section);
         onSectionChange(currentSection);
-        console.log(currentSection);
+        // console.log(currentSection);
         // setOpenStats(false);
     }
 
@@ -26,7 +26,7 @@ export const Menu = (props) => {
 
     useEffect(() => {
 
-        // console.log(currentSection)
+        console.log(currentSection)
         if (currentSection === 0) {
             setLineWidth("w-[0.5rem]");
         } else if (currentSection === 1) {
@@ -71,13 +71,13 @@ export const Menu = (props) => {
                     <div className={`absolute ml-1.5 top-0 w-full h-0.5 ${mapOpened ? "bg-white" : "bg-black"} bg-opacity-50 opacity-20`}></div>
                 </div>
                 <div className={`flex flex-row SF-Compact-Semibold text-xs tracking-wider mt-3 opacity-90 justify-between w-full ${mapOpened ? "text-white" : "text-black"}`}>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 1 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 1)}>1843</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 2 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 2)}>1927</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 3 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 3)}> 1938</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 4 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1960, 4)}>1960</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 5 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1968, 5)}>1968</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 7)}>2018</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(null, 8)}>2022</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 1 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1843, 1.5)}>1843</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 2 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1927, 3)}>1927</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 3 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1938, 5)}> 1938</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 4 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1960, 6)}>1960</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 5 || currentSection === 6 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1968, 7)}>1968</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(2018, 10.9)}>2018</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(2022, 11.9)}>2022</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => openStatsFunction(null, 10)}>Statistics</p>
 
                 </div>

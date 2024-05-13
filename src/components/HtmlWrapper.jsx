@@ -21,7 +21,6 @@ export const HtmlWrapper = (props) => {
         if (htmlRef.current) {
             if (mapOpened) {
                 gsap.to(htmlRef.current, { opacity: 1, duration: 1, ease: 'power2.inOut' });
-
             }
         }
     }, [openMap]);
@@ -37,7 +36,7 @@ export const HtmlWrapper = (props) => {
     useFrame(() => {
 
         // console.log(scrollData.scroll.current)
-        if (scrollData.scroll.current > 0.58 && scrollData.scroll.current < 0.6) {
+        if (scrollData.scroll.current > 0.51 && scrollData.scroll.current < 0.55) {
             setMapOpened(true);
             setOpenMap('holc');
         } else if (scrollData.scroll.current > 0.785 && scrollData.scroll.current < 0.81) {
@@ -56,6 +55,7 @@ export const HtmlWrapper = (props) => {
             } else {
                 setIsClosing(false);
                 setOpenMap(null);
+                setMapOpened(false)
             }
         }
     })

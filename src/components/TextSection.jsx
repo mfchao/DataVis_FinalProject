@@ -15,6 +15,8 @@ export const TextSection = ({ header, title, subtitle, caption, image, scale, im
         texture = useLoader(TextureLoader, image);
     }
 
+
+
     return (
         <group {...props}>
             <Text

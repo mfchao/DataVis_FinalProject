@@ -14,7 +14,7 @@ const LINE_NB_POINTS = 1000;
 const CURVE_DISTANCE = 200;
 const CURVE_AHEAD_CAMERA = 0.008;
 
-const FRICTION_DISTANCE = 42;
+const FRICTION_DISTANCE = 50;
 const bgColors = [
   { colorA: "#9A9380", colorB: "#766F5C", colorC: "#e8f2d8", duration: 0.5 },
   { colorA: "#948869", colorB: "#6e654d", colorC: "#CFE0FF", duration: 1 },
@@ -64,8 +64,8 @@ export const Timeline = (props) => {
         cameraRailDist: -1,
         position: new Vector3(
           curvePoints[1].x - 7,
-          curvePoints[1].y,
-          curvePoints[1].z + 25
+          curvePoints[1].y + 0.5,
+          curvePoints[1].z + 35
         ),
         title: "1843",
         subtitle: `First racially restrictive covenant, stating that land not be sold to a "Negro or native of Ireland"`,
@@ -76,9 +76,9 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 0.5,
         position: new Vector3(
-          curvePoints[2].x - 18,
+          curvePoints[2].x - 28,
           curvePoints[2].y + 0.8,
-          curvePoints[2].z + 75
+          curvePoints[2].z + 90
         ),
         rotation: [0, -0.5, 0],
         title: "1927",
@@ -92,9 +92,9 @@ export const Timeline = (props) => {
       {
         cameraRailDist: -1,
         position: new Vector3(
-          curvePoints[3].x + 130,
+          curvePoints[3].x + 80,
           curvePoints[3].y + 1,
-          curvePoints[3].z + 130
+          curvePoints[3].z + 95
         ),
         rotation: [0, 1, 0],
         title: "1938",
@@ -104,13 +104,13 @@ export const Timeline = (props) => {
         imagePosition: [-0.9, -1.1, -0.2]
       },
       {
-        cameraRailDist: 1.5,
+        cameraRailDist: -1,
         position: new Vector3(
-          curvePoints[4].x - 185,
+          curvePoints[4].x - 200,
           curvePoints[4].y + 0.5,
-          curvePoints[4].z + 170
+          curvePoints[4].z + 190
         ),
-        rotation: [0, -0.5, 0],
+        rotation: [0, 0, 0],
         title: "1960",
         subtitle: `Median price of owner-occupied housing in Boston is $15,900 and median gross monthly rent is $82 ($984 annualy).`,
         image: '../images/couple-2.png',
@@ -119,13 +119,13 @@ export const Timeline = (props) => {
 
       },
       {
-        cameraRailDist: 1.5,
+        cameraRailDist: 1,
         position: new Vector3(
-          curvePoints[4].x - 2,
+          curvePoints[4].x - 92,
           curvePoints[4].y + 1,
-          curvePoints[4].z + 10
+          curvePoints[4].z + 95
         ),
-        rotation: [0, -0.5, 0],
+        rotation: [0, -0.8, 0],
         title: "1968",
         subtitle: `Redlining is outlawed by the U.S. 1968 Fair Housing Act. Boston establishes the Boston Urban Renewal Groud (BBRG) to provide Black Bostonians FHA-insured loans and mortgages, but only in Dorchester, Mattapan, and Roxbury, areas which were 'red' under the just-outlawed HOLC map system.`,
         image: '../images/couple.png',
@@ -269,7 +269,10 @@ export const Timeline = (props) => {
     if (mapOpened) {
       // Set camera position to look at 0
       // cameraGroup.current.position.lerp(new Vector3(0, 0, 0), delta * 20);
+      const targetCameraRailPosition = new Vector3(0, 0, 0);
+      cameraRail.current.position.lerp(targetCameraRailPosition, delta);
       cameraGroup.current.lookAt(new Vector3(0, 0, 0))
+
 
     } else {
 
@@ -303,7 +306,7 @@ export const Timeline = (props) => {
         );
       }
 
-      lineMaterialRef.current.opacity = 0.15;
+      lineMaterialRef.current.opacity = 0.2;
 
       // if (end) {
       //   return;

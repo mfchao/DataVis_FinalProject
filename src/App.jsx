@@ -34,9 +34,10 @@ function App() {
       {/* <div style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
         <div style={{ width: '40%' }}> */}
       <Canvas shadows>
+        {/* <OrbitControls /> */}
         <color attach="background" args={["#ececec"]} />
 
-        <ScrollControls pages={10}
+        <ScrollControls pages={10} damping={0} distance={1.5}
         // enabled={mapOpened ? false : true}
         >
 
