@@ -33,57 +33,75 @@ const BarChart = ({ data }) => {
     const margin = { top: 20, right: 30, bottom: 40, left: 90 };
     const width = 460 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
-
+  
     d3.select(ref.current).select("svg").remove();
-
+  
     const svg = d3.select(ref.current)
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
-
+  
     const x0 = d3.scaleBand()
       .range([0, width])
       .domain(formattedData.map(d => d.category))
       .paddingInner(0.1);
-
+  
     const x1 = d3.scaleBand()
       .domain(['Selected', 'Median'])
       .range([0, x0.bandwidth()])
       .padding(0.05);
-
+  
     const maxY = d3.max(formattedData, d => d3.max(d.values, v => Math.abs(v.value)));
+  
+    // Setting the domain for y to be symmetrical around zero
     const y = d3.scaleLinear()
       .domain([-maxY, maxY])
       .range([height, 0])
       .nice();
-
-    console.log("maxY:", maxY, "Y Scale Domain:", y.domain());
-
+  
+    // Axes
+    svg.append("g")
+      .attr("class", "x-axis")
+      .attr("transform", `translate(0,${y(0)})`) // Position the X-axis at y=0
+      .call(d3.axisBottom(x0))
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", "rotate(-65)");
+  
+    svg.append("g")
+      .attr("class", "y-axis")
+      .call(d3.axisLeft(y));
+  
     const category = svg.selectAll(".category")
       .data(formattedData)
       .enter().append("g")
       .attr("class", "category")
       .attr("transform", d => `translate(${x0(d.category)}, 0)`);
-
+  
     category.selectAll("rect")
       .data(d => d.values)
       .enter().append("rect")
       .attr("x", d => x1(d.type))
-      .attr("y", d => y(Math.max(0, d.value)))
+      .attr("y", d => y(Math.max(0, d.value))) // Correct positioning for bars
       .attr("width", x1.bandwidth())
       .attr("height", d => {
-        const height = Math.abs(y(d.value) - y(0));
-        if (isNaN(height)) {
+        const rectHeight = Math.abs(y(d.value) - y(0)); // Ensure correct height calculation
+        if (isNaN(rectHeight)) {
           console.error("Invalid height calculation:", d);
         }
-        return height;
+        return rectHeight;
       })
-      .attr("fill", d => d.type === 'Selected' ? "rgba(255, 255, 255, 0.8)" : "rgba(220, 220, 220, 0.8)")
-      .attr("rx", 5)
+      .attr("fill", d => d.type === 'Selected' ? "rgba(255, 255, 255, 0.8)" : "rgba(120, 120, 120, 0.8)")
+      .attr("rx", 5) // Rounded corners for aesthetic
       .attr("ry", 5);
+  
   };
+  
+  
 
   return (
     <div ref={ref}></div>
