@@ -240,7 +240,7 @@ const HolcMapComponent = (props) => {
     if (!map) return;
     try {
       var sliderValue = Number(HolcToSfSlider);
-      console.log("!!!", sliderValue);
+      // console.log("!!!", sliderValue);
       map.setPaintProperty('bottom-map-layer', 'raster-opacity', 1 - sliderValue);
       map.setPaintProperty('top-map-layer', 'raster-opacity', 1 - sliderValue);
       map.setPaintProperty('mass-muni-extrusion', 'fill-extrusion-opacity', sliderValue);

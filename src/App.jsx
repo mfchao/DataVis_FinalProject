@@ -25,6 +25,8 @@ function App() {
   const [scroll, setScroll] = useState(0)
   const [openStats, setOpenStats] = useState(false);
 
+  const [cameraPos, setCameraPos] = useState([0, 0, 0])
+
 
 
 
@@ -49,10 +51,11 @@ function App() {
             setMapOpened={setMapOpened}
             openMap={openMap}
             setOpenMap={setOpenMap}
+            cameraPos={cameraPos}
           />
 
           {/* <SheetProvider sheet={sheet}> */}
-          <Timeline setCurrentSection={setCurrentSection} setMapOpened={setMapOpened} mapOpened={mapOpened} openMap={openMap} setOpenMap={setOpenMap} />
+          <Timeline setCurrentSection={setCurrentSection} setMapOpened={setMapOpened} mapOpened={mapOpened} openMap={openMap} setOpenMap={setOpenMap} setCameraPos={setCameraPos} />
           {/* </SheetProvider> */}
         </ScrollControls>
 

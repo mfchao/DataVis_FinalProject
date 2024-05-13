@@ -24,16 +24,16 @@ const bgColors = [
 ];
 
 export const Timeline = (props) => {
-  const { setCurrentSection, setMapOpened, mapOpened, openMap, setOpenMap } = props;
+  const { setCurrentSection, setMapOpened, mapOpened, openMap, setOpenMap, setCameraPos } = props;
 
   const curvePoints = useMemo(
     () => [
       new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(0, 0, -CURVE_DISTANCE),
-      new THREE.Vector3(100, 0, -2 * CURVE_DISTANCE),
-      new THREE.Vector3(-100, 0, -3 * CURVE_DISTANCE),
-      new THREE.Vector3(100, 0, -4 * CURVE_DISTANCE),
-      new THREE.Vector3(0, 0, -5 * CURVE_DISTANCE),
+      new THREE.Vector3(10, 0, -CURVE_DISTANCE),
+      new THREE.Vector3(-10, 0, -2 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -3 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -4 * CURVE_DISTANCE),
+      new THREE.Vector3(10, 0, -5 * CURVE_DISTANCE),
       new THREE.Vector3(0, 0, -6 * CURVE_DISTANCE),
       new THREE.Vector3(0, 0, -7 * CURVE_DISTANCE),
     ],
@@ -63,7 +63,7 @@ export const Timeline = (props) => {
       {
         cameraRailDist: -1,
         position: new Vector3(
-          curvePoints[1].x - 7,
+          curvePoints[1].x - 3,
           curvePoints[1].y + 0.5,
           curvePoints[1].z + 35
         ),
@@ -76,11 +76,11 @@ export const Timeline = (props) => {
       {
         cameraRailDist: 0.5,
         position: new Vector3(
-          curvePoints[2].x - 28,
+          curvePoints[2].x + 10,
           curvePoints[2].y + 0.8,
-          curvePoints[2].z + 90
+          curvePoints[2].z + 80
         ),
-        rotation: [0, -0.5, 0],
+        rotation: [0, 0, 0],
         title: "1927",
         subtitle: `The National Association of Real Estate Boards' Code of Ethics creates covenant stating "no part of the property should be used, occupied, sold or leased to black people, unless they were servants, janitors, or chauffeurs living in basements, servants' quarters, or a barn or garage in the rear."`,
         image: '../images/mom-child-2.png',
@@ -92,11 +92,11 @@ export const Timeline = (props) => {
       {
         cameraRailDist: -1,
         position: new Vector3(
-          curvePoints[3].x + 80,
+          curvePoints[3].x - 9,
           curvePoints[3].y + 1,
-          curvePoints[3].z + 95
+          curvePoints[3].z + 83
         ),
-        rotation: [0, 1, 0],
+        rotation: [0, 0, 0],
         title: "1938",
         subtitle: `Home Owners Loan Corporation (HOLC) created Residential Security maps for assessing the risk of financing mortgages. Areas were given 4 grades, from A for "best" to D for "hazardous".`,
         image: '../images/children=4.png',
@@ -104,11 +104,11 @@ export const Timeline = (props) => {
         imagePosition: [-0.9, -1.1, -0.2]
       },
       {
-        cameraRailDist: -1,
+        cameraRailDist: 0.5,
         position: new Vector3(
-          curvePoints[4].x - 200,
+          curvePoints[4].x + 3,
           curvePoints[4].y + 0.5,
-          curvePoints[4].z + 190
+          curvePoints[4].z + 185
         ),
         rotation: [0, 0, 0],
         title: "1960",
@@ -119,13 +119,13 @@ export const Timeline = (props) => {
 
       },
       {
-        cameraRailDist: 1,
+        cameraRailDist: 0,
         position: new Vector3(
-          curvePoints[4].x - 92,
+          curvePoints[4].x - 5,
           curvePoints[4].y + 1,
-          curvePoints[4].z + 95
+          curvePoints[4].z + 80
         ),
-        rotation: [0, -0.8, 0],
+        rotation: [0, 0, 0],
         title: "1968",
         subtitle: `Redlining is outlawed by the U.S. 1968 Fair Housing Act. Boston establishes the Boston Urban Renewal Groud (BBRG) to provide Black Bostonians FHA-insured loans and mortgages, but only in Dorchester, Mattapan, and Roxbury, areas which were 'red' under the just-outlawed HOLC map system.`,
         image: '../images/couple.png',
@@ -266,13 +266,12 @@ export const Timeline = (props) => {
   // const { play, setHasScroll, end, setEnd } = usePlay();
 
   useFrame((_state, delta) => {
-    if (mapOpened) {
-      // Set camera position to look at 0
-      // cameraGroup.current.position.lerp(new Vector3(0, 0, 0), delta * 20);
-      const targetCameraRailPosition = new Vector3(0, 0, 0);
-      cameraRail.current.position.lerp(targetCameraRailPosition, delta);
-      cameraGroup.current.lookAt(new Vector3(0, 0, 0))
+    let resetCameraRail = true;
 
+    if (mapOpened) {
+      // lerp camera to look at (0,0,0)
+      const targetLookAt = new THREE.Vector3(0, 0, 0);
+      cameraGroup.current.lookAt(targetLookAt);
 
     } else {
 
@@ -315,7 +314,7 @@ export const Timeline = (props) => {
       const scrollOffset = Math.max(0, scroll.offset);
 
       let friction = 1;
-      let resetCameraRail = true;
+
       // LOOK TO CLOSE TEXT SECTIONS
       textSections.forEach((textSection) => {
         const distance = textSection.position.distanceTo(
@@ -333,6 +332,7 @@ export const Timeline = (props) => {
           resetCameraRail = false;
         }
       });
+
       if (resetCameraRail) {
         const targetCameraRailPosition = new Vector3(0, 0, 0);
         cameraRail.current.position.lerp(targetCameraRailPosition, delta);
@@ -374,6 +374,8 @@ export const Timeline = (props) => {
         cameraGroup.current.position.clone().add(lookAt)
       );
 
+      setCameraPos(cameraGroup.current.position);
+
 
 
       if (
@@ -384,6 +386,7 @@ export const Timeline = (props) => {
         // planeOutTl.current.play();
       }
     }
+
   });
 
 

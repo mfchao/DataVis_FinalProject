@@ -1,19 +1,24 @@
 import { Html, useScroll } from "@react-three/drei";
 import { MapManager } from "./MapManager";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import gsap from 'gsap';
 import React, { useEffect, useRef, useState } from 'react';
 
 
 
 export const HtmlWrapper = (props) => {
-    const { currentSection, mapOpened, setMapOpened, openMap, setOpenMap } = props;
+    const { currentSection, mapOpened, setMapOpened, openMap, setOpenMap, cameraPos } = props;
 
     const scrollData = useScroll();
     const htmlRef = useRef();
 
+    const { camera } = useThree();
+
+    const [clonedPosition, setclonedPosition] = useState(null);
+
     const [isClosing, setIsClosing] = useState(false);
     const [scrollValue, setScrollValue] = useState(0);
+
 
 
 
