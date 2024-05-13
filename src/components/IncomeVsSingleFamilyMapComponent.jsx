@@ -404,6 +404,7 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
         onClick={handleClick}>
         BACK
       </button>
+      
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
       <div id="info-bar" style={{
         position: 'absolute',
