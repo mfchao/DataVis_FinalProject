@@ -12,7 +12,7 @@ const scenes = [
         zoom: 9,
         center: [-71.0589, 42.3601],
         clickable: false,
-        muni_id: null 
+        muni_id: null
     },
     {
         name: "Scene 2",
@@ -21,7 +21,7 @@ const scenes = [
         zoom: 13,
         center: [-71.0105, 42.3907],
         clickable: false,
-        muni_id: 57 
+        muni_id: 57
     },
     {
         name: "Scene 3",
@@ -30,7 +30,7 @@ const scenes = [
         zoom: 12.5,
         center: [-71.0935, 42.3607],
         clickable: false,
-        muni_id: 49 
+        muni_id: 49
     },
     {
         name: "Map View",
@@ -44,7 +44,7 @@ const scenes = [
 ];
 
 const Statistics = (props) => {
-    const { setOpenMap, setMapOpened } = props;
+    const { setOpenMap, setMapOpened, setOpenStats, OpenStats } = props;
     const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
     const [map, setMap] = useState(null);
     // const [data, setData] = useState([]);
@@ -52,12 +52,12 @@ const Statistics = (props) => {
 
     const [selectedMunicipalityData, setSelectedMunicipalityData] = useState(data[0]); // Initialize with first data entry
     //const [selectedMunicipalityData, setSelectedMunicipalityData] = useState(null);
-    
+
     const [lastClickedId, setLastClickedId] = useState(null);
 
     useEffect(() => {
         mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYycm41cGxrNjNsNDMifQ.8ZNsKjRpCDRNEjV5AI4wRg";
-    
+
         const newMap = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/selindursunn/clvjpb4wz069501pkdvkhb2i7',
@@ -74,16 +74,16 @@ const Statistics = (props) => {
                 return { url };
             }
         });
-    
+
         newMap.on('load', () => {
             newMap.dragRotate.enable();
             newMap.touchZoomRotate.enableRotation();
-            
+
             newMap.addSource('ma-municipalities', {
                 type: 'vector',
                 url: 'mapbox://selindursunn.2lo7wkdx'
             });
-    
+
             newMap.addLayer({
                 id: 'municipalities-layer',
                 type: 'fill',
@@ -100,13 +100,13 @@ const Statistics = (props) => {
                     'fill-opacity': 0.2
                 }
             });
-    
+
             // Click event for selecting municipalities
             newMap.on('click', 'municipalities-layer', (e) => {
                 if (e.features.length > 0) {
                     const muniId = e.features[0].properties.muni_id;
                     const muniData = data.find(muni => parseInt(muni.muni_id) === parseInt(muniId));
-    
+
                     if (muniData) {
                         if (lastClickedId !== null) {
                             newMap.setFeatureState(
@@ -114,30 +114,30 @@ const Statistics = (props) => {
                                 { selected: false }
                             );
                         }
-    
+
                         newMap.setFeatureState(
                             { source: 'ma-municipalities', sourceLayer: 'converted_ma_municipalities-bsbiz7', id: muniId },
                             { selected: true }
                         );
-    
+
                         setLastClickedId(muniId);
                         setSelectedMunicipalityData(muniData);
-    
+
                         // Automatically adjust the scene index based on the clicked municipality
                         const sceneIndex = scenes.findIndex(scene => scene.muni_id === muniId);
                         setCurrentSceneIndex(sceneIndex !== -1 ? sceneIndex : 0);
                     }
                 }
             });
-    
+
             newMap.on('mouseenter', 'municipalities-layer', () => {
                 newMap.getCanvas().style.cursor = 'pointer';
             });
-    
+
             newMap.on('mouseleave', 'municipalities-layer', () => {
                 newMap.getCanvas().style.cursor = '';
             });
-    
+
             // Initially select Chelsea's data when the map loads
             const chelseaData = data.find(muni => muni.muni_id === scenes[0].muni_id);
             if (chelseaData) {
@@ -148,12 +148,12 @@ const Statistics = (props) => {
                 );
             }
         });
-    
+
         setMap(newMap);
         return () => newMap.remove();
     }, [data]);  // Reacting to changes in 'data' might not be necessary if 'data' is static
-    
-        
+
+
 
     useEffect(() => {
         if (map) {
@@ -161,7 +161,7 @@ const Statistics = (props) => {
                 center: scenes[currentSceneIndex].center,
                 zoom: scenes[currentSceneIndex].zoom
             });
-    
+
             // Check if the current scene has a specific muni_id and find the data for it
             if (scenes[currentSceneIndex].muni_id) {
                 const sceneData = data.find(muni => muni.muni_id === scenes[currentSceneIndex].muni_id);
@@ -196,28 +196,28 @@ const Statistics = (props) => {
 
     // const updateChart = (sceneIndex) => {
     //     const svg = d3.select("#chart").html('');
-    
+
     //     if (!data.length) {
     //         console.log("Data is not loaded yet.");
     //         return;
     //     }
-    
+
     //     const width = 500;
     //     const height = 300;
     //     const margin = { top: 20, right: 20, bottom: 30, left: 50 };
-    
+
     //     svg.attr("width", width)
     //         .attr("height", height);
-    
+
     //     const x = d3.scaleBand()
     //         .domain(data.map(d => d.muni))
     //         .range([margin.left, width - margin.right])
     //         .padding(0.1);
-    
+
     //     const y = d3.scaleLinear()
     //         .domain([0, d3.max(data, d => d.z_score_education)])
     //         .range([height - margin.bottom, margin.top]);
-    
+
     //     svg.append("g")
     //         .attr("fill", "steelblue")
     //         .selectAll("rect")
@@ -227,11 +227,11 @@ const Statistics = (props) => {
     //         .attr("y", d => y(d.z_score_education))
     //         .attr("height", d => Math.max(0, y(0) - y(d.z_score_education)))
     //         .attr("width", x.bandwidth());
-    
+
     //     svg.append("g")
     //         .attr("transform", `translate(0,${height - margin.bottom})`)
     //         .call(d3.axisBottom(x));
-    
+
     //     svg.append("g")
     //         .attr("transform", `translate(${margin.left},0)`)
     //         .call(d3.axisLeft(y));
@@ -265,12 +265,13 @@ const Statistics = (props) => {
     const handleClick = () => {
         setOpenMap(null);
         setMapOpened(false);
+        setOpenStats(false);
         // setArchiveMapId(null);
     };
 
     return (
         <>
-            <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }} onClick={() => setOpenMap(false)}>
+            <button style={{ position: 'absolute', top: 50, left: 20, zIndex: 11000, color: 'aliceblue' }} onClick={() => handleClick()}>
                 BACK
             </button>
             <div className="relative w-full h-full">
@@ -281,46 +282,46 @@ const Statistics = (props) => {
                         <h1 className="text-lg font-bold text-white mb-2">{selectedMunicipalityData.muni}</h1>
                         <div>{scenes[currentSceneIndex].additionalInfo}</div>
                         <div className="legend-container mt-4 mb-4">
-    <h2 className="text-sm font-semibold mb-2">Legend</h2>
-    <div className="flex items-center mb-1">
-        <svg width="20" height="20">
-            <circle cx="10" cy="10" r="8" fill="orange" filter="url(#yellowGlow)" />
-            <defs>
-                <filter id="yellowGlow">
-                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-                    <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
-            </defs>
-        </svg>
-        <span className="ml-2 text-xs">Niche Grades (C, D, F)</span>
-    </div>
-    <div className="flex items-center mb-1">
-        <svg width="20" height="20">
-            <circle cx="10" cy="10" r="8" fill="steelblue" filter="url(#blueGlow)" />
-            <defs>
-                <filter id="blueGlow">
-                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-                    <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
-            </defs>
-        </svg>
-        <span className="ml-2 text-xs">Niche Grades (A, B, C)</span>
-    </div>
-    <div className="flex items-center mb-1">
-        <div style={{ width: '20px', height: '20px', backgroundColor: 'gray' }}></div>
-        <span className="ml-2 text-xs">Average Median Z Score</span>
-    </div>
-    <div className="flex items-center">
-        <div style={{ width: '20px', height: '20px', backgroundColor: 'white' }}></div>
-        <span className="ml-2 text-xs">Actual Z Score</span>
-    </div>
-</div>
+                            <h2 className="text-sm font-semibold mb-2">Legend</h2>
+                            <div className="flex items-center mb-1">
+                                <svg width="20" height="20">
+                                    <circle cx="10" cy="10" r="8" fill="orange" filter="url(#yellowGlow)" />
+                                    <defs>
+                                        <filter id="yellowGlow">
+                                            <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                                            <feMerge>
+                                                <feMergeNode in="coloredBlur" />
+                                                <feMergeNode in="SourceGraphic" />
+                                            </feMerge>
+                                        </filter>
+                                    </defs>
+                                </svg>
+                                <span className="ml-2 text-xs">Niche Grades (C, D, F)</span>
+                            </div>
+                            <div className="flex items-center mb-1">
+                                <svg width="20" height="20">
+                                    <circle cx="10" cy="10" r="8" fill="steelblue" filter="url(#blueGlow)" />
+                                    <defs>
+                                        <filter id="blueGlow">
+                                            <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                                            <feMerge>
+                                                <feMergeNode in="coloredBlur" />
+                                                <feMergeNode in="SourceGraphic" />
+                                            </feMerge>
+                                        </filter>
+                                    </defs>
+                                </svg>
+                                <span className="ml-2 text-xs">Niche Grades (A, B, C)</span>
+                            </div>
+                            <div className="flex items-center mb-1">
+                                <div style={{ width: '20px', height: '20px', backgroundColor: 'gray' }}></div>
+                                <span className="ml-2 text-xs">Average Median Z Score</span>
+                            </div>
+                            <div className="flex items-center">
+                                <div style={{ width: '20px', height: '20px', backgroundColor: 'white' }}></div>
+                                <span className="ml-2 text-xs">Actual Z Score</span>
+                            </div>
+                        </div>
 
                         <div className="flex justify-between items-center">
                             <button onClick={() => handleNavigation('prev')} disabled={currentSceneIndex === 0}>
@@ -335,8 +336,8 @@ const Statistics = (props) => {
             </div>
         </>
     );
-    
-    
+
+
 };
 
 export default Statistics;

@@ -9,7 +9,7 @@ import Statistics from "./Statistics";
 
 
 export const MapManager = (props) => {
-    const { currentSection, setMapOpened, openMap, setOpenMap, scroll } = props;
+    const { currentSection, setMapOpened, openMap, setOpenMap, scroll, setOpenStats, openStats } = props;
 
 
 
@@ -26,7 +26,7 @@ export const MapManager = (props) => {
             case "income": return <IncomeVsSingleFamilyMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
             case "holc": return <HolcMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
             case "race": return <RaceMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
-            case "stat": return <Statistics setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
+            case "stat": return <Statistics setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} setOpenStats={setOpenStats} openStats={openStats} />
 
 
 

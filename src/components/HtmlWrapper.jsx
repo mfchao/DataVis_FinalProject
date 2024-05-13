@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 
 export const HtmlWrapper = (props) => {
-    const { currentSection, mapOpened, setMapOpened, openMap, setOpenMap, cameraPos } = props;
+    const { currentSection, mapOpened, setMapOpened, openMap, setOpenMap, cameraPos, setOpenStats, openStats } = props;
 
     const scrollData = useScroll();
     const htmlRef = useRef();
@@ -40,30 +40,34 @@ export const HtmlWrapper = (props) => {
     }, [isClosing])
 
     useFrame(() => {
-
-        // console.log(scrollData.scroll.current)
-        if (scrollData.scroll.current > 0.51 && scrollData.scroll.current < 0.55) {
-            setMapOpened(true);
-            setOpenMap('holc');
-        } else if (scrollData.scroll.current > 0.785 && scrollData.scroll.current < 0.825) {
-            setMapOpened(true);
-            setOpenMap('race');
-        } else if (scrollData.scroll.current > 0.87 && scrollData.scroll.current < 0.92) {
-            setMapOpened(true);
-            setOpenMap('income');
-        } else if (scrollData.scroll.current > 0.98 && scrollData.scroll.current < 1.0) {
-            setMapOpened(true);
-            setOpenMap('coi');
-        } else {
-            if (mapOpened) {
-                setIsClosing(true);
-
+        if (!openStats) {
+            console.log("scroll")
+            // console.log(scrollData.scroll.current)
+            if (scrollData.scroll.current > 0.51 && scrollData.scroll.current < 0.55) {
+                setMapOpened(true);
+                setOpenMap('holc');
+            } else if (scrollData.scroll.current > 0.785 && scrollData.scroll.current < 0.825) {
+                setMapOpened(true);
+                setOpenMap('race');
+            } else if (scrollData.scroll.current > 0.87 && scrollData.scroll.current < 0.92) {
+                setMapOpened(true);
+                setOpenMap('income');
+            } else if (scrollData.scroll.current > 0.98 && scrollData.scroll.current < 1.0) {
+                setMapOpened(true);
+                setOpenMap('coi');
             } else {
-                setIsClosing(false);
-                setOpenMap(null);
-                setMapOpened(false)
+                if (mapOpened) {
+                    setIsClosing(true);
+
+                } else {
+                    setIsClosing(false);
+                    setOpenMap(null);
+                    setMapOpened(false)
+                }
             }
         }
+
+
 
         setScrollValue(scrollData.scroll.current);
 
@@ -89,7 +93,8 @@ export const HtmlWrapper = (props) => {
                     <div
                     // onPointerDown={(e) => e.stopPropagation()}
                     >
-                        <MapManager currentSection={currentSection} setMapOpened={setMapOpened} openMap={openMap} setOpenMap={setOpenMap} scroll={scrollValue} />
+                        <MapManager currentSection={currentSection} setMapOpened={setMapOpened} openMap={openMap} setOpenMap={setOpenMap} scroll={scrollValue} setOpenStats={setOpenStats}
+                            openStats={openStats} />
                     </div>
                 </Html>
             </mesh>

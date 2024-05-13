@@ -52,6 +52,8 @@ function App() {
             openMap={openMap}
             setOpenMap={setOpenMap}
             cameraPos={cameraPos}
+            setOpenStats={setOpenStats}
+            openStats={openStats}
           />
 
           {/* <SheetProvider sheet={sheet}> */}
@@ -78,6 +80,8 @@ function App() {
         setMapOpened={setMapOpened}
         mapOpened={mapOpened}
         scroll={scroll}
+        setOpenStats={setOpenStats}
+        openStats={openStats}
 
       />
 

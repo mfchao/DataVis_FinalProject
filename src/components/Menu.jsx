@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 
 export const Menu = (props) => {
-    const { onSectionChange, currentSection, setOpenMap, setMapOpened, mapOpened, scroll } = props;
+    const { onSectionChange, currentSection, setOpenMap, setMapOpened, mapOpened, scroll, setOpenStats, openStats } = props;
 
     const [section, setSection] = useState(null);
 
@@ -19,8 +19,10 @@ export const Menu = (props) => {
     const openStatsFunction = (section, currentSection) => {
         // setSection(section);
         // onSectionChange(currentSection);
+        setOpenStats(true)
         setMapOpened(true);
         setOpenMap("stat");
+
     }
 
 
