@@ -359,10 +359,12 @@ const RaceMapComponent = (props) => {
           </div>
           <div id="navigation" style={{ display: 'flex', justifyContent: 'space-between' }}>
             <button id="previous-scene" onClick={goToPreviousScene} style={{ visibility: 'hidden' }}>
+
               <img src="../images/left-arrow.png" alt="Previous" style={{ width: '40px', height: '40px' }} />
             </button>
             <button id="next-scene" onClick={goToNextScene} style={{ visibility: 'visible' }}>
               <img src="../images/right-arrow.png" alt="Next" style={{ width: '40px', height: '40px' }} />
+
             </button>
           </div>
         </div>
