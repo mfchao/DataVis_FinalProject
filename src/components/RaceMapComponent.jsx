@@ -80,13 +80,13 @@ const RaceMapComponent = (props) => {
   useEffect(() => {
     const updateScene = () => {
       console.log(scroll)
-      if (scroll > 0.785 && scroll < 0.795) {
+      if (scroll > 0.785 && scroll < 0.8) {
         setSceneLoaded(true)
         updateScrollScene(0)
-      } else if (scroll > 0.795 && scroll < 0.805) {
+      } else if (scroll > 0.8 && scroll < 0.815) {
         setSceneLoaded(true)
         updateScrollScene(1)
-      } else if (scroll > 0.805 && scroll < 0.81) {
+      } else if (scroll > 0.815 && scroll < 0.825) {
         setSceneLoaded(true)
         updateScrollScene(2)
       }
@@ -342,6 +342,7 @@ const RaceMapComponent = (props) => {
         <div id="additional-info" style={{ fontSize: '20px' }}>
           Decades after the end of redlining, it is clear that the deliberate racial separation of the past has been maintained geographically, with single family zoning continuing to place barriers to prevent economic mobility for minorities.
         </div>
+        <h2 style={{ fontSize: '15px', marginTop: '20px' }}>Keep Scrolling to explore more!</h2>
         <div style={{ marginTop: 'auto' }}>
           <div id="legend" style={{ padding: '30px' }}>
             <div>
@@ -358,10 +359,12 @@ const RaceMapComponent = (props) => {
           </div>
           <div id="navigation" style={{ display: 'flex', justifyContent: 'space-between' }}>
             <button id="previous-scene" onClick={goToPreviousScene} style={{ visibility: 'hidden' }}>
+
               <img src="../images/left-arrow.png" alt="Previous" style={{ width: '40px', height: '40px' }} />
             </button>
             <button id="next-scene" onClick={goToNextScene} style={{ visibility: 'visible' }}>
               <img src="../images/right-arrow.png" alt="Next" style={{ width: '40px', height: '40px' }} />
+
             </button>
           </div>
         </div>

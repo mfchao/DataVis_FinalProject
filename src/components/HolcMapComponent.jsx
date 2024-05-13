@@ -285,7 +285,7 @@ const HolcMapComponent = (props) => {
           The area descriptions used when producing these grades focused not on crime statistics or environmental concerns, but on assessments of the residents themselves often on the basis of race, class, religion and nationality.
           One redlined area in Roxbury was identified as "25% negro" and stated "Negro heavily concentrated north of Ruggles St.". A yellow neighborhood in Cambridge stated "A few negro families have moved in on Dame St. and threaten to spread."
           <br /> <br />
-          Adjust the slider to see how the single-family zoning maps correspond to the HOLC redlining maps.
+          Keep scrolling to adjust the slider to see how the single-family zoning maps correspond to the HOLC redlining maps.
         </div>
         <br />
         <input type="range" id="HolcToSf" min="0" max="1" value={HolcToSfSlider} step=".01" style={{ width: 200 }} />
