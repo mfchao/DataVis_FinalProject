@@ -26,7 +26,7 @@ export const Menu = (props) => {
 
     useEffect(() => {
 
-        console.log(currentSection)
+        // console.log(currentSection)
         if (currentSection === 0) {
             setLineWidth("w-[0.5rem]");
         } else if (currentSection === 1) {

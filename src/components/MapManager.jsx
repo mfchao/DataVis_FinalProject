@@ -9,7 +9,7 @@ import Statistics from "./Statistics";
 
 
 export const MapManager = (props) => {
-    const { currentSection, setMapOpened, openMap, setOpenMap } = props;
+    const { currentSection, setMapOpened, openMap, setOpenMap, scroll } = props;
 
 
 
@@ -22,11 +22,11 @@ export const MapManager = (props) => {
 
     const displayMap = (openMap) => {
         switch (openMap) {
-            case "coi": return <CoiVsSingleFamilyMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
-            case "income": return <IncomeVsSingleFamilyMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
-            case "holc": return <HolcMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
-            case "race": return <RaceMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
-            case "stat": return <Statistics setOpenMap={setOpenMap} setMapOpened={setMapOpened} />
+            case "coi": return <CoiVsSingleFamilyMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
+            case "income": return <IncomeVsSingleFamilyMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
+            case "holc": return <HolcMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
+            case "race": return <RaceMapComponent setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
+            case "stat": return <Statistics setOpenMap={setOpenMap} setMapOpened={setMapOpened} scroll={scroll} />
 
 
 

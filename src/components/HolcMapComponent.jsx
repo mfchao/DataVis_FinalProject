@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Papa from 'papaparse';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -7,8 +7,10 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYycm41cGxrNjNsNDMifQ.8ZNsKjRpCDRNEjV5AI4wRg";
 
 const HolcMapComponent = (props) => {
-  const { setOpenMap, setMapOpened } = props;
+  const { setOpenMap, setMapOpened, scroll } = props;
   const [map, setMap] = useState(null);
+  const animationRef = useRef(null);
+
 
   const [HolcToSfSlider, setHolcToSfSlider] = useState(0.1);
 
@@ -37,7 +39,7 @@ const HolcMapComponent = (props) => {
 
     newMap.on("load", function () {
       csvPromise.then(function (results) {
-        console.log(results.data);
+        // console.log(results.data);
         results.data.forEach((row) => {
 
           newMap.setFeatureState(
@@ -221,6 +223,19 @@ const HolcMapComponent = (props) => {
 
   }, []);
 
+  // Update slider value when scroll changes
+  useEffect(() => {
+    const updateSlider = () => {
+      const sliderValue = (scroll - 0.51) * 20;
+      setHolcToSfSlider(sliderValue);
+      animationRef.current = requestAnimationFrame(updateSlider);
+    };
+    animationRef.current = requestAnimationFrame(updateSlider);
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [scroll]);
+
   useEffect(() => {
     if (!map) return;
     try {
@@ -269,10 +284,10 @@ const HolcMapComponent = (props) => {
           The Home Owners Loan Corporation used 4 grades for their Residential Security maps, using green for "Best", blue for "Still Desirable", yellow for "Definitely Declining," and red for "Hazardous".
           The area descriptions used when producing these grades focused not on crime statistics or environmental concerns, but on assessments of the residents themselves often on the basis of race, class, religion and nationality.
           One redlined area in Roxbury was identified as "25% negro" and stated "Negro heavily concentrated north of Ruggles St.". A yellow neighborhood in Cambridge stated "A few negro families have moved in on Dame St. and threaten to spread."
-          <br /> <br/>
+          <br /> <br />
           Adjust the slider to see how the single-family zoning maps correspond to the HOLC redlining maps.
         </div>
-        <br/>
+        <br />
         <input type="range" id="HolcToSf" min="0" max="1" value={HolcToSfSlider} step=".01" style={{ width: 200 }} />
         <div id="legend" style={{ padding: '10px', backgroundColor: 'rgba(1, 0, 21, 0.75)' }}>
           <h4 style={{ fontSize: 'larger' }}>

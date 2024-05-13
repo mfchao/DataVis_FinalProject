@@ -8,8 +8,11 @@ mapboxgl.accessToken = "pk.eyJ1Ijoic2VsaW5kdXJzdW5uIiwiYSI6ImNsdmpucnN6YjFrYWYyc
 
 const IncomeVsSingleFamilyMapComponent = (props) => {
   const mapRef = useRef(null);
+  const animationRef = useRef(null);
+  const [sceneloaded, setSceneLoaded] = useState(false);
+  const [index, setIndex] = useState(null);
 
-  const { setOpenMap, setMapOpened } = props;
+  const { setOpenMap, setMapOpened, scroll } = props;
 
   const incomeLevels = ["incu10", "inc1015", "inc1520", "inc2025", "inc2530", "inc3035", "inc3540", "inc4045",
     "inc4550", "inc5060", "inc6075", "i7599", "i100125", "i125150", "i150200", "in200o"]
@@ -239,6 +242,11 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
 
 
 
+
+
+
+
+
     const incomeLevelMin = document.getElementById('incomeLevelMin');
     const incomeLevelMax = document.getElementById('incomeLevelMax');
     const lowIncomeGroup = document.getElementById('lowIncomeGroup');
@@ -279,6 +287,19 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
       });
     }
 
+    if (index) {
+      if (index == 0) {
+        lowClickHandler();
+        setIndex(null)
+      } else if (index == 1) {
+        midClickHandler();
+        setIndex(null)
+      } else if (index == 2) {
+        highClickHandler();
+        setIndex(null)
+      }
+    }
+
     if (incomeLevelMin && incomeLevelMax) {
       incomeLevelMin.addEventListener('input', updateIncomeDisplay);
       incomeLevelMax.addEventListener('input', updateIncomeDisplay);
@@ -296,9 +317,47 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
         highIncomeGroup.removeEventListener('click', highClickHandler);
         map.remove();
       }
+      cancelAnimationFrame(animationRef.current);
+
     };
 
-  }, []);
+
+  }, [index]);
+
+
+  function updateScrollScene(index) {
+    if (index == 0) {
+      setIndex(0)
+    } else if (index == 1) {
+      setIndex(1)
+    } else if (index == 2) {
+      setIndex(2)
+    } else {
+      setIndex(null)
+    }
+  }
+  useEffect(() => {
+    const updateScene = () => {
+      if (scroll > 0.87 && scroll < 0.88) {
+        updateScrollScene(0);
+      } else if (scroll > 0.89 && scroll < 0.90) {
+        updateScrollScene(1);
+      } else if (scroll > 0.91 && scroll < 0.92) {
+        updateScrollScene(2);
+      }
+      animationRef.current = requestAnimationFrame(updateScene);
+    }
+
+    animationRef.current = requestAnimationFrame(updateScene);
+
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [scroll]);
+
+
+
+
 
 
   const papaPromise = (url) => new Promise((resolve, reject) => {

@@ -46,8 +46,13 @@ const scenes = [
 
 
 const RaceMapComponent = (props) => {
+  const { setOpenMap, setMapOpened, scroll } = props;
+
   const mapRef = useRef(null);  // Step 1: Create the ref
   let currentSceneIndex = 0;
+  const animationRef = useRef(null);
+  const [sceneloaded, setSceneLoaded] = useState(false);
+
 
   function updateScene() {
     const scene = scenes[currentSceneIndex];
@@ -62,6 +67,39 @@ const RaceMapComponent = (props) => {
     // }
     zoomToScene(scene);
   }
+
+  function updateScrollScene(index) {
+    if (sceneloaded) {
+      console.log("zoom")
+      const scene = scenes[index];
+      zoomToScene(scene);
+      setSceneLoaded(false)
+    }
+  }
+
+  useEffect(() => {
+    const updateScene = () => {
+      console.log(scroll)
+      if (scroll > 0.785 && scroll < 0.795) {
+        setSceneLoaded(true)
+        updateScrollScene(0)
+      } else if (scroll > 0.795 && scroll < 0.805) {
+        setSceneLoaded(true)
+        updateScrollScene(1)
+      } else if (scroll > 0.805 && scroll < 0.81) {
+        setSceneLoaded(true)
+        updateScrollScene(2)
+      }
+      animationRef.current = requestAnimationFrame(updateScene);
+    };
+    animationRef.current = requestAnimationFrame(updateScene);
+
+
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [scroll]);
+
 
   function goToNextScene() {
     if (currentSceneIndex < scenes.length - 1) {
@@ -108,7 +146,6 @@ const RaceMapComponent = (props) => {
   //   }
   // }
 
-  const { setOpenMap, setMapOpened } = props;
 
   const mapOpacity = .5;
 

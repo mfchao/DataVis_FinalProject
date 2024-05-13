@@ -13,6 +13,7 @@ export const HtmlWrapper = (props) => {
     const htmlRef = useRef();
 
     const [isClosing, setIsClosing] = useState(false);
+    const [scrollValue, setScrollValue] = useState(0);
 
 
 
@@ -58,7 +59,11 @@ export const HtmlWrapper = (props) => {
                 setMapOpened(false)
             }
         }
+
+        setScrollValue(scrollData.scroll.current);
+
     })
+
 
 
     // if (!mapOpened) {
@@ -79,7 +84,7 @@ export const HtmlWrapper = (props) => {
                     <div
                     // onPointerDown={(e) => e.stopPropagation()}
                     >
-                        <MapManager currentSection={currentSection} setMapOpened={setMapOpened} openMap={openMap} setOpenMap={setOpenMap} />
+                        <MapManager currentSection={currentSection} setMapOpened={setMapOpened} openMap={openMap} setOpenMap={setOpenMap} scroll={scrollValue} />
                     </div>
                 </Html>
             </mesh>
