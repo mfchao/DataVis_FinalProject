@@ -285,7 +285,7 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
       speed: 0.3
     });
   }
-  
+
   const highClickHandler = () => {
     SetIncomeRangeAndView(14, 15, "high");
     mapRef.current.flyTo({  // Step 3: Use the ref to access the map instance
@@ -298,18 +298,22 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
     });
   }
 
-  if (index) {
-    if (index == 0) {
-      lowClickHandler();
-      setIndex(null)
-    } else if (index == 1) {
-      midClickHandler();
-      setIndex(null)
-    } else if (index == 2) {
-      highClickHandler();
-      setIndex(null)
+  useEffect(() => {
+    if (index) {
+      if (index == 0) {
+        lowClickHandler();
+        setIndex(null)
+      } else if (index == 1) {
+        midClickHandler();
+        setIndex(null)
+      } else if (index == 2) {
+        highClickHandler();
+        setIndex(null)
+      }
     }
-  }
+  }, [index])
+
+
 
   if (incomeLevelMin && incomeLevelMax) {
     incomeLevelMin.addEventListener('input', updateIncomeDisplay);
@@ -320,35 +324,35 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
   }
 
 
-  // function updateScrollScene(index) {
-  //   if (index == 0) {
-  //     setIndex(0)
-  //   } else if (index == 1) {
-  //     setIndex(1)
-  //   } else if (index == 2) {
-  //     setIndex(2)
-  //   } else {
-  //     setIndex(null)
-  //   }
-  // }
-  // useEffect(() => {
-  //   const updateScene = () => {
-  //     if (scroll > 0.87 && scroll < 0.88) {
-  //       updateScrollScene(0);
-  //     } else if (scroll > 0.89 && scroll < 0.90) {
-  //       updateScrollScene(1);
-  //     } else if (scroll > 0.91 && scroll < 0.92) {
-  //       updateScrollScene(2);
-  //     }
-  //     animationRef.current = requestAnimationFrame(updateScene);
-  //   }
+  function updateScrollScene(index) {
+    if (index == 0) {
+      setIndex(0)
+    } else if (index == 1) {
+      setIndex(1)
+    } else if (index == 2) {
+      setIndex(2)
+    } else {
+      setIndex(null)
+    }
+  }
+  useEffect(() => {
+    const updateScene = () => {
+      if (scroll > 0.87 && scroll < 0.88) {
+        updateScrollScene(0);
+      } else if (scroll > 0.89 && scroll < 0.90) {
+        updateScrollScene(1);
+      } else if (scroll > 0.91 && scroll < 0.92) {
+        updateScrollScene(2);
+      }
+      animationRef.current = requestAnimationFrame(updateScene);
+    }
 
-  //   animationRef.current = requestAnimationFrame(updateScene);
+    animationRef.current = requestAnimationFrame(updateScene);
 
-  //   return () => {
-  //     cancelAnimationFrame(animationRef.current);
-  //   };
-  // }, [scroll]);
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [scroll]);
 
 
 
@@ -399,7 +403,7 @@ const IncomeVsSingleFamilyMapComponent = (props) => {
         onClick={handleClick}>
         BACK
       </button>
-      
+
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}></div>
       <div id="info-bar" style={{
         position: 'absolute',
