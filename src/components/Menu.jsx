@@ -17,8 +17,8 @@ export const Menu = (props) => {
     }
 
     const openStatsFunction = (section, currentSection) => {
-        setSection(section);
-        onSectionChange(currentSection);
+        // setSection(section);
+        // onSectionChange(currentSection);
         setMapOpened(true);
         setOpenMap("stat");
     }
@@ -78,7 +78,7 @@ export const Menu = (props) => {
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 5 || currentSection === 6 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(1968, 7)}>1968</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 7 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(2018, 10.9)}>2018</p>
                     <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 8 ? "opacity-100" : "opacity-20"}`} onClick={() => handleClick(2022, 11.9)}>2022</p>
-                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => openStatsFunction(null, 10)}>Statistics</p>
+                    <p className={`cursor-pointer mx-3 ease-in-out duration-1000 ${currentSection === 10 ? "opacity-100" : "opacity-20"}`} onClick={() => openStatsFunction(null, 12)}>Statistics</p>
 
                 </div>
             </div>
